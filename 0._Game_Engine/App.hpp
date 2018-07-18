@@ -2,7 +2,8 @@
 #define G6037599_APP_HPP
 #pragma once
 #include "My_Math/Mat4.hpp"
-#include "Mesh_renderer.hpp"
+#include "Visual_Manager/Mesh_renderer.hpp"
+#include "Visual_Manager/Texture_manager.hpp"
 
 namespace G6037599
 {
@@ -23,7 +24,7 @@ namespace G6037599
     static const std::string TEXTURE_PATH;
 
     GLFWwindow* m_window_{};
-    GLuint m_texture_id_{};
+    Texture m_texture_id_{};
     int m_width_, m_height_;
     bool m_is_active_;
     Mesh_renderer m_mesh_renderer_{};

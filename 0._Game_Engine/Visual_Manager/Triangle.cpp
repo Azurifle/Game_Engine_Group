@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "Triangle.hpp"
-#include "Demo_Center/Demo_Center.hpp"
+#include "../Game_engine.hpp"
 
 namespace G6037599
 {
@@ -29,12 +29,12 @@ namespace G6037599
   // ___ private ________________________________________________________
   void Triangle::draw() const
   {
-    auto color = Demo_center::WHITE;
+    auto color = Game_engine::WHITE;
     static const auto PI = 3.14f, DEGREE_TO_RADIAN = 1/ 360.0f*(2 * PI);
     color.z = -cos(m_x_degree_*DEGREE_TO_RADIAN);
 
     glBegin(GL_TRIANGLES);
-      Demo_center::paint_pos(Vec3<float>(-1, 0, 0), color);
+      Game_engine::paint_pos(Vec3<float>(-1, 0, 0), color);
       glVertex3f(0, 1, 0);
       glVertex3f(1, 0, 0);
     glEnd();

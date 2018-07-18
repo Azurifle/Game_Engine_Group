@@ -8,23 +8,35 @@ namespace G6037599
 {
   // ___ public _______________________________________________________________________________
 
+  Texture_manager Texture_manager::get()
+  {
+    static const Texture_manager INSTANCE;
+    return INSTANCE;
+  }
+
   Texture Texture_manager::load_or_get(const std::string& t_png_file_path)
   {
-    static Texture_manager instance;
+    //static Texture_manager instance;
 
-    const auto FOUND_TEXTURE = instance.m_texture_collection_.find(t_png_file_path);
-    if (FOUND_TEXTURE != instance.m_texture_collection_.end())
+    const auto FOUND_TEXTURE = m_texture_collection_.find(t_png_file_path);
+    if (FOUND_TEXTURE != m_texture_collection_.end())
     {
       return FOUND_TEXTURE->second;
     }
 
-    return load(t_png_file_path, instance.m_texture_collection_);
+    //std::cout << m_texture_collection_.size() << std::endl;
+
+    return load(t_png_file_path);
+  }
+
+  void Texture_manager::unload_all()
+  {
+    m_texture_collection_.clear();
   }
 
   // ___ private _________________________________________________________________________________
 
-  Texture Texture_manager::load(const std::string& t_png_file_path
-    , std::map<std::string, Texture>& t_texture_collection)
+  Texture Texture_manager::load(const std::string& t_png_file_path)
   {
     REQUIRE(!t_png_file_path.empty());
     Texture id;
@@ -42,7 +54,8 @@ namespace G6037599
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    t_texture_collection[t_png_file_path] = id;
+    m_texture_collection_[t_png_file_path] = id;
+    //std::cout << m_texture_collection_[id] << "," << m_texture_collection_[t_png_file_path] << std::endl;//****
 
     return id;
   }

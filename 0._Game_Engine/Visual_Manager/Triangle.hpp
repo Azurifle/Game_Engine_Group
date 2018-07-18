@@ -1,7 +1,7 @@
 #ifndef G6037599_TRIANGLE_HPP
 #define G6037599_TRIANGLE_HPP
 #pragma once
-#include "My_Math/Vec3.hpp"
+#include "../My_Math/Vec3.hpp"
 
 namespace G6037599
 {

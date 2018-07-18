@@ -1,8 +1,8 @@
 #ifndef G6037599_VERTEX_HPP
 #define G6037599_VERTEX_HPP
 #pragma once
-#include "My_Math/Vec3.hpp"
-#include "My_Math/Vec2.hpp"
+#include "../My_Math/Vec3.hpp"
+#include "../My_Math/Vec2.hpp"
 
 namespace G6037599
 {

@@ -9,12 +9,13 @@ namespace G6037599
   class Texture_manager final
   {
   public:
-    static Texture load_or_get(const std::string& t_png_file_path);
+    static Texture_manager get();
+    Texture load_or_get(const std::string& t_png_file_path);
+    void unload_all();
 
     ~Texture_manager() = default;
   private:
-    static Texture load(const std::string& t_png_file_path
-      , std::map<std::string, Texture>& t_texture_collection);
+    Texture load(const std::string& t_png_file_path);
 
     std::map<std::string, Texture> m_texture_collection_{};
 

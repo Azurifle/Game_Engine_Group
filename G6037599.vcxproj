@@ -155,47 +155,71 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Demo_Center\Demo_list_menu.hpp" />
-    <ClInclude Include="Demo_Center\Demo_Center.hpp" />
-    <ClInclude Include="My_Math\Mat4.hpp" />
-    <ClInclude Include="My_Math\Vec2.hpp" />
-    <ClInclude Include="My_Math\Vec3.hpp" />
-    <ClInclude Include="My_Math\Vec4.hpp" />
+    <ClInclude Include="0._Game_Engine\App.hpp" />
+    <ClInclude Include="0._Game_Engine\Audio_manager.hpp" />
+    <ClInclude Include="0._Game_Engine\Game_engine.hpp" />
+    <ClInclude Include="0._Game_Engine\Grid.hpp" />
+    <ClInclude Include="0._Game_Engine\My_Math\Mat4.hpp" />
+    <ClInclude Include="0._Game_Engine\My_Math\Vec2.hpp" />
+    <ClInclude Include="0._Game_Engine\My_Math\Vec3.hpp" />
+    <ClInclude Include="0._Game_Engine\My_Math\Vec4.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh_renderer.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Renderer.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Shader.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Texture_manager.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Triangle.hpp" />
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Vertex.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Console.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Fantasy_game.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Hp_bar.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Map.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Spawn_point.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Spawn_to.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Status_panel.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Tile_data.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Timer.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Type_data.hpp" />
+    <ClInclude Include="1._Fantasy_Game\Unit.hpp" />
+    <ClInclude Include="2._Car_Game\Car.hpp" />
+    <ClInclude Include="2._Car_Game\Car_game.hpp" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
-    <ClInclude Include="Week_12\App.hpp" />
-    <ClInclude Include="Week_12\Mesh.hpp" />
-    <ClInclude Include="Week_12\Mesh_renderer.hpp" />
-    <ClInclude Include="Week_12\Renderer.hpp" />
-    <ClInclude Include="Week_12\Shader.hpp" />
-    <ClInclude Include="Week_12\Texture_manager.hpp" />
-    <ClInclude Include="Week_12\Triangle.hpp" />
-    <ClInclude Include="Week_12\Vertex.hpp" />
-    <ClInclude Include="Week_13\Audio_manager.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Demo_Center\Demo_list_menu.cpp" />
-    <ClCompile Include="Demo_Center\Demo_Center.cpp" />
+    <ClCompile Include="0._Game_Engine\App.cpp" />
+    <ClCompile Include="0._Game_Engine\Audio_manager.cpp" />
+    <ClCompile Include="0._Game_Engine\Game_engine.cpp" />
+    <ClCompile Include="0._Game_Engine\Grid.cpp" />
+    <ClCompile Include="0._Game_Engine\My_Math\Mat4.cpp" />
+    <ClCompile Include="0._Game_Engine\My_Math\Vec2.cpp" />
+    <ClCompile Include="0._Game_Engine\My_Math\Vec3.cpp" />
+    <ClCompile Include="0._Game_Engine\My_Math\Vec4.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh_renderer.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Renderer.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Shader.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Texture_manager.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Triangle.cpp" />
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Vertex.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Console.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Fantasy_game.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Hp_bar.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Map.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Spawn_point.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Status_panel.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Tile_data.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Timer.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Type_data.cpp" />
+    <ClCompile Include="1._Fantasy_Game\Unit.cpp" />
+    <ClCompile Include="2._Car_Game\Car.cpp" />
+    <ClCompile Include="2._Car_Game\Car_game.cpp" />
     <ClCompile Include="G6037599.cpp" />
-    <ClCompile Include="My_Math\Mat4.cpp" />
-    <ClCompile Include="My_Math\Vec2.cpp" />
-    <ClCompile Include="My_Math\Vec3.cpp" />
-    <ClCompile Include="My_Math\Vec4.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Week_12\App.cpp" />
-    <ClCompile Include="Week_12\Mesh.cpp" />
-    <ClCompile Include="Week_12\Mesh_renderer.cpp" />
-    <ClCompile Include="Week_12\Renderer.cpp" />
-    <ClCompile Include="Week_12\Shader.cpp" />
-    <ClCompile Include="Week_12\Texture_manager.cpp" />
-    <ClCompile Include="Week_12\Triangle.cpp" />
-    <ClCompile Include="Week_12\Vertex.cpp" />
-    <ClCompile Include="Week_13\Audio_manager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

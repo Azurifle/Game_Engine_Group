@@ -1,0 +1,4 @@
+Zombie	Undead never dies	Bite!	30	1	3	0	Z
+Zombie Doramon	Do-ra-a-ma-um	Device!	80	4	5	1	D
+Orc	Oh.. Ahhhh	Slash!	50	2	5	0	O
+Orc Warlord	Roarrrr	Cleave!	70	4	6	0	W

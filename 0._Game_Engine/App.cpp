@@ -1,11 +1,11 @@
 #include <stdafx.h>
 #include "App.hpp"
-#include "Vertex.hpp"
+#include "Visual_Manager/Vertex.hpp"
 #include "My_Math/Mat4.hpp"
-#include "Shader.hpp"
-#include "Renderer.hpp"
-#include "Mesh.hpp"
-#include "Texture_manager.hpp"
+#include "Visual_Manager/Shader.hpp"
+#include "Visual_Manager/Renderer.hpp"
+#include "Visual_Manager/Mesh.hpp"
+#include "Visual_Manager/Texture_manager.hpp"
 
 namespace G6037599
 {
@@ -53,7 +53,7 @@ namespace G6037599
       "} \n";
 
     Renderer::use_shader(Shader::create(VERTEX_SHADER_CODE, FRAGMENT_SHADER_CODE));//load_or_get(t_folder_path)
-    Texture_manager::load_or_get(TEXTURE_PATH);
+    m_texture_id_ = Texture_manager::get().load_or_get(TEXTURE_PATH);
 
     const auto GREEN = Vec3<float>(0, 1, 0), BLUE = Vec3<float>(0, 0, 1)
       , RED = Vec3<float>(1, 0, 0);
@@ -68,6 +68,7 @@ namespace G6037599
   App::~App()
   {
     glfwTerminate();
+    Texture_manager::get().unload_all();
     puts("App destroyed.");
   }
 
@@ -87,7 +88,7 @@ namespace G6037599
 
   // ___ private ________________________________________________
 
-  const std::string App::TEXTURE_PATH = "Week_12/texture.png";
+  const std::string App::TEXTURE_PATH = "3._Shadow_Maze/texture.png";
 
   void App::key_callback_static(GLFWwindow* t_window, const int t_key
     , const int t_scancode, const int t_action, const int t_mods)
@@ -149,7 +150,7 @@ namespace G6037599
 
   void App::render_objects() const
   {
-    Renderer::use_texture(Texture_manager::load_or_get(TEXTURE_PATH));
+    Renderer::use_texture(m_texture_id_);//Texture_manager::get().load_or_get(TEXTURE_PATH)
 
     //Renderer::push_matrix (m_matrices_.push_back())
     Mat4 MVP;

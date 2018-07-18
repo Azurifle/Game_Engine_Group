@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "Mat4.hpp"
-#include "Demo_Center/Demo_Center.hpp"
+#include "../Game_engine.hpp"
 
 namespace G6037599
 {
@@ -284,7 +284,7 @@ namespace G6037599
       for (auto col = 0; col < SIZE; ++col)
       {
         if (abs(m_mat_[row][col] - t_other.m_mat_[row][col]) 
-          > Demo_center::PRECISION)
+          > Game_engine::PRECISION)
         {
           return false;
         }
@@ -376,7 +376,7 @@ namespace G6037599
       for (auto& col : row)
       {
         const auto points = 2;
-        str += ' '+Demo_center::double_points_string(col, t_shows_float? points: 0);
+        str += ' '+ Game_engine::double_points_string(col, t_shows_float? points: 0);
       }
     }
     str += '\n';
