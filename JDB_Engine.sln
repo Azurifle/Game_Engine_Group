@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "G6037599", "G6037599.vcxproj", "{DFC4C877-F77A-466F-8A54-38B167B5087E}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JDB_Engine", "JDB_Engine.vcxproj", "{DFC4C877-F77A-466F-8A54-38B167B5087E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

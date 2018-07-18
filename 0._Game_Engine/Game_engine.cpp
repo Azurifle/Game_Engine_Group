@@ -241,7 +241,7 @@ namespace jdb
   {
     puts("=== Game Engine =======================");
     puts("");
-    puts("By: Darlyn Sirikasem jdb");
+    puts("JDB_Engine");
     puts("");
     puts("");
     puts("         ////////////////////////// Game list /////////////////////////////");
