@@ -6,7 +6,7 @@
 #include "Timer.hpp"
 #include "Spawn_to.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static _____________________________________________
   const char* Fantasy_game::MONSTER_CONF_PATH = "1._Fantasy_Game/monster_conf.txt";
@@ -429,4 +429,4 @@ namespace G6037599
     m_player_cursor_pos_ = m_player_->get_pos();
     m_console_->move_player_cursor(m_player_cursor_pos_);
   }
-}//namespace G6037599
+}//namespace jdb

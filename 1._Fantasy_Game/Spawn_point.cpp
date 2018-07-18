@@ -5,7 +5,7 @@
 #include "Console.hpp"
 #include "Map.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Spawn_point::Spawn_point(const std::shared_ptr<Type_data> t_type
@@ -122,4 +122,4 @@ namespace G6037599
   {
     m_type_->increase_max_hp(t_amount);
   }
-}//G6037599
+}//jdb

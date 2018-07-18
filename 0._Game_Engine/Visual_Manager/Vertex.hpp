@@ -4,7 +4,7 @@
 #include "../My_Math/Vec3.hpp"
 #include "../My_Math/Vec2.hpp"
 
-namespace G6037599
+namespace jdb
 {
   struct Vertex final
   {
@@ -13,6 +13,6 @@ namespace G6037599
 
     Vertex(const Vec3<float>& t_pos, const Vec3<float>& t_rgb, const Vec2<float>& t_texture = Vec2<float>(0));
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_VERTEX_HPP

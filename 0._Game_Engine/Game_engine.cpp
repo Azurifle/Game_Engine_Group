@@ -5,7 +5,7 @@
 #include "Audio_manager.hpp"
 #include "App.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static ___________________________________________________________
   const float Game_engine::SECOND = 1000.0f;
@@ -241,7 +241,7 @@ namespace G6037599
   {
     puts("=== Game Engine =======================");
     puts("");
-    puts("By: Darlyn Sirikasem G6037599");
+    puts("By: Darlyn Sirikasem jdb");
     puts("");
     puts("");
     puts("         ////////////////////////// Game list /////////////////////////////");
@@ -261,7 +261,7 @@ namespace G6037599
   {
     puts(" === Shader App with sound =======================");
     puts("");
-    puts("By: Darlyn Sirikasem G6037599");
+    puts("By: Darlyn Sirikasem jdb");
     puts("");
 
     const auto BGM = Audio_manager::load_or_get_audio("3._Shadow_Maze/Winning.wav");
@@ -280,4 +280,4 @@ namespace G6037599
     _getch(); _getch();
     system("CLS");
   }
-}//G6037599
+}//jdb

@@ -3,7 +3,7 @@
 #pragma once
 #include "My_Math/Vec3.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Grid;
 
@@ -68,6 +68,6 @@ namespace G6037599
     Game_engine& operator=(const Game_engine& t_to_copy) = default;
     Game_engine& operator=(Game_engine&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_GAME_ENGINE_HPP

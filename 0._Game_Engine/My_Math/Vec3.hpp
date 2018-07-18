@@ -2,7 +2,7 @@
 #define G6037599_VEC3_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   template <class T>
   class Vec3 final
@@ -48,6 +48,6 @@ namespace G6037599
     Vec3 radian_angles() const;
     double radian_angle_to(const Vec3& t_other) const;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_VEC3_HPP

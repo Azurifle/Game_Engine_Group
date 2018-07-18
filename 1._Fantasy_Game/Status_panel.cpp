@@ -3,7 +3,7 @@
 #include "Hp_bar.hpp"
 #include "Console.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Status_panel::Status_panel(COORD t_pos) : m_start_(t_pos), m_is_hide_(true)
@@ -74,4 +74,4 @@ namespace G6037599
   {
     m_hp_->set(t_hp, t_max_hp);
   }
-}//G6037599
+}//jdb

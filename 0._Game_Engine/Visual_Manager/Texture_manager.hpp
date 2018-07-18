@@ -2,7 +2,7 @@
 #define G6037599_TEXTURE_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   using Texture = GLuint;
 

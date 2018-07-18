@@ -2,7 +2,7 @@
 #include "Renderer.hpp"
 #include "Mesh_renderer.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ static __________________________________________________________________________________
 
@@ -28,4 +28,4 @@ namespace G6037599
   {
     return m_shader_program_id_;
   }
-}//G6037599
+}//jdb

@@ -4,7 +4,7 @@
 #include "Renderer.hpp"
 #include "Vertex.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ public ______________________________________________________________________________
 
@@ -71,4 +71,4 @@ namespace G6037599
       , reinterpret_cast<void*>(XYZ_RGB_SIZE * TEXTURE_XY));
   }
 
-}//G6037599
+}//jdb

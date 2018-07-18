@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "Shader.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ constructor ___________________________________________________________________________________________
 
@@ -90,4 +90,4 @@ namespace G6037599
     PROMISE(false);
   }
 
-}//G6037599
+}//jdb

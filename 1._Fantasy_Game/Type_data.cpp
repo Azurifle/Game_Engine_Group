@@ -2,7 +2,7 @@
 #include "Type_data.hpp"
 #include "0._Game_Engine/Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Type_data::Type_data(const std::string& t_name
@@ -33,4 +33,4 @@ namespace G6037599
   {
     return Game_engine::random(ATK, MAX_ATK);
   }
-}//G6037599
+}//jdb

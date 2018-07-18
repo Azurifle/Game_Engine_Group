@@ -4,7 +4,7 @@
 #include "Spawn_point.hpp"
 #include "Map.hpp"
 
-namespace G6037599
+namespace jdb
 {
   template <class T>
   class Spawn_to final: public Spawn_point
@@ -118,6 +118,6 @@ namespace G6037599
       return Map::NO_UNIT;
     }
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_SPAWN_TO_HPP

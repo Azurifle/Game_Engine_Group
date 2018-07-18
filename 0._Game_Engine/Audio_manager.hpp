@@ -2,7 +2,7 @@
 #define G6037599_AUDIO_MANAGER_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   using Audio = ALuint;
 
@@ -29,6 +29,6 @@ namespace G6037599
     Audio_manager& operator = (const Audio_manager& t_to_copy) = default;
     Audio_manager& operator = (Audio_manager&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_AUDIO_MANAGER_HPP

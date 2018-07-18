@@ -4,7 +4,7 @@
 #include "../My_Math/Vec3.hpp"
 #include "../My_Math/Vec2.hpp"
 
-namespace G6037599
+namespace jdb
 {
   struct Vertex;
 

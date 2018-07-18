@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "Vec2.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors/operators ____________________________________
   template <class T>
@@ -157,4 +157,4 @@ namespace G6037599
   template class Vec2<int>;
   template class Vec2<float>;
   template class Vec2<double>;
-}//G6037599
+}//jdb

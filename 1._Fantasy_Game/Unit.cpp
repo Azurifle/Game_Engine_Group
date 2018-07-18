@@ -4,7 +4,7 @@
 #include "Tile_data.hpp"
 #include "0._Game_Engine/Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Unit::Unit(const std::shared_ptr<Type_data> t_type) : m_type_(t_type)
@@ -70,4 +70,4 @@ namespace G6037599
   {
     return m_type_->random_atk();
   }
-}//G6037599
+}//jdb

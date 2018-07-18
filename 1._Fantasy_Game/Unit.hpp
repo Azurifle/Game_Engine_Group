@@ -3,7 +3,7 @@
 #pragma once
 #include "Tile_data.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Type_data;
 

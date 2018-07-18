@@ -138,12 +138,12 @@
     <ClInclude Include="0._Game_Engine\Grid.hpp">
       <Filter>Header Files\0._Game_Engine</Filter>
     </ClInclude>
+    <ClInclude Include="Shadow_maze_game.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="G6037599.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="0._Game_Engine\My_Math\Mat4.cpp">
@@ -226,6 +226,12 @@
     </ClCompile>
     <ClCompile Include="0._Game_Engine\Grid.cpp">
       <Filter>Source Files\0._Game_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Shadow_maze_game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

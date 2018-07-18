@@ -5,7 +5,7 @@
 #include "Visual_Manager/Mesh_renderer.hpp"
 #include "Visual_Manager/Texture_manager.hpp"
 
-namespace G6037599
+namespace jdb
 {
   struct Vertex;
 
@@ -38,6 +38,6 @@ namespace G6037599
     void render_objects() const;
     void model_view_projection(Mat4& t_out_mvp) const;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_APP_HPP

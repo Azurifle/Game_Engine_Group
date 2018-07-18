@@ -4,7 +4,7 @@
 #include "Hp_bar.hpp"
 #include "Status_panel.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Timer;
 
@@ -58,6 +58,6 @@ namespace G6037599
     COORD find_map_cursor_pos(const COORD& t_pos) const;
   };
 
-}//G6037599
+}//jdb
 
 #endif //G6037599_CONSOLE_HPP

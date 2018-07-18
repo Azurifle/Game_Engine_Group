@@ -4,7 +4,7 @@
 #include "Map.hpp"
 #include "Timer.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static _______________________________________________________
   COORD Console::get_cursor()
@@ -269,7 +269,7 @@ namespace G6037599
     puts("");
     puts("                      /////////////////////// THE FANTASY WORLD ///////////////////");
     puts("");
-    puts("                                       By: Darlyn Sirikasem G6037599.");
+    puts("                                       By: Darlyn Sirikasem jdb.");
     puts("");
     puts("");
     puts("                                     THANK YOU FOR PLAYING THIS GAME !!!");
@@ -387,4 +387,4 @@ namespace G6037599
     return COORD{ m_map_start_.X + t_pos.X * SPACE_BETWEEN_TILE, m_map_start_.Y + t_pos.Y };
   }
 
-}//G6037599
+}//jdb

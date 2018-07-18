@@ -7,7 +7,7 @@
 #include "Visual_Manager/Mesh.hpp"
 #include "Visual_Manager/Texture_manager.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //adapt from https://github.com/redeian/FirstGLFW/tree/master/FirstGLFW
 
@@ -178,4 +178,4 @@ namespace G6037599
     t_out_mvp = MODEL_MAT * VIEW_PROJECTION;
   }
 
-}//G6037599
+}//jdb

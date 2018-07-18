@@ -3,7 +3,7 @@
 #pragma once
 #include "Shader.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Mesh_renderer;
 
@@ -25,6 +25,6 @@ namespace G6037599
     Renderer& operator = (const Renderer& t_to_copy) = default;
     Renderer& operator = (Renderer&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif G6037599_RENDERER_HPP;

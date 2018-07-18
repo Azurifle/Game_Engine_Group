@@ -183,6 +183,7 @@
     <ClInclude Include="1._Fantasy_Game\Unit.hpp" />
     <ClInclude Include="2._Car_Game\Car.hpp" />
     <ClInclude Include="2._Car_Game\Car_game.hpp" />
+    <ClInclude Include="Shadow_maze_game.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +214,8 @@
     <ClCompile Include="1._Fantasy_Game\Unit.cpp" />
     <ClCompile Include="2._Car_Game\Car.cpp" />
     <ClCompile Include="2._Car_Game\Car_game.cpp" />
-    <ClCompile Include="G6037599.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Shadow_maze_game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

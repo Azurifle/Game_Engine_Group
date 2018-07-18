@@ -2,7 +2,7 @@
 #define G6037599_VEC4_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   template <class T>
   class Vec4 final
@@ -45,6 +45,6 @@ namespace G6037599
     T dot(const Vec4& t_other) const;
     double radian_angle_to(const Vec4& t_other) const;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_VEC4_HPP

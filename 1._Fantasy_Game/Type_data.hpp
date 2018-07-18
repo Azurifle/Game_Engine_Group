@@ -2,7 +2,7 @@
 #define G6037599_TYPE_DATA_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Type_data final
   {
@@ -30,6 +30,6 @@ namespace G6037599
     Type_data& operator=(const Type_data& t_to_copy) = default;
     Type_data& operator=(Type_data&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_TYPE_DATA_HPP

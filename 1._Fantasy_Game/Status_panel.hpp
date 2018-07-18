@@ -2,7 +2,7 @@
 #define G6037599_STATUS_PANEL_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Hp_bar;
 
@@ -30,7 +30,7 @@ namespace G6037599
     std::unique_ptr<Hp_bar> m_hp_{};
     bool m_is_hide_;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_STATUS_PANEL_HPP
 

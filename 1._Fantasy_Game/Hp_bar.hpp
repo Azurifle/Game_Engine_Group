@@ -2,7 +2,7 @@
 #define G6037599_HP_BAR_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Hp_bar final
   {
@@ -21,7 +21,7 @@ namespace G6037599
 
     static int print_half_bar(int t_bar_left);
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_HP_BAR_HPP
 

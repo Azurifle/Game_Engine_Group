@@ -2,7 +2,7 @@
 #define G6037599_SHADER_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Shader final
   {
@@ -23,6 +23,6 @@ namespace G6037599
     Shader& operator = (const Shader& t_to_copy) = default;
     Shader& operator = (Shader&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_SHADER_HPP

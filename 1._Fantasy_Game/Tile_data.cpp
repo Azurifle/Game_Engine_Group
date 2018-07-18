@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Tile_data.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Tile_data::Tile_data() : ID(m_id_count_), m_pos_({ 0, 0 })
@@ -27,4 +27,4 @@ namespace G6037599
 
   //___ private static _____________________________________________
   int Tile_data::m_id_count_ = 0;
-}//G6037599
+}//jdb
