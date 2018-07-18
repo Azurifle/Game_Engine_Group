@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Demo_Center">
+      <UniqueIdentifier>{d003312d-c644-43d3-8c30-b17d20bd248c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Demo_Center">
+      <UniqueIdentifier>{649dda88-f4a5-44c2-bf35-e329c5047589}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\My_Math">
+      <UniqueIdentifier>{3b87d23e-7aa3-49be-99fb-20b5deb36a24}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Week_12">
+      <UniqueIdentifier>{0dba3a4e-41ae-4369-82f4-69a73986d471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\My_Math">
+      <UniqueIdentifier>{cadda444-a50b-47ca-941e-decd0f3fa0a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Week_12">
+      <UniqueIdentifier>{0ef21a1a-7c1a-4329-b410-a40e46edf87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Week_13">
+      <UniqueIdentifier>{c41db1d4-4823-4000-bf4e-1be1798b6544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Week_13">
+      <UniqueIdentifier>{add95828-4928-4297-a761-41c935e75c9d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo_Center\Demo_Center.hpp">
+      <Filter>Header Files\Demo_Center</Filter>
+    </ClInclude>
+    <ClInclude Include="Demo_Center\Demo_list_menu.hpp">
+      <Filter>Header Files\Demo_Center</Filter>
+    </ClInclude>
+    <ClInclude Include="My_Math\Vec2.hpp">
+      <Filter>Header Files\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="My_Math\Vec3.hpp">
+      <Filter>Header Files\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="My_Math\Vec4.hpp">
+      <Filter>Header Files\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="My_Math\Mat4.hpp">
+      <Filter>Header Files\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Triangle.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\App.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Vertex.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Shader.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Mesh.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_13\Audio_manager.hpp">
+      <Filter>Header Files\Week_13</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Renderer.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Mesh_renderer.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+    <ClInclude Include="Week_12\Texture_manager.hpp">
+      <Filter>Header Files\Week_12</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="G6037599.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo_Center\Demo_Center.cpp">
+      <Filter>Source Files\Demo_Center</Filter>
+    </ClCompile>
+    <ClCompile Include="Demo_Center\Demo_list_menu.cpp">
+      <Filter>Source Files\Demo_Center</Filter>
+    </ClCompile>
+    <ClCompile Include="My_Math\Mat4.cpp">
+      <Filter>Source Files\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="My_Math\Vec2.cpp">
+      <Filter>Source Files\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="My_Math\Vec3.cpp">
+      <Filter>Source Files\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="My_Math\Vec4.cpp">
+      <Filter>Source Files\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Triangle.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\App.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Vertex.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Shader.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_13\Audio_manager.cpp">
+      <Filter>Source Files\Week_13</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Mesh.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Renderer.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Mesh_renderer.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+    <ClCompile Include="Week_12\Texture_manager.cpp">
+      <Filter>Source Files\Week_12</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
