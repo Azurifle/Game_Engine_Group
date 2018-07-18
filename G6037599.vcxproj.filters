@@ -138,8 +138,8 @@
     <ClInclude Include="0._Game_Engine\Grid.hpp">
       <Filter>Header Files\0._Game_Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Shadow_maze_game.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="3._Shadow_Maze\Shadow_maze_game.hpp">
+      <Filter>Header Files\3._Shadow_Maze</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,11 +227,11 @@
     <ClCompile Include="0._Game_Engine\Grid.cpp">
       <Filter>Source Files\0._Game_Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Shadow_maze_game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3._Shadow_Maze\Shadow_maze_game.cpp">
+      <Filter>Source Files\3._Shadow_Maze</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

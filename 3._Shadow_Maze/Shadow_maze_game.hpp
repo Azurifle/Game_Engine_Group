@@ -1,5 +1,5 @@
-#ifndef G6037599_APP_HPP
-#define G6037599_APP_HPP
+#ifndef JDB_APP_HPP
+#define JDB_APP_HPP
 #pragma once
 
 namespace jdb
@@ -12,4 +12,4 @@ namespace jdb
   };
 }//jdb
 
-#endif//G6037599_APP_HPP
+#endif//JDB_APP_HPP
