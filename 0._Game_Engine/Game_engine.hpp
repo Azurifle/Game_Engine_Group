@@ -32,7 +32,6 @@ namespace jdb
     static int wait_key();
     static int wait_key(int t_miliseconds);
     static COORD get_cursor();
-    //static char get_cursor_char();
     static void set_cursor(const COORD& t_coord);
 
     static short limit_interval(short t_number, short t_min, short t_max);
@@ -59,7 +58,6 @@ namespace jdb
 
     static void disable_mouse_editing();
     static void show_header();
-    static void shadow_maze();
     static void back_to_main_menu();
 
     Game_engine() = default;

@@ -4,6 +4,7 @@
 #include "2._Car_Game/Car_game.hpp"
 #include "Audio_manager.hpp"
 #include "App.hpp"
+#include "3._Shadow_Maze/Shadow_maze.hpp"
 
 namespace jdb
 {
@@ -36,12 +37,12 @@ namespace jdb
           back_to_main_menu();
           break;
         case OPTION_2: system("CLS");
-          Car_game::runs();
+          Car_game::run();
           wrong_input = false;
           back_to_main_menu();
           break;
         case OPTION_LAST: system("CLS");
-          shadow_maze();
+          Shadow_maze::run();
           wrong_input = false;
           back_to_main_menu();
           break;
@@ -255,22 +256,6 @@ namespace jdb
     puts("         //////////////////////////////////////////////////////////////////");
     puts("");
     puts("");
-  }
-
-  void Game_engine::shadow_maze()
-  {
-    puts(" === Shader App with sound =======================");
-    puts("");
-    puts("By: Darlyn Sirikasem jdb");
-    puts("");
-
-    const auto BGM = Audio_manager::load_or_get_audio("3._Shadow_Maze/Winning.wav");
-    Audio_manager::play(BGM);
-     
-    App app(640, 480, "Rendering a Triangle!!");
-    app.run();
-
-    Audio_manager::stop(BGM);
   }
 
   void Game_engine::back_to_main_menu()

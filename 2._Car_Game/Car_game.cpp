@@ -7,9 +7,10 @@
 namespace jdb
 {
   //___ static _____________________________________________
+
   const std::string Car_game::GAME_FOLDER("2._Car_Game/");
 
-  void Car_game::runs()
+  void Car_game::run()
   {
     REQUIRE(Game_engine::is_running());
     REQUIRE(!m_is_running_);

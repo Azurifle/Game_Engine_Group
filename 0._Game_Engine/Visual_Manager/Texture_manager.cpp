@@ -46,6 +46,7 @@ namespace jdb
     int img_width, img_height, components;
     const auto TEXTURE_IMG = stbi_load(t_png_file_path.c_str()
       , &img_width, &img_height, &components, 0);
+    PROMISE(TEXTURE_IMG != nullptr);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, img_width, img_height,
       0, GL_RGBA, GL_UNSIGNED_BYTE, TEXTURE_IMG);

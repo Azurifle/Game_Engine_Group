@@ -6,6 +6,7 @@
 #include "Visual_Manager/Renderer.hpp"
 #include "Visual_Manager/Mesh.hpp"
 #include "Visual_Manager/Texture_manager.hpp"
+#include "Game_engine.hpp"
 
 namespace jdb
 {
@@ -53,7 +54,8 @@ namespace jdb
       "} \n";
 
     Renderer::use_shader(Shader::create(VERTEX_SHADER_CODE, FRAGMENT_SHADER_CODE));//load_or_get(t_folder_path)
-    m_texture_id_ = Texture_manager::get().load_or_get(TEXTURE_PATH);
+    m_texture_id_ = Texture_manager::get().load_or_get(GAME_FOLDER+"texture.png");
+    //m_texture_tile_id_ = Texture_manager::get().load_or_get(GAME_FOLDER + "Tile.png");
 
     const auto GREEN = Vec3<float>(0, 1, 0), BLUE = Vec3<float>(0, 0, 1)
       , RED = Vec3<float>(1, 0, 0);
@@ -63,6 +65,14 @@ namespace jdb
     mesh.add_vertex(Vec3<float>(0, 0.6f, 0), RED, Vec2<float>(1, 1));
 
     m_mesh_renderer_ = Mesh_renderer(mesh);
+
+    /*mesh = Mesh();
+    static const auto TILE_SIZE = 0.2f;
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE, 0), Game_engine::WHITE, Vec2<float>(0, 0));
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE, 0), Game_engine::WHITE, Vec2<float>(1, 0));
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE, 0), Game_engine::WHITE, Vec2<float>(1, 1));
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE, 0), Game_engine::WHITE, Vec2<float>(0, 1));
+    m_tile_mesh_renderer_ = Mesh_renderer(mesh);*/
   }
 
   App::~App()
@@ -88,7 +98,7 @@ namespace jdb
 
   // ___ private ________________________________________________
 
-  const std::string App::TEXTURE_PATH = "3._Shadow_Maze/texture.png";
+  const std::string App::GAME_FOLDER = "3._Shadow_Maze/";
 
   void App::key_callback_static(GLFWwindow* t_window, const int t_key
     , const int t_scancode, const int t_action, const int t_mods)
@@ -150,22 +160,53 @@ namespace jdb
 
   void App::render_objects() const
   {
-    Renderer::use_texture(m_texture_id_);//Texture_manager::get().load_or_get(TEXTURE_PATH)
+    Renderer::use_texture(m_texture_id_);//Texture_manager::get().load_or_get(GAME_FOLDER)
 
-    //Renderer::push_matrix (m_matrices_.push_back())
-    Mat4 MVP;
+    //Renderer::push_matrix (m_matrices_.push_back())\
+
 
     //Renderer::rotate(Vec3<float>(0, 0, 1));
-    model_view_projection(MVP);
-    
+    const auto ANGLE = static_cast<float>(glfwGetTime())
+      , RATIO = m_width_ / static_cast<float>(m_height_);
+    const auto ROTATE_MAT = Mat4::rotation(ANGLE, Vec3<int>(0, 0, 1))
+      , MODEL_MAT = Mat4::translation(Vec3<float>(0, 0, 0)) * ROTATE_MAT * Mat4::scaling(Vec3<float>(1))
+      , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);//Renderer::set_projection(Renderer::PERSPECTIVE); in App constructor
+    Mat4 MVP = MODEL_MAT * VIEW_PROJECTION;
+
     //Renderer::draw_mesh(m_mesh_renderer_);
     const auto MVP_ARRAY = MVP.to_array();
     glUniformMatrix4fv(m_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY);
     glBindVertexArray(m_mesh_renderer_.id());
     glDrawArrays(GL_TRIANGLES, 0, 3);
-
+    
     //Renderer::pop_matrix (m_matrices_.pop_back())
     delete[] MVP_ARRAY;
+    /*
+    //second triangle
+    const auto MODEL_MAT2 = Mat4::translation(Vec3<float>(-5, 0, 0))
+    auto mvp2 = MODEL_MAT2 * VIEW_PROJECTION;
+
+    const auto MVP_ARRAY2 = mvp2.to_array();
+    glUniformMatrix4fv(m_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY2);
+    glBindVertexArray(m_mesh_renderer_.id());
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    delete[] MVP_ARRAY2;*/
+    /*
+    //render a tile
+    Renderer::use_texture(m_texture_tile_id_);//Texture_manager::get().load_or_get(GAME_FOLDER)
+
+    const auto RATIO = m_width_ / static_cast<float>(m_height_);
+    const auto MODEL_MAT = Mat4::translation(Vec3<float>(-5, 0, 0))
+      , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);
+    auto mvp_tile = MODEL_MAT * VIEW_PROJECTION;
+
+    const auto MVP_ARRAY2 = mvp_tile.to_array();
+    glUniformMatrix4fv(m_tile_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY2);
+    glBindVertexArray(m_tile_mesh_renderer_.id());
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    delete[] MVP_ARRAY2;*/
   }
 
   void App::model_view_projection(Mat4& t_out_mvp) const

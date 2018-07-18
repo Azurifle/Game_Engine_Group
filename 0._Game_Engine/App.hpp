@@ -21,13 +21,13 @@ namespace jdb
 
     void run() const;
   private:
-    static const std::string TEXTURE_PATH;
+    static const std::string GAME_FOLDER;
 
     GLFWwindow* m_window_{};
-    Texture m_texture_id_{};
+    Texture m_texture_id_{}, m_texture_tile_id_{};
     int m_width_, m_height_;
     bool m_is_active_;
-    Mesh_renderer m_mesh_renderer_{};
+    Mesh_renderer m_mesh_renderer_{}, m_tile_mesh_renderer_{};
 
     void init_glfw_system(const std::string& t_title);
     static void key_callback_static(GLFWwindow* t_window, int t_key, int t_scancode, int t_action, int t_mods);

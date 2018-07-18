@@ -6,17 +6,16 @@
 namespace jdb
 {
   class Grid;
-
+  
   class Car_game final
   {
   public:
-    static const std::string GAME_FOLDER;
-
-    static void runs();
+    static void run();
 
     ~Car_game() = default;
   private:
     static bool m_is_running_;
+    static const std::string GAME_FOLDER;
 
     std::vector<std::string> m_track_names_{};
     std::vector<std::unique_ptr<Car>> m_cars_;
