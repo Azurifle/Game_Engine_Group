@@ -1,5 +1,5 @@
-#ifndef G6037599_GRID_HPP
-#define G6037599_GRID_HPP
+#ifndef GRID_HPP
+#define GRID_HPP
 #pragma once
 
 namespace jdb
@@ -50,4 +50,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_GRID_HPP
+#endif //GRID_HPP

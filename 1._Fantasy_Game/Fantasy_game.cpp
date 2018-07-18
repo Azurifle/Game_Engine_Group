@@ -16,30 +16,29 @@ namespace jdb
   const COORD Fantasy_game::LEFT = { -1, 0 };
   const COORD Fantasy_game::RIGHT = { 1, 0 };
 
-  void Fantasy_game::runs()
+  void Fantasy_game::run()
   {
-    REQUIRE(Game_engine::is_running());
-    REQUIRE(!m_is_running_);
-    m_is_running_ = true;
-    Fantasy_game world;
+    //REQUIRE(Game_engine::is_running());
+   // REQUIRE(!m_is_running_);
+    //m_is_running_ = true;
 
-    while (true)
+    //while (true)
     {
       const auto HALF_SECOND = 500;
       switch (Game_engine::wait_key(HALF_SECOND))
       {
-      case Game_engine::KEY_NO_PRESS: world.update(); break;
-      case 'w': world.player_move(UP); break;
-      case 's': world.player_move(DOWN); break;
-      case 'a': world.player_move(LEFT); break;
-      case 'd': world.player_move(RIGHT); break;
-      case Game_engine::KEY_ARROW_UP: world.move_cursor(UP); break;
-      case Game_engine::KEY_ARROW_DOWN: world.move_cursor(DOWN); break;
-      case Game_engine::KEY_ARROW_LEFT: world.move_cursor(LEFT); break;
-      case Game_engine::KEY_ARROW_RIGHT: world.move_cursor(RIGHT); break;
-      case Game_engine::KEY_ESC: world.exit(); 
-        m_is_running_ = false; return;
-      default: world.player_move();
+      case Game_engine::KEY_NO_PRESS: update(); break;
+      case 'w': player_move(UP); break;
+      case 's': player_move(DOWN); break;
+      case 'a': player_move(LEFT); break;
+      case 'd': player_move(RIGHT); break;
+      case Game_engine::KEY_ARROW_UP: move_cursor(UP); break;
+      case Game_engine::KEY_ARROW_DOWN: move_cursor(DOWN); break;
+      case Game_engine::KEY_ARROW_LEFT: move_cursor(LEFT); break;
+      case Game_engine::KEY_ARROW_RIGHT: move_cursor(RIGHT); break;
+      case Game_engine::KEY_ESC: exit(); 
+        //m_is_running_ = false; return;
+      default: player_move();
       }
     }//game loop
   }
@@ -61,20 +60,23 @@ namespace jdb
     , PLAYER_MAX_HP, PLAYER_ATK, PLAYER_MAX_ATK, '&')))
     , m_monster_count_(STAGE_1_MONSTERS), m_level_monsters_(STAGE_1_MONSTERS)
   {
-    m_console_->show();
 
-    m_player_->set_pos(COORD{ Map::MIDDLE, Map::MIDDLE });
-    m_player_cursor_pos_ = m_player_->get_pos();
-    m_map_->marked(m_player_->get_pos(), m_player_->get_id());
-
-    m_console_->move_player_cursor(m_player_->get_pos());
-    m_console_->marked(m_player_->get_pos(), std::string(1, m_player_->get_symbol()).c_str());
-
-    read_monster_types();
-    spawn_spawners();
-    spawners_spawn_monster();
   }
+  void Fantasy_game::init(bool start)
+  {
+	  m_console_->show();
 
+	  m_player_->set_pos(COORD{ Map::MIDDLE, Map::MIDDLE });
+	  m_player_cursor_pos_ = m_player_->get_pos();
+	  m_map_->marked(m_player_->get_pos(), m_player_->get_id());
+
+	  m_console_->move_player_cursor(m_player_->get_pos());
+	  m_console_->marked(m_player_->get_pos(), std::string(1, m_player_->get_symbol()).c_str());
+
+	  read_monster_types();
+	  spawn_spawners();
+	  spawners_spawn_monster();
+  }
   //___ public _____________________________________________
   void Fantasy_game::player_move()
   {
@@ -175,10 +177,11 @@ namespace jdb
   {
     system("CLS");
     m_console_->thanks_user();
+	Game_engine::shutdown_engine();
   }
 
   //___ private static ________________________________________________
-  bool Fantasy_game::m_is_running_ = false;
+  //bool Fantasy_game::m_is_running_ = false;
 
   //___ private _______________________________________________________
   void Fantasy_game::read_monster_types()

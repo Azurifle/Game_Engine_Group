@@ -1,5 +1,5 @@
-#ifndef G6037599_GAME_ENGINE_HPP
-#define G6037599_GAME_ENGINE_HPP
+#ifndef GAME_ENGINE_HPP
+#define GAME_ENGINE_HPP
 #pragma once
 #include "My_Math/Vec3.hpp"
 
@@ -7,10 +7,32 @@ namespace jdb
 {
   class Grid;
 
+  class System_base
+  {
+  public:
+	  virtual void init(bool) { std::cout << "SystemBase init\n"; Exit(); }
+	  virtual void run() { std::cout << "SystemBase update\n"; Exit(); }
+	  virtual void getInput(int) { std::cout << "SystemBase getInput\n"; Exit(); }
+  private:
+	  void Exit();
+  };
+
+  enum Engine_state
+  {
+	  INVALID,
+	  CONSTRUCTING,
+	  INITIALIZING,
+	  RUNNING,
+	  SHUTTING_DOWN,
+	  DESTROYING
+  };
+
   class Game_engine final
   {
   public:
-    enum Enum
+
+	Game_engine() = default;
+    enum Keyboard_input
     {
       KEY_NO_PRESS
       , KEY_ARROW = 224
@@ -18,14 +40,17 @@ namespace jdb
       , KEY_ARROW_LEFT = 75, KEY_ARROW_RIGHT = 77
       , KEY_SPACE = 32
       , KEY_ESC = 27
-      , FPS_50 = 20
-      , CMD_LAST_COLS = 140, CMD_LAST_ROWS = 40
-      , DEFAULT_DOUBLE_POINTS = 2
     };
+	enum Enum
+	{
+		FPS_50 = 20
+		, CMD_LAST_COLS = 140, CMD_LAST_ROWS = 40
+		, DEFAULT_DOUBLE_POINTS = 2
+	};
     static const float SECOND, PRECISION;
     static const Vec3<float> WHITE;
 
-    static void start();
+	int start();
     static bool is_running();
 
     static int get_key();
@@ -52,17 +77,32 @@ namespace jdb
 
     static void paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb);
     
+	//
+	
+	static void shutdown_engine() { 
+		m_Enging_state = Engine_state::SHUTTING_DOWN;
+		back_to_main_menu();
+	}
+
+
     ~Game_engine() = default;
   private:
+	static Engine_state m_Enging_state;
+	//static System_base game_system;
+
+	int intialize(std::shared_ptr<System_base> system);
+	int update(std::shared_ptr<System_base> system);
+	std::shared_ptr<System_base> console_menu();
+
+
+
     static clock_t m_delta_milisec_;
     static bool m_is_running_;
 
     static void disable_mouse_editing();
     static void show_header();
-    static void shadow_maze();
     static void back_to_main_menu();
 
-    Game_engine() = default;
     Game_engine(const Game_engine& t_to_copy) = default;
     Game_engine(Game_engine&& t_to_move) noexcept = default;
     Game_engine& operator=(const Game_engine& t_to_copy) = default;
@@ -70,4 +110,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_GAME_ENGINE_HPP
+#endif //GAME_ENGINE_HPP

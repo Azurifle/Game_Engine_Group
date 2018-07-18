@@ -7,54 +7,40 @@
 
 namespace jdb
 {
+	auto _Fantasy_game = std::make_shared<Fantasy_game>();
+	auto _Car_game = std::make_shared<Car_game>();
+  Engine_state Game_engine::m_Enging_state = Engine_state::INVALID;
   //___ static ___________________________________________________________
   const float Game_engine::SECOND = 1000.0f;
   const float Game_engine::PRECISION = 0.01f;
   const Vec3<float> Game_engine::WHITE = Vec3<float>(1);
+  //___ system_game_______________________________________________________
 
-  void Game_engine::start()
+
+  int Game_engine::start()
   {
-    REQUIRE(!m_is_running_);
-    m_is_running_ = true;
+	  while (true) //console_menu
+	  {
+		  std::cout << "console_menu" << std::endl;
 
-    disable_mouse_editing();
-    srand(GetTickCount());
-
-    while (true)
-    {
-      show_header();
-      const char OPTION_1 = '1', OPTION_2 = '2', OPTION_LAST = '3', ESC = 27;
-      std::cout << "Press <" << OPTION_1 << " - " << OPTION_LAST << "> or [ESC] to exit: ";
-      auto wrong_input = true;
-      while (wrong_input)
-      {
-        switch (get_key())
-        {
-        case OPTION_1: system("CLS");
-          Fantasy_game::runs();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
-        case OPTION_2: system("CLS");
-          Car_game::runs();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
-        case OPTION_LAST: system("CLS");
-          shadow_maze();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
-
-        case ESC: puts("\n");
-          puts("============================ End of Program ====================================");
-          wait_key();
-          m_is_running_ = false;
-          return;
-        default:;
-        }
-      }//input loop
-    }//menu loop
+		  std::shared_ptr<System_base> game_system = console_menu();
+		  if (game_system != nullptr)
+		  {
+			  if (!this->intialize(game_system))
+			    return 1;
+			  m_Enging_state = Engine_state::RUNNING;
+			  while (m_Enging_state == Engine_state::RUNNING)
+			  {
+				  game_system->run();
+			  }
+		  }
+		  else
+		  {
+			  system("CLS");
+			  break;
+		  }
+	  }
+	  return 0;
   }
 
   bool Game_engine::is_running() { return m_is_running_; }
@@ -257,27 +243,74 @@ namespace jdb
     puts("");
   }
 
-  void Game_engine::shadow_maze()
-  {
-    puts(" === Shader App with sound =======================");
-    puts("");
-    puts("By: Darlyn Sirikasem jdb");
-    puts("");
-
-    const auto BGM = Audio_manager::load_or_get_audio("3._Shadow_Maze/Winning.wav");
-    Audio_manager::play(BGM);
-     
-    App app(640, 480, "Rendering a Triangle!!");
-    app.run();
-
-    Audio_manager::stop(BGM);
-  }
-
   void Game_engine::back_to_main_menu()
   {
     std::cout << std::endl
       << "Press <Any key> to main menu: ";
     _getch(); _getch();
     system("CLS");
+  }
+
+
+  int Game_engine::intialize(std::shared_ptr<System_base> system)
+  {
+	  m_Enging_state = Engine_state::INITIALIZING;
+	  //REQUIRE(!m_is_running_);
+	  //m_is_running_ = true;
+	  disable_mouse_editing();
+	  srand(GetTickCount());
+	  system->init(true);
+	  return true;
+  }
+
+
+  int Game_engine::update(std::shared_ptr<System_base> system)
+  {
+	  return 0;
+  }
+
+  std::shared_ptr<System_base> Game_engine::console_menu()
+  {
+	  //return std::shared_ptr<System_base>();
+	  show_header();
+	  const char OPTION_1 = '1', OPTION_2 = '2', OPTION_LAST = '3', ESC = 27;
+	  std::cout << "Press <" << OPTION_1 << " - " << OPTION_LAST << "> or [ESC] to exit: ";
+	  auto wrong_input = true;
+	  while (wrong_input)
+	  {
+		  switch (get_key())
+		  {
+		  case OPTION_1: system("CLS");
+			  //Fantasy_game::runs();
+			  return _Fantasy_game;
+			  //wrong_input = false;
+			  //back_to_main_menu();
+			  break;
+		  case OPTION_2: system("CLS");
+			  //Car_game::runs();
+			  return _Car_game;
+			  //wrong_input = false;
+			 // back_to_main_menu();
+			  break;
+		  case OPTION_LAST: system("CLS");
+
+			  wrong_input = false;
+			  back_to_main_menu();
+			  break;
+
+		  case ESC: puts("\n");
+			  puts("============================ End of Program ====================================");
+			  wait_key();
+			  m_is_running_ = false;
+			  return nullptr;
+		  default:;
+			  ;
+		  }
+	  }//input loop*/
+	  return nullptr;
+  }
+  void System_base::Exit()
+  {
+	  Game_engine::shutdown_engine();
   }
 }//jdb
