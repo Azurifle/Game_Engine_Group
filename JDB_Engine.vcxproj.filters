@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\0._Game_Engine">
+      <UniqueIdentifier>{53228a36-54de-48c1-a036-cdf9fac8c0c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\1._Fantasy_Game">
+      <UniqueIdentifier>{b9d32aab-1466-444c-9ddc-2b0f2dd596b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\2._Car_Game">
+      <UniqueIdentifier>{af9cc8f0-5ab0-4c70-ac17-2610109e433e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\3._Shadow_Maze">
+      <UniqueIdentifier>{0c61f954-fcb5-4c97-a5c4-2f3be3ca5288}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\0._Game_Engine">
+      <UniqueIdentifier>{ffab722b-2eab-4cf9-b56f-6e9965fa1a08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\1._Fantasy_Game">
+      <UniqueIdentifier>{6be2f7ca-3c35-4632-9071-0da321746452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\2._Car_Game">
+      <UniqueIdentifier>{2f880c6a-63a8-49c6-979a-c5bad0eb83b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\3._Shadow_Maze">
+      <UniqueIdentifier>{53248c4f-2230-419b-a7a8-16e5d05c84cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\0._Game_Engine\My_Math">
+      <UniqueIdentifier>{694793fe-6785-460d-8308-ddeafc2a15af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\0._Game_Engine\Visual_Manager">
+      <UniqueIdentifier>{c2324a17-061b-495a-ad64-fe4315f11a1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\0._Game_Engine\My_Math">
+      <UniqueIdentifier>{66eaa946-b613-466b-9478-ed59bb9145a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\0._Game_Engine\Visual_Manager">
+      <UniqueIdentifier>{d866517e-9fb2-48ed-85eb-eb5323028771}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\My_Math\Mat4.hpp">
+      <Filter>Source Files\0._Game_Engine\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\My_Math\Vec2.hpp">
+      <Filter>Source Files\0._Game_Engine\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\My_Math\Vec3.hpp">
+      <Filter>Source Files\0._Game_Engine\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\My_Math\Vec4.hpp">
+      <Filter>Source Files\0._Game_Engine\My_Math</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh_renderer.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Renderer.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Shader.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Texture_manager.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Triangle.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Unit.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Console.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Fantasy_game.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Hp_bar.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Map.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Spawn_point.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Spawn_to.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Status_panel.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Tile_data.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Timer.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="1._Fantasy_Game\Type_data.hpp">
+      <Filter>Header Files\1._Fantasy_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="2._Car_Game\Car.hpp">
+      <Filter>Header Files\2._Car_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="2._Car_Game\Car_game.hpp">
+      <Filter>Header Files\2._Car_Game</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Visual_Manager\Vertex.hpp">
+      <Filter>Header Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Audio_manager.hpp">
+      <Filter>Header Files\0._Game_Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\App.hpp">
+      <Filter>Header Files\0._Game_Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Game_engine.hpp">
+      <Filter>Header Files\0._Game_Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="0._Game_Engine\Grid.hpp">
+      <Filter>Header Files\0._Game_Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="3._Shadow_Maze\Shadow_maze_game.hpp">
+      <Filter>Header Files\3._Shadow_Maze</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\My_Math\Mat4.cpp">
+      <Filter>Header Files\0._Game_Engine\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\My_Math\Vec2.cpp">
+      <Filter>Header Files\0._Game_Engine\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\My_Math\Vec3.cpp">
+      <Filter>Header Files\0._Game_Engine\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\My_Math\Vec4.cpp">
+      <Filter>Header Files\0._Game_Engine\My_Math</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh_renderer.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Renderer.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Shader.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Texture_manager.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Triangle.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Console.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Fantasy_game.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Hp_bar.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Map.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Spawn_point.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Status_panel.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Tile_data.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Timer.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Type_data.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="1._Fantasy_Game\Unit.cpp">
+      <Filter>Source Files\1._Fantasy_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="2._Car_Game\Car.cpp">
+      <Filter>Source Files\2._Car_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="2._Car_Game\Car_game.cpp">
+      <Filter>Source Files\2._Car_Game</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Visual_Manager\Vertex.cpp">
+      <Filter>Source Files\0._Game_Engine\Visual_Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\App.cpp">
+      <Filter>Source Files\0._Game_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Audio_manager.cpp">
+      <Filter>Source Files\0._Game_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Game_engine.cpp">
+      <Filter>Source Files\0._Game_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="0._Game_Engine\Grid.cpp">
+      <Filter>Source Files\0._Game_Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="3._Shadow_Maze\Shadow_maze_game.cpp">
+      <Filter>Source Files\3._Shadow_Maze</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

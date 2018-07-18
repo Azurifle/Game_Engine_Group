@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JDB_Engine", "JDB_Engine.vcxproj", "{DFC4C877-F77A-466F-8A54-38B167B5087E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Debug|x64.ActiveCfg = Debug|x64
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Debug|x64.Build.0 = Debug|x64
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Debug|x86.ActiveCfg = Debug|Win32
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Debug|x86.Build.0 = Debug|Win32
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Release|x64.ActiveCfg = Release|x64
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Release|x64.Build.0 = Release|x64
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Release|x86.ActiveCfg = Release|Win32
+		{DFC4C877-F77A-466F-8A54-38B167B5087E}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0C224F50-B9B7-460A-B9FF-0E0CEBF8C6FC}
+	EndGlobalSection
+EndGlobal
