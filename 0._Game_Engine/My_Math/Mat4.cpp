@@ -2,7 +2,7 @@
 #include "Mat4.hpp"
 #include "../Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ static _________________________________________________________________
   Mat4 Mat4::identity()
@@ -421,4 +421,4 @@ namespace G6037599
     }
     return array;
   }
-}//G6037599
+}//jdb

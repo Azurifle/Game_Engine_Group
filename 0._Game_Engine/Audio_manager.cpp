@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "Audio_manager.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ public __________________________________________________________________________________
 
@@ -95,4 +95,4 @@ namespace G6037599
     alutInit(nullptr, nullptr);
     puts("Audio_manager initialized.");
   }
-  }//G6037599
+  }//jdb

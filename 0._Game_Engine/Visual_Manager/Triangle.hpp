@@ -3,7 +3,7 @@
 #pragma once
 #include "../My_Math/Vec3.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Triangle final
   {
@@ -26,6 +26,6 @@ namespace G6037599
 
     void draw() const;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_TRIANGLE_HPP

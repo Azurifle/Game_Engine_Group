@@ -4,7 +4,7 @@
 #include "0._Game_Engine/Grid.hpp"
 #include "../Thirdparty/json.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static _____________________________________________
   const std::string Car_game::GAME_FOLDER("2._Car_Game/");
@@ -103,4 +103,4 @@ namespace G6037599
       m_current_track_ = t_move;
     }
   }
-}//G6037599
+}//jdb

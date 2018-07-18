@@ -1,7 +1,7 @@
 #include <stdafx.h>
 #include "Vec3.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static ____________________________________
   template <class T>
@@ -174,4 +174,4 @@ namespace G6037599
   template class Vec3<int>;
   template class Vec3<float>;
   template class Vec3<double>;
-}//G6037599
+}//jdb

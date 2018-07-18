@@ -2,7 +2,7 @@
 #define G6037599_CAR_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Grid;
 
@@ -36,6 +36,6 @@ namespace G6037599
     bool random_move_xy(int t_x, int t_y);
     COORD random_2_diagonal_pos(Direction t_east_or_west) const;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_GAME_ENGINE_HPP

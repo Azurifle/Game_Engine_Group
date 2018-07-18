@@ -2,7 +2,7 @@
 #include "Triangle.hpp"
 #include "../Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ constructor __________________________________________________________
   Triangle::Triangle(const Vec3<float>& t_pos, const Vec3<float>& t_scale
@@ -40,4 +40,4 @@ namespace G6037599
     glEnd();
   }
 
-}//G6037599
+}//jdb

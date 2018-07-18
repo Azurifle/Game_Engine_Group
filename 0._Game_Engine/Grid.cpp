@@ -2,7 +2,7 @@
 #include "Grid.hpp"
 #include "Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ static _____________________________________________
   const COORD Grid::NOT_SPAWN = { -1, -1 };
@@ -228,4 +228,4 @@ namespace G6037599
     move_symbol_n_despawn(t_pos, t_id, t_symbol, t_moved, true);
   }
 
-}//G6037599
+}//jdb

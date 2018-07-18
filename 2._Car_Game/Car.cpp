@@ -3,7 +3,7 @@
 #include "0._Game_Engine/Grid.hpp"
 #include "0._Game_Engine/Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ constructors _____________________________________________
   Car::Car(const std::string& t_name, const std::string& t_shape
@@ -135,4 +135,4 @@ namespace G6037599
       : COORD{ MOVE_WEST_OR_EAST, MOVE_SOUTH };
   }
 
-}//G6037599
+}//jdb

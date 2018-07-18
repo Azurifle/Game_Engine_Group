@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "Map.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Map::Map()
@@ -113,4 +113,4 @@ namespace G6037599
     }
   }
 
-}//G6037599
+}//jdb

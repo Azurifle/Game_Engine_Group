@@ -3,7 +3,7 @@
 #pragma once
 #include "Tile_data.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Type_data;
   class Map;
@@ -53,6 +53,6 @@ namespace G6037599
     std::shared_ptr<Map> m_map_{};
     std::unique_ptr<Tile_data> m_tile_{};
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_SPAWN_POINT_HPP

@@ -2,7 +2,7 @@
 #define G6037599_GRID_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Grid final
   {
@@ -48,6 +48,6 @@ namespace G6037599
     void move_to_slot_2(const COORD& t_pos, int t_id
       , const std::string& t_symbol, const COORD& t_moved);
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_GRID_HPP

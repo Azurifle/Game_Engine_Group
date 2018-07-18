@@ -2,7 +2,7 @@
 #define G6037599_TIMER_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Timer final
   {
@@ -25,6 +25,6 @@ namespace G6037599
     COORD m_start_{};
     int m_day_, m_hour_, m_minute_;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_TIMER_HPP

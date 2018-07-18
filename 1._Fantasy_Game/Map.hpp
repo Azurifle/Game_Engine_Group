@@ -2,7 +2,7 @@
 #define G6037599_MAP_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Map final
   {
@@ -31,6 +31,6 @@ namespace G6037599
 
     void copy_from(const Map& t_to_copy);
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_MAP_HPP

@@ -2,7 +2,7 @@
 #include "Timer.hpp"
 #include "Console.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Timer::Timer(const COORD& t_pos) : m_start_(t_pos), m_day_(1)
@@ -68,4 +68,4 @@ namespace G6037599
     std::cout << '0';
     return HOUR_REACH;
   }
-}//G6037599
+}//jdb

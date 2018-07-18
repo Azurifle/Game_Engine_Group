@@ -2,7 +2,7 @@
 #include "Hp_bar.hpp"
 #include "Console.hpp"
 
-namespace G6037599
+namespace jdb
 {
   //___ (de)constructors _____________________________________________
   Hp_bar::Hp_bar(const COORD& t_pos) : m_start_(t_pos) {}
@@ -54,4 +54,4 @@ namespace G6037599
     return t_bar_left;
   }
 
-}//G6037599
+}//jdb

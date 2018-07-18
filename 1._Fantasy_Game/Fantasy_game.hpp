@@ -5,7 +5,7 @@
 #include "Spawn_point.hpp"
 #include "0._Game_Engine/Game_engine.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Console;
   class Map;
@@ -62,6 +62,6 @@ namespace G6037599
     void monster_dies(int t_index);
     void next_stage();
 	};
-}//G6037599
+}//jdb
 
 #endif //G6037599_FANTASY_GAME_HPP

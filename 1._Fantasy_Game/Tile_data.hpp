@@ -2,7 +2,7 @@
 #define G6037599_TILE_DATA_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Tile_data final
   {
@@ -24,6 +24,6 @@ namespace G6037599
     Tile_data& operator=(const Tile_data& t_to_copy) = default;
     Tile_data& operator=(Tile_data&& t_to_move) noexcept = default;
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_TILE_DATA_HPP

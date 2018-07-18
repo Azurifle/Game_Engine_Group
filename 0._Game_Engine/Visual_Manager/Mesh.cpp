@@ -2,7 +2,7 @@
 #include "Mesh.hpp"
 #include "Vertex.hpp"
 
-namespace G6037599
+namespace jdb
 {
   // ___ public __________________________________________________________________________________
 
@@ -15,4 +15,4 @@ namespace G6037599
   {
     return m_vertices_.size() * sizeof(Vertex);
   }
-}//G6037599
+}//jdb

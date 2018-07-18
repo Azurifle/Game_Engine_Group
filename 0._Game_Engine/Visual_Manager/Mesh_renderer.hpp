@@ -2,7 +2,7 @@
 #define G6037599_MESH_RENDERER_HPP
 #pragma once
 
-namespace G6037599
+namespace jdb
 {
   class Mesh;
 
@@ -28,6 +28,6 @@ namespace G6037599
     static void enable_value_processing(const std::vector<GLint>& t_vram_location);
     static void set_vertex_pointer(const std::vector<GLint>& t_vram_location);
   };
-}//G6037599
+}//jdb
 
 #endif G6037599_MESH_RENDERER_HPP;

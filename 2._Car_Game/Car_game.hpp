@@ -3,7 +3,7 @@
 #pragma once
 #include "Car.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Grid;
 
@@ -33,6 +33,6 @@ namespace G6037599
     void spawns_car();
     void changes_track(int t_move);
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_CAR_GAME_HPP

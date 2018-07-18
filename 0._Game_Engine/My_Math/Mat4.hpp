@@ -5,7 +5,7 @@
 #include "Vec4.hpp"
 #include "Vec2.hpp"
 
-namespace G6037599
+namespace jdb
 {
   class Mat4 final
   {
@@ -51,6 +51,6 @@ namespace G6037599
   private:
     float m_mat_[SIZE][SIZE]{};
   };
-}//G6037599
+}//jdb
 
 #endif //G6037599_MAT4_HPP

@@ -4,7 +4,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "Thirdparty/stb_image.h"//can't add include guard
 
-namespace G6037599
+namespace jdb
 {
   // ___ public _______________________________________________________________________________
 
@@ -49,6 +49,7 @@ namespace G6037599
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, img_width, img_height,
       0, GL_RGBA, GL_UNSIGNED_BYTE, TEXTURE_IMG);
+    free(TEXTURE_IMG);
 
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -59,4 +60,4 @@ namespace G6037599
 
     return id;
   }
-}//G6037599
+}//jdb
