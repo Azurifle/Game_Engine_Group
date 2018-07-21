@@ -14,7 +14,7 @@ namespace jdb
 
     static Mat4 identity();
     static Mat4 translation(const Vec3<float>& t_translate);
-    static Mat4 rotation(float t_radian_angle, const Vec3<int>& t_axis);
+    static Mat4 rotation(const Vec3<float>& t_radian_angles);
     static Mat4 scaling(const Vec3<float>& t_scale);
     static Mat4 transpose(const Mat4& t_matrix);
     static Mat4 inverse(const Mat4& t_m);

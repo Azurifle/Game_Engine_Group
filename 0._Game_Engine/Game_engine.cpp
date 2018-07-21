@@ -1,10 +1,7 @@
 #include <stdafx.h>
 #include "Game_engine.hpp"
-#include "1._Fantasy_Game/Fantasy_game.hpp"
-#include "2._Car_Game/Car_game.hpp"
-#include "Audio_manager.hpp"
 #include "App.hpp"
-#include "3._Shadow_Maze/Shadow_maze.hpp"
+#include "1._Shadow_Maze/Shadow_maze.hpp"
 
 namespace jdb
 {
@@ -21,41 +18,11 @@ namespace jdb
     disable_mouse_editing();
     srand(GetTickCount());
 
-    while (true)
-    {
-      show_header();
-      const char OPTION_1 = '1', OPTION_2 = '2', OPTION_LAST = '3', ESC = 27;
-      std::cout << "Press <" << OPTION_1 << " - " << OPTION_LAST << "> or [ESC] to exit: ";
-      auto wrong_input = true;
-      while (wrong_input)
-      {
-        switch (get_key())
-        {
-        case OPTION_1: system("CLS");
-          Fantasy_game::runs();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
-        case OPTION_2: system("CLS");
-          Car_game::run();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
-        case OPTION_LAST: system("CLS");
-          Shadow_maze::run();
-          wrong_input = false;
-          back_to_main_menu();
-          break;
+    Shadow_maze::run();
 
-        case ESC: puts("\n");
-          puts("============================ End of Program ====================================");
-          wait_key();
-          m_is_running_ = false;
-          return;
-        default:;
-        }
-      }//input loop
-    }//menu loop
+    puts("============================ End of Program ====================================");
+    wait_key();
+    m_is_running_ = false;
   }
 
   bool Game_engine::is_running() { return m_is_running_; }
@@ -108,17 +75,6 @@ namespace jdb
     PROMISE(GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &console_info));
     return console_info.dwCursorPosition;
   }
-
-  /*char Game_engine::get_cursor_char()
-  {
-  const LPWSTR CHAR_OUT = nullptr;
-  if(ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE)
-  , CHAR_OUT, 1, get_cursor(), nullptr))
-  {
-  return static_cast<char>(*CHAR_OUT);
-  }
-  return ' ';
-  }*/
 
   void Game_engine::set_cursor(const COORD& t_coord)
   {

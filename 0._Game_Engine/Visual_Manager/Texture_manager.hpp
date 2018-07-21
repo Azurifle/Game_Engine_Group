@@ -10,12 +10,12 @@ namespace jdb
   {
   public:
     static Texture_manager get();
-    Texture load_or_get(const std::string& t_png_file_path);
+    Texture load_or_get(const std::string& t_png_file_path, GLenum t_color_format = GL_RGBA);
     void unload_all();
 
     ~Texture_manager() = default;
   private:
-    Texture load(const std::string& t_png_file_path);
+    Texture load(const std::string& t_png_file_path, GLenum t_color_format);
 
     std::map<std::string, Texture> m_texture_collection_{};
 

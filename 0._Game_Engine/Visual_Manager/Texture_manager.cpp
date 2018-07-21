@@ -14,7 +14,7 @@ namespace jdb
     return INSTANCE;
   }
 
-  Texture Texture_manager::load_or_get(const std::string& t_png_file_path)
+  Texture Texture_manager::load_or_get(const std::string& t_png_file_path, const GLenum t_color_format)
   {
     //static Texture_manager instance;
 
@@ -26,7 +26,7 @@ namespace jdb
 
     //std::cout << m_texture_collection_.size() << std::endl;
 
-    return load(t_png_file_path);
+    return load(t_png_file_path, t_color_format);
   }
 
   void Texture_manager::unload_all()
@@ -36,7 +36,7 @@ namespace jdb
 
   // ___ private _________________________________________________________________________________
 
-  Texture Texture_manager::load(const std::string& t_png_file_path)
+  Texture Texture_manager::load(const std::string& t_png_file_path, const GLenum t_color_format)
   {
     REQUIRE(!t_png_file_path.empty());
     Texture id;
@@ -49,8 +49,7 @@ namespace jdb
     PROMISE(TEXTURE_IMG != nullptr);
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_SRGB8_ALPHA8, img_width, img_height,
-      0, GL_RGBA, GL_UNSIGNED_BYTE, TEXTURE_IMG);
-    free(TEXTURE_IMG);
+      0, t_color_format, GL_UNSIGNED_BYTE, TEXTURE_IMG);
 
     glGenerateMipmap(GL_TEXTURE_2D);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -58,6 +57,8 @@ namespace jdb
 
     m_texture_collection_[t_png_file_path] = id;
     //std::cout << m_texture_collection_[id] << "," << m_texture_collection_[t_png_file_path] << std::endl;//****
+
+    free(TEXTURE_IMG);
 
     return id;
   }

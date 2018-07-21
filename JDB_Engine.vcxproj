@@ -172,20 +172,7 @@
     <ClInclude Include="0._Game_Engine\Visual_Manager\Texture_manager.hpp" />
     <ClInclude Include="0._Game_Engine\Visual_Manager\Triangle.hpp" />
     <ClInclude Include="0._Game_Engine\Visual_Manager\Vertex.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Console.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Fantasy_game.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Hp_bar.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Map.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Spawn_point.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Spawn_to.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Status_panel.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Tile_data.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Timer.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Type_data.hpp" />
-    <ClInclude Include="1._Fantasy_Game\Unit.hpp" />
-    <ClInclude Include="2._Car_Game\Car.hpp" />
-    <ClInclude Include="2._Car_Game\Car_game.hpp" />
-    <ClInclude Include="3._Shadow_Maze\Shadow_maze.hpp" />
+    <ClInclude Include="1._Shadow_Maze\Shadow_maze.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
@@ -205,19 +192,7 @@
     <ClCompile Include="0._Game_Engine\Visual_Manager\Texture_manager.cpp" />
     <ClCompile Include="0._Game_Engine\Visual_Manager\Triangle.cpp" />
     <ClCompile Include="0._Game_Engine\Visual_Manager\Vertex.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Console.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Fantasy_game.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Hp_bar.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Map.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Spawn_point.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Status_panel.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Tile_data.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Timer.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Type_data.cpp" />
-    <ClCompile Include="1._Fantasy_Game\Unit.cpp" />
-    <ClCompile Include="2._Car_Game\Car.cpp" />
-    <ClCompile Include="2._Car_Game\Car_game.cpp" />
-    <ClCompile Include="3._Shadow_Maze\Shadow_maze.cpp" />
+    <ClCompile Include="1._Shadow_Maze\Shadow_maze.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

@@ -14,7 +14,7 @@ namespace jdb
 
     explicit Vec3(T t_x_y = 0);
     ~Vec3() = default;
-    Vec3(T t_x, T t_y, T t_z);
+    Vec3(T t_x, T t_y, T t_z = 0);
     Vec3(const Vec3<T>& t_to_copy) = default;
     Vec3(Vec3&& t_to_move) noexcept = default;
     Vec3& operator = (const Vec3& t_to_copy) = default;

@@ -13,37 +13,34 @@ namespace jdb
   Mat4 Mat4::translation(const Vec3<float>& t_translate)
   {
     Mat4 temp(1);
-    temp.m_mat_[0][T] = t_translate.x;
-    temp.m_mat_[1][T] = t_translate.y;
-    temp.m_mat_[2][T] = t_translate.z;
+    temp.m_mat_[3][X] = t_translate.x;//row major
+    temp.m_mat_[3][Y] = t_translate.y;
+    temp.m_mat_[3][Z] = t_translate.z;
     return temp;
   }
 
-  Mat4 Mat4::rotation(const float t_radian_angle, const Vec3<int>& t_axis)
+  Mat4 Mat4::rotation(const Vec3<float>& t_radian_angles)
   {
-    //adapt from http://www.songho.ca/opengl/gl_matrix.html
+    /*_______________________________________________________
+    |  adapt from http://www.songho.ca/opengl/gl_matrix.html |
+    |  and https://en.wikipedia.org/wiki/Rotation_matrix     |
+    |_______________________________________________________*/
 
-    Mat4 rot(1);
-    const auto C = cos(t_radian_angle), S = sin(t_radian_angle)
-      , ONE_MINUS_C = 1 - C
-      , XY_1_MINUS_C = t_axis.x*t_axis.y*ONE_MINUS_C
-      , XZ_1_MINUS_C = t_axis.x*t_axis.z*ONE_MINUS_C
-      , YZ_1_MINUS_C = t_axis.y*t_axis.z*ONE_MINUS_C
-      , Z_S = t_axis.z*S, Y_S = t_axis.y*S, X_S = t_axis.x*S;
+    Mat4 rotate_x(1), rotate_y(1), rotate_z(1);
 
-    rot.m_mat_[0][X] = t_axis.x*t_axis.x*ONE_MINUS_C + C;
-    rot.set(Vec2<int>(Y, 0), XY_1_MINUS_C - Z_S);
-    rot.m_mat_[0][Z] = XZ_1_MINUS_C + Y_S;
+    auto cos_angle = cos(t_radian_angles.x), sin_angle = sin(t_radian_angles.x);//row major
+    rotate_x.set(Vec2<int>(Y, 1), cos_angle); rotate_x.m_mat_[1][Z] = sin_angle;
+    rotate_x.m_mat_[2][Y] = -sin_angle; rotate_x.m_mat_[2][Z] = cos_angle;
 
-    rot.m_mat_[1][X] = XY_1_MINUS_C + Z_S;
-    rot.m_mat_[1][Y] = t_axis.y*t_axis.y*ONE_MINUS_C + C;
-    rot.m_mat_[1][Z] = YZ_1_MINUS_C - X_S;
+    cos_angle = cos(t_radian_angles.y); sin_angle = sin(t_radian_angles.y);
+    rotate_y.set(Vec2<int>(X, 0), cos_angle); rotate_y.m_mat_[0][Z] = -sin_angle;
+    rotate_y.m_mat_[2][X] = sin_angle; rotate_y.m_mat_[2][Z] = cos_angle;
 
-    rot.m_mat_[2][X] = XZ_1_MINUS_C - Y_S;
-    rot.m_mat_[2][Y] = YZ_1_MINUS_C + X_S;
-    rot.m_mat_[2][Z] = t_axis.z*t_axis.z*ONE_MINUS_C + C;
+    cos_angle = cos(t_radian_angles.z); sin_angle = sin(t_radian_angles.z);
+    rotate_z.set(Vec2<int>(X, 0), cos_angle); rotate_z.m_mat_[0][Y] = sin_angle;
+    rotate_z.m_mat_[1][X] = -sin_angle; rotate_z.m_mat_[1][Y] = cos_angle;
 
-    return rot;
+    return rotate_x * rotate_y * rotate_z;
   }
 
   Mat4 Mat4::scaling(const Vec3<float>& t_scale)
