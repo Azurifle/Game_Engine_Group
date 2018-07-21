@@ -4,9 +4,37 @@
 #include "My_Math/Mat4.hpp"
 #include "Visual_Manager/Mesh_renderer.hpp"
 #include "Visual_Manager/Texture_manager.hpp"
+#include <vector>
 
+//#include "Vertex.h"
 namespace jdb
 {
+	/*class App final
+	{
+	private:
+
+		GLFWwindow *window = nullptr;
+		std::vector<Vertex> vertices;
+
+		GLuint programID;
+		GLuint vertexArrayID;
+		GLint mvp_location;
+		GLuint textureID;
+
+		int width;
+		int height;
+	public:
+		App();
+		~App();
+		void Start();
+		void init(int WIDTH, int HEIGHT, const std::string& tittle);
+		void initMesh();
+		void initShaderProgram();
+		void initTexture();
+
+		void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void key_callback_static(GLFWwindow* window, int key, int scancode, int action, int mods);
+	};*/
   struct Vertex;
 
   class App final

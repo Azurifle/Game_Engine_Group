@@ -94,6 +94,8 @@ namespace jdb
 	int update(std::shared_ptr<System_base> system);
 	std::shared_ptr<System_base> console_menu();
 
+	void shadow_maze();
+
 
 
     static clock_t m_delta_milisec_;

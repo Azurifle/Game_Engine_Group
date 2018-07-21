@@ -62,6 +62,11 @@ namespace jdb
     mesh.add_vertex(Vec3<float>(-0.6f, -0.4f, 0), GREEN, Vec2<float>(0, 0));
     mesh.add_vertex(Vec3<float>(0, 0.6f, 0), RED, Vec2<float>(1, 1));
 
+
+	mesh.add_vertex(Vec3<float>(0.6f, -0.4f, 0), BLUE, Vec2<float>(0, 1));
+	mesh.add_vertex(Vec3<float>(-0.6f, -0.4f, 0), GREEN, Vec2<float>(0, 0));
+	mesh.add_vertex(Vec3<float>(0, 0.6f, 0), RED, Vec2<float>(1, 1));
+
     m_mesh_renderer_ = Mesh_renderer(mesh);
   }
 
@@ -162,7 +167,23 @@ namespace jdb
     const auto MVP_ARRAY = MVP.to_array();
     glUniformMatrix4fv(m_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY);
     glBindVertexArray(m_mesh_renderer_.id());
+
     glDrawArrays(GL_TRIANGLES, 0, 3);
+
+
+
+
+	const auto ANGLE = static_cast<float>(glfwGetTime())
+		, RATIO = m_width_ / static_cast<float>(m_height_);
+	const auto ROTATE_MAT = Mat4::rotation(ANGLE, Vec3<int>(0, 0, 0))
+		, MODEL_MAT = Mat4::translation(Vec3<float>(0)) * ROTATE_MAT * Mat4::scaling(Vec3<float>(1))
+		, VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);//Renderer::set_projection(Renderer::PERSPECTIVE); in App constructor
+	MVP = MODEL_MAT * VIEW_PROJECTION;
+
+	glUniformMatrix4fv(m_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY);
+	glBindVertexArray(m_mesh_renderer_.id());
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
     //Renderer::pop_matrix (m_matrices_.pop_back())
     delete[] MVP_ARRAY;
@@ -177,5 +198,6 @@ namespace jdb
       , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);//Renderer::set_projection(Renderer::PERSPECTIVE); in App constructor
     t_out_mvp = MODEL_MAT * VIEW_PROJECTION;
   }
+  
 
 }//jdb
