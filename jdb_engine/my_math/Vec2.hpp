@@ -1,5 +1,5 @@
-#ifndef G6037599_VEC2_HPP
-#define G6037599_VEC2_HPP
+#ifndef JDB_VEC2_HPP
+#define JDB_VEC2_HPP
 #pragma once
 
 namespace jdb
@@ -48,4 +48,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_VEC2_HPP
+#endif //JDB_VEC2_HPP

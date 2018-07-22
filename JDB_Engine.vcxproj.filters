@@ -84,10 +84,10 @@
     <ClInclude Include="jdb_engine\visual\Renderer.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
-    <ClInclude Include="jdb_engine\visual\Shader.hpp">
+    <ClInclude Include="jdb_engine\visual\Texture_manager.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
-    <ClInclude Include="jdb_engine\visual\Texture_manager.hpp">
+    <ClInclude Include="jdb_engine\visual\Shader_manager.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,10 +140,10 @@
     <ClCompile Include="jdb_engine\visual\Renderer.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
-    <ClCompile Include="jdb_engine\visual\Shader.cpp">
+    <ClCompile Include="jdb_engine\visual\Texture_manager.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
-    <ClCompile Include="jdb_engine\visual\Texture_manager.cpp">
+    <ClCompile Include="jdb_engine\visual\Shader_manager.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
   </ItemGroup>

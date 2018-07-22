@@ -168,7 +168,7 @@
     <ClInclude Include="jdb_engine\visual\Mesh.hpp" />
     <ClInclude Include="jdb_engine\visual\Mesh_renderer.hpp" />
     <ClInclude Include="jdb_engine\visual\Renderer.hpp" />
-    <ClInclude Include="jdb_engine\visual\Shader.hpp" />
+    <ClInclude Include="jdb_engine\visual\Shader_manager.hpp" />
     <ClInclude Include="jdb_engine\visual\Texture_manager.hpp" />
     <ClInclude Include="jdb_engine\visual\Vertex.hpp" />
     <ClInclude Include="shadow_maze\Game.hpp" />
@@ -187,7 +187,7 @@
     <ClCompile Include="jdb_engine\visual\Mesh.cpp" />
     <ClCompile Include="jdb_engine\visual\Mesh_renderer.cpp" />
     <ClCompile Include="jdb_engine\visual\Renderer.cpp" />
-    <ClCompile Include="jdb_engine\visual\Shader.cpp" />
+    <ClCompile Include="jdb_engine\visual\Shader_manager.cpp" />
     <ClCompile Include="jdb_engine\visual\Texture_manager.cpp" />
     <ClCompile Include="jdb_engine\visual\Vertex.cpp" />
     <ClCompile Include="Main.cpp" />

@@ -1,5 +1,5 @@
-#ifndef G6037599_VEC3_HPP
-#define G6037599_VEC3_HPP
+#ifndef JDB_VEC3_HPP
+#define JDB_VEC3_HPP
 #pragma once
 
 namespace jdb
@@ -50,4 +50,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_VEC3_HPP
+#endif //JDB_VEC3_HPP

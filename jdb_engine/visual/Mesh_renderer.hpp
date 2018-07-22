@@ -1,5 +1,5 @@
-#ifndef G6037599_MESH_RENDERER_HPP
-#define G6037599_MESH_RENDERER_HPP
+#ifndef JDB_MESH_RENDERER_HPP
+#define JDB_MESH_RENDERER_HPP
 #pragma once
 
 namespace jdb
@@ -30,4 +30,4 @@ namespace jdb
   };
 }//jdb
 
-#endif G6037599_MESH_RENDERER_HPP;
+#endif JDB_MESH_RENDERER_HPP;

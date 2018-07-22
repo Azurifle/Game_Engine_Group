@@ -1,6 +1,7 @@
-#ifndef G6037599_VEC4_HPP
-#define G6037599_VEC4_HPP
+#ifndef JDB_VEC4_HPP
+#define JDB_VEC4_HPP
 #pragma once
+#include "Vec3.hpp"
 
 namespace jdb
 {
@@ -26,6 +27,7 @@ namespace jdb
     Vec4 operator /= (T t_scalar);
 
     Vec4 operator + (const Vec4& t_other) const;
+    friend Vec4 operator + (const Vec4& t_left, const Vec3<T>& t_right);
     Vec4 operator - (const Vec4& t_other) const;
     Vec4 operator * (T t_scalar) const;
     Vec4 operator / (T t_scalar) const;
@@ -47,4 +49,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_VEC4_HPP
+#endif //JDB_VEC4_HPP

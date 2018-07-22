@@ -1,5 +1,5 @@
-#ifndef G6037599_AUDIO_MANAGER_HPP
-#define G6037599_AUDIO_MANAGER_HPP
+#ifndef JDB_AUDIO_MANAGER_HPP
+#define JDB_AUDIO_MANAGER_HPP
 #pragma once
 
 namespace jdb
@@ -31,4 +31,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_AUDIO_MANAGER_HPP
+#endif //JDB_AUDIO_MANAGER_HPP

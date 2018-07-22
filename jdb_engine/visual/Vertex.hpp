@@ -1,5 +1,5 @@
-#ifndef G6037599_VERTEX_HPP
-#define G6037599_VERTEX_HPP
+#ifndef JDB_VERTEX_HPP
+#define JDB_VERTEX_HPP
 #pragma once
 #include "../My_Math/Vec3.hpp"
 #include "../My_Math/Vec2.hpp"
@@ -15,4 +15,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_VERTEX_HPP
+#endif //JDB_VERTEX_HPP

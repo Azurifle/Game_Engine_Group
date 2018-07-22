@@ -1,5 +1,5 @@
-#ifndef G6037599_GAME_ENGINE_HPP
-#define G6037599_GAME_ENGINE_HPP
+#ifndef JDB_GAME_ENGINE_HPP
+#define JDB_GAME_ENGINE_HPP
 #pragma once
 #include "My_Math/Vec3.hpp"
 
@@ -36,8 +36,7 @@ namespace jdb
 
     static short limit_interval(short t_number, short t_min, short t_max);
 
-    static void load_txt(const std::string& t_path
-      , std::vector<std::string>& t_tokens_out);
+    static void load_txt(const std::string& t_path, std::string& t_string_out);
     static void load_bmp(const std::string& t_path
       , std::vector<std::vector<std::vector<int>>>& t_image);
 
@@ -68,4 +67,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_GAME_ENGINE_HPP
+#endif //JDB_GAME_ENGINE_HPP

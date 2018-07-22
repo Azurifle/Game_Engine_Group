@@ -1,8 +1,8 @@
-#ifndef G6037599_MESH_HPP
-#define G6037599_MESH_HPP
+#ifndef JDB_MESH_HPP
+#define JDB_MESH_HPP
 #pragma once
-#include "../My_Math/Vec3.hpp"
-#include "../My_Math/Vec2.hpp"
+#include "../my_math/Vec3.hpp"
+#include "../my_math/Vec2.hpp"
 
 namespace jdb
 {
@@ -11,6 +11,8 @@ namespace jdb
   class Mesh final
   {
   public:
+    std::vector<Vertex> vertices{};
+
     Mesh() = default;
     ~Mesh() = default;
     Mesh(const Mesh& t_to_copy) = default;
@@ -22,8 +24,7 @@ namespace jdb
     //Add vertex clock wise
     void add_vertex(const Vec3<float>& t_pos, const Vec3<float>& t_rgb, const Vec2<float>& t_texture_xy);
     GLsizeiptr memory_size() const;
-    std::vector<Vertex> m_vertices_{};
   };
-}//G6037599
+}//jdb
 
-#endif //G6037599_MESH_HPP
+#endif //JDB_MESH_HPP

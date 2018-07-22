@@ -38,7 +38,7 @@ namespace jdb
     GLuint buffer_id;
     glGenBuffers(1, &buffer_id);
     glBindBuffer(GL_ARRAY_BUFFER, buffer_id);
-    glBufferData(GL_ARRAY_BUFFER, t_mesh.memory_size(), t_mesh.m_vertices_.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, t_mesh.memory_size(), t_mesh.vertices.data(), GL_STATIC_DRAW);
   }
 
   void Mesh_renderer::get_variables(std::vector<GLint>& t_vram_locations)

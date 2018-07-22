@@ -1,7 +1,8 @@
-#ifndef G6037599_RENDERER_HPP
-#define G6037599_RENDERER_HPP
+#ifndef JDB_RENDERER_HPP
+#define JDB_RENDERER_HPP
 #pragma once
-#include "Shader.hpp"
+#include "Shader_manager.hpp"
+#include "Texture_manager.hpp"
 
 namespace jdb
 {
@@ -10,13 +11,13 @@ namespace jdb
   class Renderer final
   {
   public:
-    static void use_shader(GLuint t_shader_id);
-    static void use_texture(GLuint t_texture_id);
+    static void use_shader(Shader t_id);
+    static void use_texture(Texture t_id);
     static void draw_mesh(const Mesh_renderer& t_mesh_renderer);
 
-    static GLuint shader();
+    static Shader shader();
   private:
-    static GLuint m_shader_program_id_;
+    static Shader m_shader_program_id_;
 
     Renderer() = default;
     ~Renderer() = default;
@@ -27,4 +28,4 @@ namespace jdb
   };
 }//jdb
 
-#endif G6037599_RENDERER_HPP;
+#endif JDB_RENDERER_HPP;

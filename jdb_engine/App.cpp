@@ -2,7 +2,7 @@
 #include "App.hpp"
 #include "visual/Vertex.hpp"
 #include "my_math/Mat4.hpp"
-#include "visual/Shader.hpp"
+#include "visual/Shader_manager.hpp"
 #include "visual/Renderer.hpp"
 #include "visual/Mesh.hpp"
 #include "visual/Texture_manager.hpp"
@@ -30,55 +30,37 @@ namespace jdb
     show_glew_versions();
     test_depth_n_alpha_bend();
 
-    static const std::string VERTEX_SHADER_CODE =
-      "uniform mat4 MVP; \n"	//MVP is Model View Projection
-      "attribute vec3 vPos; \n"
-      "attribute vec3 vCol; \n"
-      "attribute vec2 vTex; \n"
-      "varying vec3 color; \n"
-      "varying vec2 texCoord; \n"
-      "void main() \n "
-      "{ \n"
-      "   gl_Position = MVP * vec4(vPos, 1.0); \n"
-      "   color = vCol; \n"
-      "   texCoord = vTex; \n"
-      "} \n"
-
-      , FRAGMENT_SHADER_CODE = //color & texture
-      "uniform sampler2D texture; \n"
-      "varying vec3 color; \n"
-      "varying vec2 texCoord; \n"
-      "void main() \n"
-      "{ \n"
-      "    gl_FragColor = texture2D( texture, texCoord);\n"
-      "} \n";
-
-    Renderer::use_shader(Shader::create(VERTEX_SHADER_CODE, FRAGMENT_SHADER_CODE));//load_or_get(t_folder_path)
-    m_texture_id_ = Texture_manager::get().load_or_get(GAME_FOLDER+"texture/Test.png");
-    m_texture_tile_id_ = Texture_manager::get().load_or_get(GAME_FOLDER + "texture/Grass.png", GL_RGB);
+    Renderer::use_shader(Shader_manager::load_or_get());
+    m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Test.png"));
+    m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Grass.png", GL_RGB));
+    m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Wall_top.png", GL_RGB));
+    m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Wall_side.png", GL_RGB));
+    m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Smiley.png"));
 
     const auto GREEN = Vec3<float>(0, 1, 0), BLUE = Vec3<float>(0, 0, 1)
       , RED = Vec3<float>(1, 0, 0);
+    const auto TEX_LEFT_TOP = Vec2<float>(0, 0), TEX_RIGHT_TOP = Vec2<float>(1, 0)
+      , TEX_RIGHT_BOTTOM = Vec2<float>(1, 1), TEX_LEFT_BOTTOM = Vec2<float>(0, 1);
+
     Mesh mesh{};
-    mesh.add_vertex(Vec3<float>(0.6f, -0.4f), BLUE, Vec2<float>(1, 1));//pos rb, tex lb
-    mesh.add_vertex(Vec3<float>(-0.6f, -0.4f), GREEN, Vec2<float>(0, 1));//pos lb, tex lb
-    mesh.add_vertex(Vec3<float>(0, 0.6f), RED, Vec2<float>(0.5f, 0));//pos mt, tex mt
+    mesh.add_vertex(Vec3<float>(0.6f, -0.4f), BLUE, TEX_RIGHT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(-0.6f, -0.4f), GREEN, TEX_LEFT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(0, 0.6f), RED, Vec2<float>(0.5f, 0));
 
     m_mesh_renderer_ = Mesh_renderer(mesh);
 
     mesh = Mesh();
-    static const auto TILE_SIZE = 0.2f;
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), BLUE, Vec2<float>(0, 0));//lt
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), GREEN, Vec2<float>(1, 0));//rt
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), RED, Vec2<float>(1, 1));//rb
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), Engine::WHITE, Vec2<float>(0, 1));//lb
+    static const auto TILE_SIZE = 0.05f;
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), BLUE, TEX_LEFT_TOP);
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), GREEN, TEX_RIGHT_TOP);
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), RED, TEX_RIGHT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), Engine::WHITE, TEX_LEFT_BOTTOM);
     m_tile_mesh_renderer_ = Mesh_renderer(mesh);
   }
 
   App::~App()
   {
     glfwTerminate();
-    Texture_manager::get().unload_all();
     puts("App destroyed.");
   }
 
@@ -98,7 +80,7 @@ namespace jdb
 
   // ___ private ________________________________________________
 
-  const std::string App::GAME_FOLDER = "shadow_maze/";
+  const std::string App::TEXTURE_FOLDER = "shadow_maze/texture/";
 
   void App::key_callback_static(GLFWwindow* t_window, const int t_key
     , const int t_scancode, const int t_action, const int t_mods)
@@ -160,7 +142,8 @@ namespace jdb
 
   void App::render_objects() const
   {
-    Renderer::use_texture(m_texture_id_);//Texture_manager::get().load_or_get(GAME_FOLDER)
+    enum Texture_id { TEST, GRASS, WALL_TOP, WALL_SIDE, SMILEY };
+    Renderer::use_texture(m_textures_[TEST]);//Texture_manager::get().load_or_get(GAME_FOLDER)
     
     //Renderer::push_matrix (m_matrices_.push_back())
     Mat4 MVP;
@@ -177,9 +160,8 @@ namespace jdb
     //Renderer::pop_matrix (m_matrices_.pop_back())
     delete[] MVP_ARRAY;
     
-
-    //render a tile
-    Renderer::use_texture(m_texture_tile_id_);//Texture_manager::get().load_or_get(GAME_FOLDER)
+    //render a grass tile
+    Renderer::use_texture(m_textures_[SMILEY]);
 
     const auto RATIO = m_width_ / static_cast<float>(m_height_);
     const auto MODEL_MAT = Mat4::translation(Vec3<float>(-1, 0, 0))
@@ -198,7 +180,7 @@ namespace jdb
   {
     const auto ANGLE = static_cast<float>(glfwGetTime())
       , RATIO = m_width_ / static_cast<float>(m_height_);
-    const auto ROTATE_MAT = Mat4::rotation(Vec3<float>(0, 0, 0))//ANGLE, Vec3<int>(0, 0, 1)
+    const auto ROTATE_MAT = Mat4::rotation(Vec3<float>(0, 0, ANGLE))//ANGLE, Vec3<int>(0, 0, 1)
       , MODEL_MAT = Mat4::translation(Vec3<float>(0)) * ROTATE_MAT * Mat4::scaling(Vec3<float>(1))
       , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);//Renderer::set_projection(Renderer::PERSPECTIVE); in App constructor
     t_out_mvp = MODEL_MAT * VIEW_PROJECTION;

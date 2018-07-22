@@ -98,8 +98,7 @@ namespace jdb
     return t_number;
   }
 
-  void Engine::load_txt(const std::string& t_path
-    , std::vector<std::string>& t_tokens_out)
+  void Engine::load_txt(const std::string& t_path, std::string& t_string_out)
   {
     std::ifstream file_reader(t_path);
     REQUIRE(file_reader.is_open());//should change to popup warning later
@@ -107,10 +106,7 @@ namespace jdb
     std::string temp;
     while (std::getline(file_reader, temp))
     {
-      const auto TAB = '\t';
-      std::istringstream string_cutter(temp);
-      while(std::getline(string_cutter, temp, TAB))
-      { t_tokens_out.push_back(temp); }
+      t_string_out += temp;
     }
     file_reader.close();
   }

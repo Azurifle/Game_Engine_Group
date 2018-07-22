@@ -1,5 +1,5 @@
-#ifndef G6037599_APP_HPP
-#define G6037599_APP_HPP
+#ifndef JDB_APP_HPP
+#define JDB_APP_HPP
 #pragma once
 #include "my_math/Mat4.hpp"
 #include "visual/Mesh_renderer.hpp"
@@ -21,10 +21,10 @@ namespace jdb
 
     void run() const;
   private:
-    static const std::string GAME_FOLDER;
+    static const std::string TEXTURE_FOLDER;
 
     GLFWwindow* m_window_{};
-    Texture m_texture_id_{}, m_texture_tile_id_{};
+    std::vector<Texture> m_textures_{};
     int m_width_, m_height_;
     bool m_is_active_;
     Mesh_renderer m_mesh_renderer_{}, m_tile_mesh_renderer_{};
@@ -40,4 +40,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_APP_HPP
+#endif //JDB_APP_HPP

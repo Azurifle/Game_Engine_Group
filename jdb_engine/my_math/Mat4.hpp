@@ -1,5 +1,5 @@
-#ifndef G6037599_MAT4_HPP
-#define G6037599_MAT4_HPP
+#ifndef JDB_MAT4_HPP
+#define JDB_MAT4_HPP
 #pragma once
 #include "Vec3.hpp"
 #include "Vec4.hpp"
@@ -53,4 +53,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //G6037599_MAT4_HPP
+#endif //JDB_MAT4_HPP

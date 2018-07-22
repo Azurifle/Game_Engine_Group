@@ -149,6 +149,21 @@ namespace jdb
   }
 
   template class Vec4<int>;
+  Vec4<int> operator+(const Vec4<int>& t_left, const Vec3<int>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y, t_left.z + t_right.z, t_left.t };
+  }
+
   template class Vec4<float>;
+  Vec4<float> operator+(const Vec4<float>& t_left, const Vec3<float>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y, t_left.z + t_right.z, t_left.t };
+  }
+
   template class Vec4<double>;
+  Vec4<double> operator+(const Vec4<double>& t_left, const Vec3<double>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y, t_left.z + t_right.z, t_left.t };
+  } 
+
 }//jdb

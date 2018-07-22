@@ -6,17 +6,17 @@ namespace jdb
 {
   // ___ static __________________________________________________________________________________
 
-  GLuint Renderer::m_shader_program_id_ = 0;
+  Shader Renderer::m_shader_program_id_ = 0;
 
-  void Renderer::use_shader(const GLuint t_shader_id)
+  void Renderer::use_shader(const Shader t_id)
   {
-    m_shader_program_id_ = t_shader_id;
+    m_shader_program_id_ = t_id;
     glUseProgram(m_shader_program_id_);
   }
 
-  void Renderer::use_texture(const GLuint t_texture_id)
+  void Renderer::use_texture(const Texture t_id)
   {
-    glBindTexture(GL_TEXTURE_2D, t_texture_id);
+    glBindTexture(GL_TEXTURE_2D, t_id);
   }
 
   void Renderer::draw_mesh(const Mesh_renderer& t_mesh_renderer)
