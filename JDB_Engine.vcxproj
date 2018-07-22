@@ -93,12 +93,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Thirdparty\OpenAL-1.1-SDK\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)jdb_engine\thirdparty\openAL-1.1-SDK\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Thirdparty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)Thirdparty\glew-2.1.0\lib;$(ProjectDir)Thirdparty\alut\lib;$(ProjectDir)Thirdparty\OpenAL-1.1-SDK\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)jdb_engine\thirdparty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)jdb_engine\thirdparty\glew-2.1.0\lib;$(ProjectDir)jdb_engine\thirdparty\alut\lib;$(ProjectDir)jdb_engine\thirdparty\openAL-1.1-SDK\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;alut32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -126,14 +126,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)Thirdparty\OpenAL-1.1-SDK\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)jdb_engine\thirdparty\openAL-1.1-SDK\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)Thirdparty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)Thirdparty\glew-2.1.0\lib;$(ProjectDir)Thirdparty\alut\lib;$(ProjectDir)Thirdparty\OpenAL-1.1-SDK\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)jdb_engine\thirdparty\glfw-3.2.1.bin.WIN32\lib-vc2015;$(ProjectDir)jdb_engine\thirdparty\glew-2.1.0\lib;$(ProjectDir)jdb_engine\thirdparty\alut\lib;$(ProjectDir)jdb_engine\thirdparty\openAL-1.1-SDK\libs;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;alut32.lib;OpenAL32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -156,44 +156,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="0._Game_Engine\App.hpp" />
-    <ClInclude Include="0._Game_Engine\Audio_manager.hpp" />
-    <ClInclude Include="0._Game_Engine\Delta_time.hpp" />
-    <ClInclude Include="0._Game_Engine\Game_engine.hpp" />
-    <ClInclude Include="0._Game_Engine\Grid.hpp" />
-    <ClInclude Include="0._Game_Engine\My_Math\Mat4.hpp" />
-    <ClInclude Include="0._Game_Engine\My_Math\Vec2.hpp" />
-    <ClInclude Include="0._Game_Engine\My_Math\Vec3.hpp" />
-    <ClInclude Include="0._Game_Engine\My_Math\Vec4.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Mesh_renderer.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Renderer.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Shader.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Texture_manager.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Triangle.hpp" />
-    <ClInclude Include="0._Game_Engine\Visual_Manager\Vertex.hpp" />
-    <ClInclude Include="1._Shadow_Maze\Shadow_maze.hpp" />
+    <ClInclude Include="jdb_engine\App.hpp" />
+    <ClInclude Include="jdb_engine\Audio_manager.hpp" />
+    <ClInclude Include="jdb_engine\Delta_time.hpp" />
+    <ClInclude Include="jdb_engine\Engine.hpp" />
+    <ClInclude Include="jdb_engine\Grid.hpp" />
+    <ClInclude Include="jdb_engine\my_math\Mat4.hpp" />
+    <ClInclude Include="jdb_engine\my_math\Vec2.hpp" />
+    <ClInclude Include="jdb_engine\my_math\Vec3.hpp" />
+    <ClInclude Include="jdb_engine\my_math\Vec4.hpp" />
+    <ClInclude Include="jdb_engine\visual\Mesh.hpp" />
+    <ClInclude Include="jdb_engine\visual\Mesh_renderer.hpp" />
+    <ClInclude Include="jdb_engine\visual\Renderer.hpp" />
+    <ClInclude Include="jdb_engine\visual\Shader.hpp" />
+    <ClInclude Include="jdb_engine\visual\Texture_manager.hpp" />
+    <ClInclude Include="jdb_engine\visual\Vertex.hpp" />
+    <ClInclude Include="shadow_maze\Game.hpp" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="0._Game_Engine\App.cpp" />
-    <ClCompile Include="0._Game_Engine\Audio_manager.cpp" />
-    <ClCompile Include="0._Game_Engine\Delta_time.cpp" />
-    <ClCompile Include="0._Game_Engine\Game_engine.cpp" />
-    <ClCompile Include="0._Game_Engine\Grid.cpp" />
-    <ClCompile Include="0._Game_Engine\My_Math\Mat4.cpp" />
-    <ClCompile Include="0._Game_Engine\My_Math\Vec2.cpp" />
-    <ClCompile Include="0._Game_Engine\My_Math\Vec3.cpp" />
-    <ClCompile Include="0._Game_Engine\My_Math\Vec4.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Mesh_renderer.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Renderer.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Shader.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Texture_manager.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Triangle.cpp" />
-    <ClCompile Include="0._Game_Engine\Visual_Manager\Vertex.cpp" />
-    <ClCompile Include="1._Shadow_Maze\Shadow_maze.cpp" />
+    <ClCompile Include="jdb_engine\App.cpp" />
+    <ClCompile Include="jdb_engine\Audio_manager.cpp" />
+    <ClCompile Include="jdb_engine\Delta_time.cpp" />
+    <ClCompile Include="jdb_engine\Engine.cpp" />
+    <ClCompile Include="jdb_engine\Grid.cpp" />
+    <ClCompile Include="jdb_engine\my_math\Mat4.cpp" />
+    <ClCompile Include="jdb_engine\my_math\Vec2.cpp" />
+    <ClCompile Include="jdb_engine\my_math\Vec3.cpp" />
+    <ClCompile Include="jdb_engine\my_math\Vec4.cpp" />
+    <ClCompile Include="jdb_engine\visual\Mesh.cpp" />
+    <ClCompile Include="jdb_engine\visual\Mesh_renderer.cpp" />
+    <ClCompile Include="jdb_engine\visual\Renderer.cpp" />
+    <ClCompile Include="jdb_engine\visual\Shader.cpp" />
+    <ClCompile Include="jdb_engine\visual\Texture_manager.cpp" />
+    <ClCompile Include="jdb_engine\visual\Vertex.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="shadow_maze\Game.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

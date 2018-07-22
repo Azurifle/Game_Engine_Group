@@ -2,7 +2,7 @@
 #include "Texture_manager.hpp"
 
 #define STB_IMAGE_IMPLEMENTATION
-#include "Thirdparty/stb_image.h"//can't add include guard
+#include "jdb_engine/thirdparty/stb_image.h"//can't add include guard
 
 namespace jdb
 {

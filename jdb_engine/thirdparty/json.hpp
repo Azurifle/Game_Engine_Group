@@ -669,7 +669,7 @@ json.exception.type_error.308 | cannot use push_back() with string | The @ref pu
 json.exception.type_error.309 | cannot use insert() with | The @ref insert() member functions can only be executed for certain JSON types.
 json.exception.type_error.310 | cannot use swap() with number | The @ref swap() member functions can only be executed for certain JSON types.
 json.exception.type_error.311 | cannot use emplace_back() with string | The @ref emplace_back() member function can only be executed for certain JSON types.
-json.exception.type_error.312 | cannot use update() with string | The @ref update() member functions can only be executed for certain JSON types.
+json.exception.type_error.312 | cannot use init() with string | The @ref update() member functions can only be executed for certain JSON types.
 json.exception.type_error.313 | invalid value to unflatten | The @ref unflatten function converts an object whose keys are JSON Pointers back into an arbitrary nested JSON value. The JSON Pointers must not overlap, because then the resulting value would not be well defined.
 json.exception.type_error.314 | only objects can be unflattened | The @ref unflatten function only works for an object whose keys are JSON Pointers.
 json.exception.type_error.315 | values in object must be primitive | The @ref unflatten function only works for an object whose keys are JSON Pointers and whose values are primitive.
@@ -14988,7 +14988,7 @@ class basic_json
     @sa https://docs.python.org/3.6/library/stdtypes.html#dict.update
     @since version 3.0.0
     */
-    void update(const_reference j)
+    void init(const_reference j)
     {
         // implicitly convert null value to an empty object
         if (is_null())
@@ -15032,7 +15032,7 @@ class basic_json
     @sa https://docs.python.org/3.6/library/stdtypes.html#dict.update
     @since version 3.0.0
     */
-    void update(const_iterator first, const_iterator last)
+    void init(const_iterator first, const_iterator last)
     {
         // implicitly convert null value to an empty object
         if (is_null())

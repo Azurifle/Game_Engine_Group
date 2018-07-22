@@ -7,7 +7,7 @@ namespace jdb
 {
   class Grid;
 
-  class Game_engine final
+  class Engine final
   {
   public:
     enum Enum
@@ -51,7 +51,7 @@ namespace jdb
 
     static void paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb);
     
-    ~Game_engine() = default;
+    ~Engine() = default;
   private:
     static clock_t m_delta_milisec_;
     static bool m_is_running_;
@@ -60,11 +60,11 @@ namespace jdb
     static void show_header();
     static void back_to_main_menu();
 
-    Game_engine() = default;
-    Game_engine(const Game_engine& t_to_copy) = default;
-    Game_engine(Game_engine&& t_to_move) noexcept = default;
-    Game_engine& operator=(const Game_engine& t_to_copy) = default;
-    Game_engine& operator=(Game_engine&& t_to_move) noexcept = default;
+    Engine() = default;
+    Engine(const Engine& t_to_copy) = default;
+    Engine(Engine&& t_to_move) noexcept = default;
+    Engine& operator=(const Engine& t_to_copy) = default;
+    Engine& operator=(Engine&& t_to_move) noexcept = default;
   };
 }//jdb
 

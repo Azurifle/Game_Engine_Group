@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "Mat4.hpp"
-#include "../Game_engine.hpp"
+#include "../Engine.hpp"
 
 namespace jdb
 {
@@ -281,7 +281,7 @@ namespace jdb
       for (auto col = 0; col < SIZE; ++col)
       {
         if (abs(m_mat_[row][col] - t_other.m_mat_[row][col]) 
-          > Game_engine::PRECISION)
+          > Engine::PRECISION)
         {
           return false;
         }
@@ -373,7 +373,7 @@ namespace jdb
       for (auto& col : row)
       {
         const auto points = 2;
-        str += ' '+ Game_engine::double_points_string(col, t_shows_float? points: 0);
+        str += ' '+ Engine::double_points_string(col, t_shows_float? points: 0);
       }
     }
     str += '\n';

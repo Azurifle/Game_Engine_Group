@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "Grid.hpp"
-#include "Game_engine.hpp"
+#include "Engine.hpp"
 
 namespace jdb
 {
@@ -11,8 +11,8 @@ namespace jdb
   Grid::Grid(const COORD& t_start_coord, const COORD& t_end_coord)
     : m_start_coord_(t_start_coord), m_end_coord_(t_end_coord)
   {
-    REQUIRE(0 <= t_start_coord.X); REQUIRE(t_end_coord.X <= Game_engine::CMD_LAST_COLS);
-    REQUIRE(0 <= t_start_coord.Y); REQUIRE(t_end_coord.Y <= Game_engine::CMD_LAST_ROWS);
+    REQUIRE(0 <= t_start_coord.X); REQUIRE(t_end_coord.X <= Engine::CMD_LAST_COLS);
+    REQUIRE(0 <= t_start_coord.Y); REQUIRE(t_end_coord.Y <= Engine::CMD_LAST_ROWS);
     REQUIRE(t_start_coord.X < t_end_coord.X);
     REQUIRE(t_start_coord.Y < t_end_coord.Y);
   }
@@ -24,7 +24,7 @@ namespace jdb
     clean_canvas();
 
     std::vector<std::vector<std::vector<int>>> image;
-    Game_engine::load_bmp(t_bmp_path, image);
+    Engine::load_bmp(t_bmp_path, image);
 
     m_tiles_.resize(image.size()
       , std::vector<Tile>(image[0].size(), Tile{ NO_TILE, NO_TILE })
@@ -61,7 +61,7 @@ namespace jdb
     short row = 0;
     do
     {
-      Game_engine::set_cursor({ m_print_coord_.X, m_print_coord_.Y + row });
+      Engine::set_cursor({ m_print_coord_.X, m_print_coord_.Y + row });
 
       for (short col = 0; col < m_print_size_.X; ++col)
       {
@@ -91,7 +91,7 @@ namespace jdb
       || m_tiles_[pos.Y][pos.X].slot_2 != NO_GAME_OBJECT);
 
     m_tiles_[pos.Y][pos.X].slot_1 = t_id;
-    Game_engine::set_cursor(get_coord(pos));
+    Engine::set_cursor(get_coord(pos));
     std::cout << t_symbol;
 
     return pos;
@@ -106,7 +106,7 @@ namespace jdb
     {
       m_tiles_[t_pos.Y][t_pos.X].slot_1 = NO_GAME_OBJECT;
 
-      Game_engine::set_cursor(get_coord(t_pos));
+      Engine::set_cursor(get_coord(t_pos));
       std::cout << '.';
     }
     else
@@ -114,7 +114,7 @@ namespace jdb
       REQUIRE(m_tiles_[t_pos.Y][t_pos.X].slot_2 == t_id);
       m_tiles_[t_pos.Y][t_pos.X].slot_2 = NO_GAME_OBJECT;
 
-      Game_engine::set_cursor(get_coord(t_pos, true));
+      Engine::set_cursor(get_coord(t_pos, true));
       std::cout << ' ';
     }
   }
@@ -125,8 +125,8 @@ namespace jdb
     REQUIRE(t_pos.X != NOT_SPAWN.X);
     REQUIRE(t_id > NO_GAME_OBJECT);
 
-    t_moved.X = Game_engine::limit_interval(t_moved.X, 0, m_print_size_.X);
-    t_moved.Y = Game_engine::limit_interval(t_moved.Y, 0, m_print_size_.Y);
+    t_moved.X = Engine::limit_interval(t_moved.X, 0, m_print_size_.X);
+    t_moved.Y = Engine::limit_interval(t_moved.Y, 0, m_print_size_.Y);
 
     switch (m_tiles_[t_moved.Y][t_moved.X].slot_1)
     {
@@ -200,7 +200,7 @@ namespace jdb
     short row = 0;
     do
     {
-      Game_engine::set_cursor({ m_start_coord_.X, m_start_coord_.Y + row });
+      Engine::set_cursor({ m_start_coord_.X, m_start_coord_.Y + row });
       std::cout << std::setw(m_end_coord_.X - m_start_coord_.X + 1) << std::setfill(' ') << ' ';
       ++row;
     } while (row < m_end_coord_.Y);
@@ -209,7 +209,7 @@ namespace jdb
   void Grid::move_symbol_n_despawn(const COORD& t_pos, const int t_id
     , const std::string& t_symbol, const COORD& t_moved, const bool t_is_slot2)
   {
-    Game_engine::set_cursor(get_coord(t_moved, t_is_slot2));
+    Engine::set_cursor(get_coord(t_moved, t_is_slot2));
     std::cout << t_symbol;
     despawns(t_pos, t_id);
   }

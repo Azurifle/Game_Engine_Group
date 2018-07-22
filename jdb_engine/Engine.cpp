@@ -1,16 +1,16 @@
 #include <stdafx.h>
-#include "Game_engine.hpp"
+#include "Engine.hpp"
 #include "App.hpp"
-#include "1._Shadow_Maze/Shadow_maze.hpp"
+#include "shadow_maze/Game.hpp"
 
 namespace jdb
 {
   //___ static ___________________________________________________________
-  const float Game_engine::SECOND = 1000.0f;
-  const float Game_engine::PRECISION = 0.01f;
-  const Vec3<float> Game_engine::WHITE = Vec3<float>(1);
+  const float Engine::SECOND = 1000.0f;
+  const float Engine::PRECISION = 0.01f;
+  const Vec3<float> Engine::WHITE = Vec3<float>(1);
 
-  void Game_engine::start()
+  void Engine::start()
   {
     REQUIRE(!m_is_running_);
     m_is_running_ = true;
@@ -18,16 +18,16 @@ namespace jdb
     disable_mouse_editing();
     srand(GetTickCount());
 
-    Shadow_maze::run();
+    shadow_maze::Game::init();
 
     puts("============================ End of Program ====================================");
     wait_key();
     m_is_running_ = false;
   }
 
-  bool Game_engine::is_running() { return m_is_running_; }
+  bool Engine::is_running() { return m_is_running_; }
 
-  int Game_engine::get_key()
+  int Engine::get_key()
   {
     switch (_kbhit())
     {
@@ -36,7 +36,7 @@ namespace jdb
     }//switch 1st keyboard hit
   }
 
-  int Game_engine::wait_key()
+  int Engine::wait_key()
   {
     const auto FIRST_KEY = _getch();
     switch (FIRST_KEY)
@@ -51,7 +51,7 @@ namespace jdb
     }
   }
 
-  int Game_engine::wait_key(const int t_miliseconds)
+  int Engine::wait_key(const int t_miliseconds)
   {
     const auto TIME_UP = clock() + t_miliseconds;
     do
@@ -69,14 +69,14 @@ namespace jdb
     return KEY_NO_PRESS;
   }
 
-  COORD Game_engine::get_cursor()
+  COORD Engine::get_cursor()
   {
     CONSOLE_SCREEN_BUFFER_INFO console_info;
     PROMISE(GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &console_info));
     return console_info.dwCursorPosition;
   }
 
-  void Game_engine::set_cursor(const COORD& t_coord)
+  void Engine::set_cursor(const COORD& t_coord)
   {
     REQUIRE(0 <= t_coord.X); REQUIRE(t_coord.X <= CMD_LAST_COLS);
     REQUIRE(0 <= t_coord.Y); REQUIRE(t_coord.Y <= CMD_LAST_ROWS);
@@ -84,7 +84,7 @@ namespace jdb
     PROMISE(SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), t_coord));
   }
 
-  short Game_engine::limit_interval(const short t_number
+  short Engine::limit_interval(const short t_number
     , const short t_min, const short t_max)
   {
     if (t_number <= t_min)
@@ -98,7 +98,7 @@ namespace jdb
     return t_number;
   }
 
-  void Game_engine::load_txt(const std::string& t_path
+  void Engine::load_txt(const std::string& t_path
     , std::vector<std::string>& t_tokens_out)
   {
     std::ifstream file_reader(t_path);
@@ -115,7 +115,7 @@ namespace jdb
     file_reader.close();
   }
 
-  void Game_engine::load_bmp(const std::string& t_path
+  void Engine::load_bmp(const std::string& t_path
     , std::vector<std::vector<std::vector<int>>>& t_image)
   {
     //adapt from https://stackoverflow.com/questions/9296059/read-pixel-value-in-bmp-file
@@ -151,7 +151,7 @@ namespace jdb
     }//row loop
   }
 
-  int Game_engine::random(int t_min, int t_max)
+  int Engine::random(int t_min, int t_max)
   {
     if(t_min > t_max)
     {
@@ -160,41 +160,41 @@ namespace jdb
     return t_min + (rand() & t_max - t_min);
   }
 
-  void Game_engine::reset_delta_time()
+  void Engine::reset_delta_time()
   {
     m_delta_milisec_ = clock();
   }
 
-  float Game_engine::get_delta_time()
+  float Engine::get_delta_time()
   {
     return (clock() - m_delta_milisec_)/SECOND;
   }
 
-  std::string Game_engine::double_points_string(const double t_double, const int t_points)
+  std::string Engine::double_points_string(const double t_double, const int t_points)
   {
     std::stringstream double_w_points;
     double_w_points << std::fixed << std::setprecision(t_points) << t_double;
     return double_w_points.str();
   }
 
-  void Game_engine::paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb)
+  void Engine::paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb)
   {
     glColor3f(t_rgb.x, t_rgb.y, t_rgb.z);
     glVertex3f(t_pos.x, t_pos.y, t_pos.z);
   }
 
   //___ private static ___________________________________________________________
-  clock_t Game_engine::m_delta_milisec_ = 0;
-  bool Game_engine::m_is_running_ = false;
+  clock_t Engine::m_delta_milisec_ = 0;
+  bool Engine::m_is_running_ = false;
 
-  void Game_engine::disable_mouse_editing()
+  void Engine::disable_mouse_editing()
   {
     DWORD prev_mode;
     PROMISE(GetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), &prev_mode));
     PROMISE(SetConsoleMode(GetStdHandle(STD_OUTPUT_HANDLE), prev_mode & ~ENABLE_QUICK_EDIT_MODE));
   }
 
-  void Game_engine::show_header()
+  void Engine::show_header()
   {
     puts("=== Game Engine =======================");
     puts("");
@@ -214,7 +214,7 @@ namespace jdb
     puts("");
   }
 
-  void Game_engine::back_to_main_menu()
+  void Engine::back_to_main_menu()
   {
     std::cout << std::endl
       << "Press <Any key> to main menu: ";

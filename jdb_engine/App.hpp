@@ -1,9 +1,9 @@
 #ifndef G6037599_APP_HPP
 #define G6037599_APP_HPP
 #pragma once
-#include "My_Math/Mat4.hpp"
-#include "Visual_Manager/Mesh_renderer.hpp"
-#include "Visual_Manager/Texture_manager.hpp"
+#include "my_math/Mat4.hpp"
+#include "visual/Mesh_renderer.hpp"
+#include "visual/Texture_manager.hpp"
 
 namespace jdb
 {

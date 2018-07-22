@@ -1,12 +1,12 @@
 #include <stdafx.h>
 #include "App.hpp"
-#include "Visual_Manager/Vertex.hpp"
-#include "My_Math/Mat4.hpp"
-#include "Visual_Manager/Shader.hpp"
-#include "Visual_Manager/Renderer.hpp"
-#include "Visual_Manager/Mesh.hpp"
-#include "Visual_Manager/Texture_manager.hpp"
-#include "Game_engine.hpp"
+#include "visual/Vertex.hpp"
+#include "my_math/Mat4.hpp"
+#include "visual/Shader.hpp"
+#include "visual/Renderer.hpp"
+#include "visual/Mesh.hpp"
+#include "visual/Texture_manager.hpp"
+#include "Engine.hpp"
 
 namespace jdb
 {
@@ -71,7 +71,7 @@ namespace jdb
     mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), BLUE, Vec2<float>(0, 0));//lt
     mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), GREEN, Vec2<float>(1, 0));//rt
     mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), RED, Vec2<float>(1, 1));//rb
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), Game_engine::WHITE, Vec2<float>(0, 1));//lb
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), Engine::WHITE, Vec2<float>(0, 1));//lb
     m_tile_mesh_renderer_ = Mesh_renderer(mesh);
   }
 
@@ -98,7 +98,7 @@ namespace jdb
 
   // ___ private ________________________________________________
 
-  const std::string App::GAME_FOLDER = "1._Shadow_Maze/";
+  const std::string App::GAME_FOLDER = "shadow_maze/";
 
   void App::key_callback_static(GLFWwindow* t_window, const int t_key
     , const int t_scancode, const int t_action, const int t_mods)
