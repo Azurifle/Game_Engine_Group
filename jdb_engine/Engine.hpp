@@ -1,7 +1,7 @@
 #ifndef JDB_GAME_ENGINE_HPP
 #define JDB_GAME_ENGINE_HPP
 #pragma once
-#include "My_Math/Vec3.hpp"
+#include "my_math/Vec3.hpp"
 
 namespace jdb
 {
@@ -23,7 +23,6 @@ namespace jdb
       , DEFAULT_DOUBLE_POINTS = 2
     };
     static const float SECOND, PRECISION;
-    static const Vec3<float> WHITE;
 
     static void start();
     static bool is_running();

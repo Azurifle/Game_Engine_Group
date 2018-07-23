@@ -8,14 +8,29 @@ namespace jdb
 {
   // ___ public ______________________________________________________________________________
 
-  Mesh_renderer::Mesh_renderer(const Mesh& t_mesh)
+  Mesh_renderer::Mesh_renderer(const Mesh& t_mesh, const GLenum t_draw_mode)
+  : m_mode_(t_draw_mode), m_vertices_count_(t_mesh.vertices.size())
   {
     move_to_vram(t_mesh);
 
     std::vector<GLint> vram_locations;
     get_variables(vram_locations);
     enable_value_processing(vram_locations);
-    set_vertex_pointer(vram_locations);
+
+    enum Enum
+    {
+      POS, COLOR, TEXTURE
+      , TEXTURE_XY = 2, XYZ_RGB, XYZ_RGB_SIZE = sizeof(float) * XYZ_RGB
+    };
+    set_vertex_pointer(vram_locations[POS], XYZ_RGB);
+    set_vertex_pointer(vram_locations[COLOR], XYZ_RGB, reinterpret_cast<void*>(XYZ_RGB_SIZE));
+    static const auto TEXTURE_PTR = reinterpret_cast<void*>(XYZ_RGB_SIZE * TEXTURE_XY);
+    set_vertex_pointer(vram_locations[TEXTURE], TEXTURE_XY, TEXTURE_PTR);
+  }
+
+  GLint Mesh_renderer::mvp_location() const
+  {
+    return m_mvp_location_;
   }
 
   GLuint Mesh_renderer::id() const
@@ -23,9 +38,14 @@ namespace jdb
     return m_id_;
   }
 
-  GLint Mesh_renderer::mvp_location() const
+  GLenum Mesh_renderer::mode() const
   {
-    return m_mvp_location_;
+    return m_mode_;
+  }
+
+  GLsizei Mesh_renderer::vertices_count() const
+  {
+    return m_vertices_count_;
   }
 
   // ___ private ______________________________________________________________________________
@@ -57,18 +77,10 @@ namespace jdb
     }
   }
 
-  void Mesh_renderer::set_vertex_pointer(const std::vector<GLint>& t_vram_locations)
+  void Mesh_renderer::set_vertex_pointer(const GLuint t_attribute, const GLint t_size
+    , const void* t_ptr)
   {
-    enum Enum
-    {
-      POS, COLOR, TEXTURE, TEXTURE_XY = 2, XYZ_RGB
-      , XYZ_RGB_SIZE = sizeof(float) * XYZ_RGB
-    };
-    glVertexAttribPointer(t_vram_locations[POS], XYZ_RGB, GL_FLOAT, GL_FALSE, sizeof(Vertex), nullptr);
-    glVertexAttribPointer(t_vram_locations[COLOR], XYZ_RGB, GL_FLOAT, GL_FALSE, sizeof(Vertex)
-      , reinterpret_cast<void*>(XYZ_RGB_SIZE));
-    glVertexAttribPointer(t_vram_locations[TEXTURE], TEXTURE_XY, GL_FLOAT, GL_FALSE, sizeof(Vertex)
-      , reinterpret_cast<void*>(XYZ_RGB_SIZE * TEXTURE_XY));
+    glVertexAttribPointer(t_attribute, t_size, GL_FLOAT, GL_FALSE, sizeof(Vertex), t_ptr);
   }
 
 }//jdb

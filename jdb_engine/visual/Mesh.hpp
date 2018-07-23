@@ -22,7 +22,7 @@ namespace jdb
 
     //t_texture_xy: x = {left:0.0f - right:1.0f}, y = {top:0.0f - bottom:1.0f}
     //Add vertex clock wise
-    void add_vertex(const Vec3<float>& t_pos, const Vec3<float>& t_rgb, const Vec2<float>& t_texture_xy);
+    void add_vertex(const Vec3<float>& t_pos, const Vec2<float>& t_texture_xy);
     GLsizeiptr memory_size() const;
   };
 }//jdb

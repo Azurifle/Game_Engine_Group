@@ -12,7 +12,7 @@ namespace jdb
   class App final
   {
   public:
-    App(int t_width, int t_height, const std::string& t_title);
+    App(const Vec2<int>& t_size, const std::string& t_title);
     ~App();
     App(const App& t_to_copy) = default;
     App(App&& t_to_move) noexcept = default;
@@ -23,9 +23,9 @@ namespace jdb
   private:
     static const std::string TEXTURE_FOLDER;
 
-    GLFWwindow* m_window_{};
     std::vector<Texture> m_textures_{};
-    int m_width_, m_height_;
+    Vec2<int> m_size_;
+    GLFWwindow* m_window_{};
     bool m_is_active_;
     Mesh_renderer m_mesh_renderer_{}, m_tile_mesh_renderer_{};
 
@@ -34,9 +34,7 @@ namespace jdb
     void key_callback(GLFWwindow* t_window, int t_key, int t_scancode, int t_action, int t_mods);
     static void show_glew_versions();
     static void test_depth_n_alpha_bend();
-    static void render_background();
     void render_objects() const;
-    void model_view_projection(Mat4& t_out_mvp) const;
   };
 }//jdb
 

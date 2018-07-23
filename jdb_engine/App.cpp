@@ -1,12 +1,10 @@
 #include <stdafx.h>
 #include "App.hpp"
 #include "visual/Vertex.hpp"
-#include "my_math/Mat4.hpp"
 #include "visual/Shader_manager.hpp"
 #include "visual/Renderer.hpp"
 #include "visual/Mesh.hpp"
 #include "visual/Texture_manager.hpp"
-#include "Engine.hpp"
 
 namespace jdb
 {
@@ -14,8 +12,8 @@ namespace jdb
 
   // ___ (de)constructors ________________________________________________
 
-  App::App(const int t_width, const int t_height, const std::string& t_title) 
-    : m_width_(t_width), m_height_(t_height), m_is_active_(true)
+  App::App(const Vec2<int>& t_size, const std::string& t_title) 
+    : m_size_(t_size), m_is_active_(true)
   {
     init_glfw_system(t_title);
     
@@ -37,31 +35,29 @@ namespace jdb
     m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Wall_side.png", GL_RGB));
     m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Smiley.png"));
 
-    const auto GREEN = Vec3<float>(0, 1, 0), BLUE = Vec3<float>(0, 0, 1)
-      , RED = Vec3<float>(1, 0, 0);
     const auto TEX_LEFT_TOP = Vec2<float>(0, 0), TEX_RIGHT_TOP = Vec2<float>(1, 0)
       , TEX_RIGHT_BOTTOM = Vec2<float>(1, 1), TEX_LEFT_BOTTOM = Vec2<float>(0, 1);
 
     Mesh mesh{};
-    mesh.add_vertex(Vec3<float>(0.6f, -0.4f), BLUE, TEX_RIGHT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(-0.6f, -0.4f), GREEN, TEX_LEFT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(0, 0.6f), RED, Vec2<float>(0.5f, 0));
+    mesh.add_vertex(Vec3<float>(6, -4), TEX_RIGHT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(-6, -4), TEX_LEFT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(0, 6), Vec2<float>(0.5f, 0));
 
-    m_mesh_renderer_ = Mesh_renderer(mesh);
+    m_mesh_renderer_ = Mesh_renderer(mesh, GL_TRIANGLES);
 
     mesh = Mesh();
-    static const auto TILE_SIZE = 0.05f;
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), BLUE, TEX_LEFT_TOP);
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), GREEN, TEX_RIGHT_TOP);
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), RED, TEX_RIGHT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), Engine::WHITE, TEX_LEFT_BOTTOM);
-    m_tile_mesh_renderer_ = Mesh_renderer(mesh);
+    static const auto TILE_SIZE = 5;
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), TEX_LEFT_TOP);
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), TEX_RIGHT_TOP);
+    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);
+    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), TEX_LEFT_BOTTOM);
+    m_tile_mesh_renderer_ = Mesh_renderer(mesh, GL_QUADS);
   }
 
   App::~App()
   {
-    glfwTerminate();
-    puts("App destroyed.");
+    glfwTerminate();//close window
+    puts("Glfw_window destroyed.");
   }
 
   // ___ public ________________________________________________
@@ -70,9 +66,15 @@ namespace jdb
   {
     while (!glfwWindowShouldClose(m_window_))
     {
-      render_background();//Renderer::render_background(t_rgb);********
-      glViewport(0, 0, m_width_, m_height_);//Renderer::set_projection(Renderer::PERSPECTIVE); in constructor
-      switch (m_is_active_) { case true: render_objects(); default:; }
+      const Vec3<float> BLACK(0, 0, 0);
+      Renderer::render_bg(BLACK);
+      switch (m_is_active_) 
+      { 
+        case true: glViewport(0, 0, m_size_.x*0.25, m_size_.y*0.25); //test mini map
+          render_objects();
+          glViewport(0, 0, m_size_.x, m_size_.y); render_objects();
+        default:; 
+      }
       glfwSwapBuffers(m_window_);
       glfwPollEvents();//clear inputs
     }
@@ -104,13 +106,6 @@ namespace jdb
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   }
 
-  void App::render_background()
-  {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    const Vec3<float> BG_BLUE_GREEN(0, 0.3f, 0.8f);
-    glClearColor(BG_BLUE_GREEN.x, BG_BLUE_GREEN.y, BG_BLUE_GREEN.z, 1);
-  }
-
   void App::init_glfw_system(const std::string& t_title)
   {
     switch (glfwInit())
@@ -118,7 +113,7 @@ namespace jdb
     case GLFW_FALSE: glfwTerminate(); PROMISE(false); default:;
     }
 
-    m_window_ = glfwCreateWindow(m_width_, m_height_, t_title.c_str(), nullptr, nullptr);
+    m_window_ = glfwCreateWindow(m_size_.x, m_size_.y, t_title.c_str(), nullptr, nullptr);
     if (!m_window_)
     {
       glfwTerminate(); PROMISE(false);
@@ -143,47 +138,18 @@ namespace jdb
   void App::render_objects() const
   {
     enum Texture_id { TEST, GRASS, WALL_TOP, WALL_SIDE, SMILEY };
-    Renderer::use_texture(m_textures_[TEST]);//Texture_manager::get().load_or_get(GAME_FOLDER)
-    
-    //Renderer::push_matrix (m_matrices_.push_back())
-    Mat4 MVP;
 
-    //Renderer::rotate(Vec3<float>(0, 0, 1));
-    model_view_projection(MVP);
+    Renderer::push_matrix();
+      Renderer::translate(Vec3<float>(-10, 0, 0));
+      Renderer::use_texture(m_textures_[SMILEY]);
+      Renderer::draw_mesh(m_tile_mesh_renderer_);
+    Renderer::pop_matrix();
 
-    //Renderer::draw_mesh(m_mesh_renderer_);
-    const auto MVP_ARRAY = MVP.to_array();
-    glUniformMatrix4fv(m_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY);
-    glBindVertexArray(m_mesh_renderer_.id());
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    //Renderer::pop_matrix (m_matrices_.pop_back())
-    delete[] MVP_ARRAY;
-    
-    //render a grass tile
-    Renderer::use_texture(m_textures_[SMILEY]);
-
-    const auto RATIO = m_width_ / static_cast<float>(m_height_);
-    const auto MODEL_MAT = Mat4::translation(Vec3<float>(-1, 0, 0))
-      , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);
-    auto mvp_tile = MODEL_MAT * VIEW_PROJECTION;
-
-    const auto MVP_ARRAY2 = mvp_tile.to_array();
-    glUniformMatrix4fv(m_tile_mesh_renderer_.mvp_location(), 1, GL_FALSE, MVP_ARRAY2);
-    glBindVertexArray(m_tile_mesh_renderer_.id());
-    glDrawArrays(GL_QUADS, 0, 4);
-
-    delete[] MVP_ARRAY2;
-  }
-
-  void App::model_view_projection(Mat4& t_out_mvp) const
-  {
-    const auto ANGLE = static_cast<float>(glfwGetTime())
-      , RATIO = m_width_ / static_cast<float>(m_height_);
-    const auto ROTATE_MAT = Mat4::rotation(Vec3<float>(0, 0, ANGLE))//ANGLE, Vec3<int>(0, 0, 1)
-      , MODEL_MAT = Mat4::translation(Vec3<float>(0)) * ROTATE_MAT * Mat4::scaling(Vec3<float>(1))
-      , VIEW_PROJECTION = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);//Renderer::set_projection(Renderer::PERSPECTIVE); in App constructor
-    t_out_mvp = MODEL_MAT * VIEW_PROJECTION;
+    Renderer::push_matrix();
+      Renderer::rotate(Vec3<float>(0, 0, static_cast<float>(glfwGetTime())));
+      Renderer::use_texture(m_textures_[TEST]);
+      Renderer::draw_mesh(m_mesh_renderer_);
+    Renderer::pop_matrix();
   }
 
 }//jdb

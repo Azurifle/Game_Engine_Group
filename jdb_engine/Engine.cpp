@@ -8,7 +8,6 @@ namespace jdb
   //___ static ___________________________________________________________
   const float Engine::SECOND = 1000.0f;
   const float Engine::PRECISION = 0.01f;
-  const Vec3<float> Engine::WHITE = Vec3<float>(1);
 
   void Engine::start()
   {
