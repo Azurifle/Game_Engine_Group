@@ -1,6 +1,6 @@
 #include <stdafx.h>
 #include "Renderer.hpp"
-#include "Mesh_renderer.hpp"
+#include "Mesh.hpp"
 
 namespace jdb
 {
@@ -52,36 +52,26 @@ namespace jdb
     instance.m_matrices_.back() *= Mat4::translation(t_xyz);
   }
 
-  void Renderer::use_shader(const Shader t_id)
-  {
-    instance.m_shader_program_id_ = t_id;
-    glUseProgram(t_id);
-  }
-
   void Renderer::use_texture(const Texture t_id)
   {
     glBindTexture(GL_TEXTURE_2D, t_id);
   }
 
-  void Renderer::draw_mesh(const Mesh_renderer& t_mesh_renderer)
+  void Renderer::draw_mesh(const Mesh& t_mesh)
   {
+    glUseProgram(t_mesh.shader());
+
     auto model_transform = Mat4::identity();
     for(const auto MATRIX : instance.m_matrices_)
     {
       model_transform *= MATRIX;
     }
     const auto MVP_ARRAY = (model_transform * instance.m_view_projection_).to_array();
-    glUniformMatrix4fv(t_mesh_renderer.mvp_location(), 1, GL_FALSE
-      , MVP_ARRAY);
+    glUniformMatrix4fv(t_mesh.vram_mvp(), 1, GL_FALSE, MVP_ARRAY);
 
-    glBindVertexArray(t_mesh_renderer.id());
-    glDrawArrays(t_mesh_renderer.mode(), 0, t_mesh_renderer.vertices_count());
+    glBindVertexArray(t_mesh.id());
+    glDrawArrays(t_mesh.draw_mode(), 0, t_mesh.vertices_count());
     delete[] MVP_ARRAY;
-  }
-
-  Shader Renderer::shader()
-  {
-    return instance.m_shader_program_id_;
   }
 
   // ___ private ________________________________________________________________________________

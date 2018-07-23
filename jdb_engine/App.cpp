@@ -3,7 +3,7 @@
 #include "visual/Vertex.hpp"
 #include "visual/Shader_manager.hpp"
 #include "visual/Renderer.hpp"
-#include "visual/Mesh.hpp"
+#include "visual/Mesh_manager.hpp"
 #include "visual/Texture_manager.hpp"
 
 namespace jdb
@@ -28,7 +28,6 @@ namespace jdb
     show_glew_versions();
     test_depth_n_alpha_bend();
 
-    Renderer::use_shader(Shader_manager::load_or_get());
     m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Test.png"));
     m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Grass.png", GL_RGB));
     m_textures_.push_back(Texture_manager::load_or_get(TEXTURE_FOLDER + "Wall_top.png", GL_RGB));
@@ -38,20 +37,19 @@ namespace jdb
     const auto TEX_LEFT_TOP = Vec2<float>(0, 0), TEX_RIGHT_TOP = Vec2<float>(1, 0)
       , TEX_RIGHT_BOTTOM = Vec2<float>(1, 1), TEX_LEFT_BOTTOM = Vec2<float>(0, 1);
 
-    Mesh mesh{};
-    mesh.add_vertex(Vec3<float>(6, -4), TEX_RIGHT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(-6, -4), TEX_LEFT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(0, 6), Vec2<float>(0.5f, 0));
+    Mesh_manager::new_mesh(GL_TRIANGLES, Shader_manager::load_or_get());
+      Mesh_manager::add_vertex(Vec3<float>(6, -4), TEX_RIGHT_BOTTOM);
+      Mesh_manager::add_vertex(Vec3<float>(-6, -4), TEX_LEFT_BOTTOM);
+      Mesh_manager::add_vertex(Vec3<float>(0, 6), Vec2<float>(0.5f, 0));
+    m_test_mesh_ = Mesh_manager::save_mesh();
 
-    m_mesh_renderer_ = Mesh_renderer(mesh, GL_TRIANGLES);
-
-    mesh = Mesh();
-    static const auto TILE_SIZE = 5;
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), TEX_LEFT_TOP);
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), TEX_RIGHT_TOP);
-    mesh.add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);
-    mesh.add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), TEX_LEFT_BOTTOM);
-    m_tile_mesh_renderer_ = Mesh_renderer(mesh, GL_QUADS);
+    Mesh_manager::new_mesh(GL_QUADS, Shader_manager::load_or_get());
+      static const auto TILE_SIZE = 5.0f;
+      Mesh_manager::add_vertex(Vec3<float>(-TILE_SIZE, TILE_SIZE), TEX_LEFT_TOP);
+      Mesh_manager::add_vertex(Vec3<float>(TILE_SIZE, TILE_SIZE), TEX_RIGHT_TOP);
+      Mesh_manager::add_vertex(Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);
+      Mesh_manager::add_vertex(Vec3<float>(-TILE_SIZE, -TILE_SIZE), TEX_LEFT_BOTTOM);
+    m_tile_mesh_ = Mesh_manager::save_mesh();
   }
 
   App::~App()
@@ -70,7 +68,8 @@ namespace jdb
       Renderer::render_bg(BLACK);
       switch (m_is_active_) 
       { 
-        case true: glViewport(0, 0, m_size_.x*0.25, m_size_.y*0.25); //test mini map
+        case true: glViewport(0, 0, static_cast<int>(round(m_size_.x * 0.25))
+          , static_cast<int>(round(m_size_.y * 0.25))); //test mini map
           render_objects();
           glViewport(0, 0, m_size_.x, m_size_.y); render_objects();
         default:; 
@@ -142,13 +141,13 @@ namespace jdb
     Renderer::push_matrix();
       Renderer::translate(Vec3<float>(-10, 0, 0));
       Renderer::use_texture(m_textures_[SMILEY]);
-      Renderer::draw_mesh(m_tile_mesh_renderer_);
+      Renderer::draw_mesh(m_tile_mesh_);
     Renderer::pop_matrix();
 
     Renderer::push_matrix();
       Renderer::rotate(Vec3<float>(0, 0, static_cast<float>(glfwGetTime())));
       Renderer::use_texture(m_textures_[TEST]);
-      Renderer::draw_mesh(m_mesh_renderer_);
+      Renderer::draw_mesh(m_test_mesh_);
     Renderer::pop_matrix();
   }
 

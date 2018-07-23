@@ -75,12 +75,6 @@
     <ClInclude Include="jdb_engine\visual\Vertex.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
-    <ClInclude Include="jdb_engine\visual\Mesh.hpp">
-      <Filter>Header Files\jdk_engine\visual</Filter>
-    </ClInclude>
-    <ClInclude Include="jdb_engine\visual\Mesh_renderer.hpp">
-      <Filter>Header Files\jdk_engine\visual</Filter>
-    </ClInclude>
     <ClInclude Include="jdb_engine\visual\Renderer.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
@@ -88,6 +82,12 @@
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
     <ClInclude Include="jdb_engine\visual\Shader_manager.hpp">
+      <Filter>Header Files\jdk_engine\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="jdb_engine\visual\Mesh_manager.hpp">
+      <Filter>Header Files\jdk_engine\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="jdb_engine\visual\Mesh.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
   </ItemGroup>
@@ -131,12 +131,6 @@
     <ClCompile Include="jdb_engine\visual\Vertex.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
-    <ClCompile Include="jdb_engine\visual\Mesh.cpp">
-      <Filter>Source Files\jdk_engine\visual</Filter>
-    </ClCompile>
-    <ClCompile Include="jdb_engine\visual\Mesh_renderer.cpp">
-      <Filter>Source Files\jdk_engine\visual</Filter>
-    </ClCompile>
     <ClCompile Include="jdb_engine\visual\Renderer.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
@@ -144,6 +138,12 @@
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
     <ClCompile Include="jdb_engine\visual\Shader_manager.cpp">
+      <Filter>Source Files\jdk_engine\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="jdb_engine\visual\Mesh_manager.cpp">
+      <Filter>Source Files\jdk_engine\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="jdb_engine\visual\Mesh.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,8 +1,7 @@
-#ifndef JDB_MESH_HPP
-#define JDB_MESH_HPP
+#ifndef JDB_MESH_RENDERER_HPP
+#define JDB_MESH_RENDERER_HPP
 #pragma once
-#include "../my_math/Vec3.hpp"
-#include "../my_math/Vec2.hpp"
+#include "Shader_manager.hpp"
 
 namespace jdb
 {
@@ -11,20 +10,31 @@ namespace jdb
   class Mesh final
   {
   public:
-    std::vector<Vertex> vertices{};
-
     Mesh() = default;
+    Mesh(GLenum t_draw_mode, Shader t_shader, const std::vector<Vertex>& t_vertices);
     ~Mesh() = default;
     Mesh(const Mesh& t_to_copy) = default;
     Mesh(Mesh&& t_to_move) noexcept = default;
     Mesh& operator = (const Mesh& t_to_copy) = default;
     Mesh& operator = (Mesh&& t_to_move) noexcept = default;
 
-    //t_texture_xy: x = {left:0.0f - right:1.0f}, y = {top:0.0f - bottom:1.0f}
-    //Add vertex clock wise
-    void add_vertex(const Vec3<float>& t_pos, const Vec2<float>& t_texture_xy);
-    GLsizeiptr memory_size() const;
+    GLenum draw_mode() const;
+    Shader shader() const;
+    GLsizei vertices_count() const;
+    GLuint id() const;
+    GLint vram_mvp() const;
+  private:
+    GLenum m_draw_mode_{};
+    Shader m_shader_{};
+    GLsizei m_vertices_count_{};
+    GLuint m_id_{};
+    GLint m_mvp_location_{};
+
+    void move_to_vram(const std::vector<Vertex>& t_vertices);
+    void get_variables(std::vector<GLint>& t_vram_location);
+    static void enable_value_processing(const std::vector<GLint>& t_vram_location);
+    static void set_vertex_pointer(GLuint t_attribute, GLint t_size, const void* t_ptr = nullptr);
   };
 }//jdb
 
-#endif //JDB_MESH_HPP
+#endif JDB_MESH_RENDERER_HPP;

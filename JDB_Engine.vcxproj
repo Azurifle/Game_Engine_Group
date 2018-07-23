@@ -165,8 +165,8 @@
     <ClInclude Include="jdb_engine\my_math\Vec2.hpp" />
     <ClInclude Include="jdb_engine\my_math\Vec3.hpp" />
     <ClInclude Include="jdb_engine\my_math\Vec4.hpp" />
+    <ClInclude Include="jdb_engine\visual\Mesh_manager.hpp" />
     <ClInclude Include="jdb_engine\visual\Mesh.hpp" />
-    <ClInclude Include="jdb_engine\visual\Mesh_renderer.hpp" />
     <ClInclude Include="jdb_engine\visual\Renderer.hpp" />
     <ClInclude Include="jdb_engine\visual\Shader_manager.hpp" />
     <ClInclude Include="jdb_engine\visual\Texture_manager.hpp" />
@@ -184,8 +184,8 @@
     <ClCompile Include="jdb_engine\my_math\Vec2.cpp" />
     <ClCompile Include="jdb_engine\my_math\Vec3.cpp" />
     <ClCompile Include="jdb_engine\my_math\Vec4.cpp" />
+    <ClCompile Include="jdb_engine\visual\Mesh_manager.cpp" />
     <ClCompile Include="jdb_engine\visual\Mesh.cpp" />
-    <ClCompile Include="jdb_engine\visual\Mesh_renderer.cpp" />
     <ClCompile Include="jdb_engine\visual\Renderer.cpp" />
     <ClCompile Include="jdb_engine\visual\Shader_manager.cpp" />
     <ClCompile Include="jdb_engine\visual\Texture_manager.cpp" />

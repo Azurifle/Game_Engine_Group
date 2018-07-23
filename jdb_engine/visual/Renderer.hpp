@@ -1,7 +1,6 @@
 #ifndef JDB_RENDERER_HPP
 #define JDB_RENDERER_HPP
 #pragma once
-#include "Shader_manager.hpp"
 #include "Texture_manager.hpp"
 #include "../my_math/Vec2.hpp"
 #include "../my_math/Vec3.hpp"
@@ -9,7 +8,7 @@
 
 namespace jdb
 {
-  class Mesh_renderer;
+  class Mesh;
 
   class Renderer final
   {
@@ -31,20 +30,15 @@ namespace jdb
     static void scale(const Vec3<float>& t_xyz);
     static void rotate(const Vec3<float>& t_radian_angles);
     static void translate(const Vec3<float>& t_xyz);
-
-    static void use_shader(Shader t_id);
     static void use_texture(Texture t_id);
 
     //draw first stay on top
-    static void draw_mesh(const Mesh_renderer& t_mesh_renderer);
-
-    static Shader shader();
+    static void draw_mesh(const Mesh& t_mesh);
 
     ~Renderer() = default;
   private:
     Mat4 m_view_projection_;
     std::vector<Mat4> m_matrices_{};
-    Shader m_shader_program_id_{};
 
     Renderer();
     Renderer(const Renderer& t_to_copy) = default;

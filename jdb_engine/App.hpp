@@ -1,9 +1,9 @@
 #ifndef JDB_APP_HPP
 #define JDB_APP_HPP
 #pragma once
-#include "my_math/Mat4.hpp"
-#include "visual/Mesh_renderer.hpp"
 #include "visual/Texture_manager.hpp"
+#include "visual/Mesh.hpp"
+#include "my_math/Vec2.hpp"
 
 namespace jdb
 {
@@ -27,7 +27,7 @@ namespace jdb
     Vec2<int> m_size_;
     GLFWwindow* m_window_{};
     bool m_is_active_;
-    Mesh_renderer m_mesh_renderer_{}, m_tile_mesh_renderer_{};
+    Mesh m_test_mesh_{}, m_tile_mesh_{};
 
     void init_glfw_system(const std::string& t_title);
     static void key_callback_static(GLFWwindow* t_window, int t_key, int t_scancode, int t_action, int t_mods);
