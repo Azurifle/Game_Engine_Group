@@ -94,16 +94,17 @@ namespace shadow_maze
     enum Texture_id { TEST, GRASS, WALL, SMILEY };
 
     jdb::Renderer::push_matrix();
-      jdb::Renderer::translate(jdb::Vec3<float>(-10, 0, 0));
-      jdb::Renderer::use_texture(m_textures_[GRASS]);
-      jdb::Renderer::draw_mesh(m_tile_mesh_);
-    jdb::Renderer::pop_matrix();
-
-    jdb::Renderer::push_matrix();
       jdb::Renderer::rotate(jdb::Vec3<float>(0, 0, static_cast<float>(glfwGetTime())));
       jdb::Renderer::use_texture(m_textures_[TEST]);
       jdb::Renderer::draw_mesh(m_test_mesh_);
     jdb::Renderer::pop_matrix();
+
+    jdb::Renderer::push_matrix();
+      jdb::Renderer::translate(jdb::Vec3<float>(0, 0, 0));//-10
+      jdb::Renderer::use_texture(m_textures_[GRASS]);
+      jdb::Renderer::draw_mesh(m_tile_mesh_);
+    jdb::Renderer::pop_matrix();
+
   }
 
 }//shadow_maze

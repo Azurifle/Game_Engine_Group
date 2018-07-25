@@ -30,14 +30,13 @@ namespace shadow_maze
   private:
     enum Window_size { WIDTH = 900, HEIGHT = 600 };
     static const std::string TEXTURE_FOLDER;
-    void load_texture(const std::string& t_png_name, GLenum t_color_format = GL_RGB);
     std::vector<jdb::Texture> m_textures_{};
-
     std::shared_ptr<jdb::Mesh> m_test_mesh_{}, m_tile_mesh_{};
+    jdb::Audio m_bgm_{};
+
+    void load_texture(const std::string& t_png_name, GLenum t_color_format = GL_RGB);
     void setup_meshes();
     void update_game_objects() const;
-
-    jdb::Audio m_bgm_{};
 
     Game(const Game& t_to_copy) = default;
     Game& operator=(const Game& t_to_copy) = default;

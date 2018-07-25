@@ -90,6 +90,9 @@
     <ClInclude Include="jdb_engine\Gui_system.hpp">
       <Filter>Header Files\jdk_engine</Filter>
     </ClInclude>
+    <ClInclude Include="jdb_engine\Game_object.hpp">
+      <Filter>Header Files\jdk_engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
