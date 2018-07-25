@@ -149,7 +149,6 @@ namespace shadow_maze
 		DummyTime = 0;
 	}
 
-
 	jdb::Renderer::push_matrix();
 	  //jdb::Renderer::scale(jdb::Vec3<float>(5, 5, 0));
 	  //jdb::Renderer::translate(jdb::Vec3<float>(0, 0, 0));
