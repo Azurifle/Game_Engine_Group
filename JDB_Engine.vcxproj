@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="jdb_engine\Game_object.hpp" />
     <ClInclude Include="jdb_engine\Gui_system.hpp" />
     <ClInclude Include="jdb_engine\Audio_manager.hpp" />
     <ClInclude Include="jdb_engine\Delta_time.hpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="jdb_engine\Game_object.cpp" />
     <ClCompile Include="jdb_engine\Gui_system.cpp" />
     <ClCompile Include="jdb_engine\Audio_manager.cpp" />
     <ClCompile Include="jdb_engine\Delta_time.cpp" />

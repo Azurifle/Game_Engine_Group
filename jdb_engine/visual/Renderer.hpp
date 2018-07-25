@@ -16,7 +16,7 @@ namespace jdb
     static Renderer instance;
 
     static void render_bg(const Vec3<float>& t_rgb);
-    static void set_projection_orthogonal(const Vec2<int>& t_window_size);
+    static void set_projection_orthogonal(Vec2<int> t_grid_size);
 
     //default is set_draw_frame(0, 0, window_size.x, window_size.y) = full window
     //(0, 0) means left bottom edge of the window
@@ -32,7 +32,7 @@ namespace jdb
     static void translate(const Vec3<float>& t_xyz);
     static void use_texture(Texture t_id);
 
-    //draw first stay on top
+    //draw last stay on top
     static void draw_mesh(const std::shared_ptr<Mesh>& t_mesh);
 
     ~Renderer() = default;

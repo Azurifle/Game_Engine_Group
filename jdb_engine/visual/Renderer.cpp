@@ -14,10 +14,12 @@ namespace jdb
     glClearColor(t_rgb.x, t_rgb.y, t_rgb.z, 1);
   }
 
-  void Renderer::set_projection_orthogonal(const Vec2<int>& t_window_size)
+  void Renderer::set_projection_orthogonal(Vec2<int> t_grid_size)
   {
-    const auto RATIO = t_window_size.x / static_cast<float>(t_window_size.y);
-    instance.m_view_projection_ = Mat4::ortho(-RATIO, RATIO, -1, 1, 1, -1);
+    t_grid_size.x /= 2;
+    t_grid_size.y /= 2;
+    instance.m_view_projection_ = Mat4::ortho(-t_grid_size.x, t_grid_size.x
+      , -t_grid_size.y, t_grid_size.y, 1, -1);
   }
 
   void Renderer::set_draw_frame(const Vec2<int>& t_pos_on_window
@@ -59,6 +61,8 @@ namespace jdb
 
   void Renderer::draw_mesh(const std::shared_ptr<Mesh>& t_mesh)
   {
+    REQUIRE(t_mesh);
+
     glUseProgram(t_mesh->shader());
 
     auto model_transform = Mat4::identity();

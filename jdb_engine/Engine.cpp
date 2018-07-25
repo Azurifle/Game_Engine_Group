@@ -109,7 +109,8 @@ namespace jdb
 
     while (!Gui_system::has_window_close(WINDOW))
     {
-      m_app_->update();
+      m_delta_time_.reset();
+      m_app_->update(m_delta_time_.float_seconds());
       Gui_system::swap_buffer_n_clear_inputs(WINDOW);
     }
     
@@ -145,9 +146,7 @@ namespace jdb
     std::cout << "JDB Engine: initailizing \"" << m_app_->title() << "\"." 
       << std::endl << std::endl;
 
-    Vec2<int> size;
-    m_app_->window_size(size);
-    const auto WINDOW = Gui_system::create_window(m_app_->title(), size);
+    const auto WINDOW = Gui_system::create_window(m_app_->title(), m_app_->window_size());
     Gui_system::set_key_callback(WINDOW, this, key_callback);
 
     m_state_ = RUNNING;
