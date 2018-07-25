@@ -22,18 +22,17 @@ namespace shadow_maze
     void key_callback(GLFWwindow* t_window, int t_key, int t_scancode, int t_action
       , int t_mods) override;
     void start() override;
-    void update() override;
+    void update(float t_delta_secs) override;
   private:
     nlohmann::json m_config_{};
     jdb::Vec2<int> m_window_size_{};
-
     jdb::Game_object m_grass_tile_{};
 	  std::vector<std::shared_ptr<jdb::Mesh>> m_player_mesh_;
     jdb::Texture m_a_texture_{};
     jdb::Audio m_bgm_{};
 
-    float m_anime_data_;
-    int m_dummy_time_;
+    float m_dummy_time_;
+    int m_anime_data_;
 
     jdb::Texture load_texture(const std::string& t_png_name, GLenum t_color_format = GL_RGB);
     void setup_meshes();

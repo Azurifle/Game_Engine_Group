@@ -48,22 +48,19 @@ namespace shadow_maze
     setup_meshes();
   }
 
-  void Game::update()
+  void Game::update(const float t_delta_secs)
   {
     static const jdb::Vec3<float> BLACK(0);
     jdb::Renderer::render_bg(BLACK);
 
     m_grass_tile_.render();
 
-    m_dummy_time_++;
-    if (m_dummy_time_ >= 1000)
+    m_dummy_time_ += t_delta_secs;
+    static const auto HALF_SEC = 0.5f;
+    if (m_dummy_time_ >= HALF_SEC)
     {
-      m_anime_data_++;
-      if (m_anime_data_ > 15)
-      {
-        m_anime_data_ = 0;
-      }
       m_dummy_time_ = 0;
+      m_anime_data_ = (m_anime_data_+1)%16;
     }
 
     jdb::Renderer::push_matrix();
@@ -88,7 +85,7 @@ namespace shadow_maze
     jdb::Mesh_factory mesh_factory{};
 
     mesh_factory.new_mesh(GL_QUADS);
-    static const auto TILE_SIZE = 1.0f;
+    static const auto TILE_SIZE = 0.5f;
     mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), TEX_LEFT_TOP);
     mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), TEX_RIGHT_TOP);
     mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);

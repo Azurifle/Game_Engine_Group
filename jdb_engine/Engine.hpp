@@ -1,6 +1,7 @@
 #ifndef JDB_ENGINE_HPP
 #define JDB_ENGINE_HPP
 #pragma once
+#include "Delta_time.hpp"
 
 namespace jdb
 {
@@ -40,6 +41,7 @@ namespace jdb
       , int t_mods);
 
     std::unique_ptr<System_base> m_app_{};
+    Delta_time m_delta_time_;
 
     Engine(const Engine& t_to_copy) = default;
     Engine(Engine&& t_to_move) noexcept = default;

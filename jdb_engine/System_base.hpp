@@ -23,7 +23,7 @@ namespace jdb
     // ___ game play _____________________________________________________________________________
 
     virtual void start() = 0;
-    virtual void update() = 0;
+    virtual void update(float t_delta_secs) = 0;
   protected:
     System_base(const System_base& t_to_copy) = default;
     System_base& operator=(const System_base& t_to_copy) = default;

@@ -109,7 +109,8 @@ namespace jdb
 
     while (!Gui_system::has_window_close(WINDOW))
     {
-      m_app_->update();
+      m_delta_time_.reset();
+      m_app_->update(m_delta_time_.float_seconds());
       Gui_system::swap_buffer_n_clear_inputs(WINDOW);
     }
     
