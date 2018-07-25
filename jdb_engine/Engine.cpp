@@ -147,7 +147,6 @@ namespace jdb
 
     Vec2<int> size;
     m_app_->window_size(size);
-
     const auto WINDOW = Gui_system::create_window(m_app_->title(), size);
     Gui_system::set_key_callback(WINDOW, this, key_callback);
 
