@@ -1,86 +1,19 @@
 #include <stdafx.h>
 #include "Engine.hpp"
-#include "App.hpp"
-#include "shadow_maze/Game.hpp"
+#include "System_base.hpp"
+#include "Gui_system.hpp"
 
 namespace jdb
 {
-  //___ static ___________________________________________________________
-  const float Engine::SECOND = 1000.0f;
+  //___ public utility ___________________________________________________________
+
   const float Engine::PRECISION = 0.01f;
 
-  void Engine::start()
+  std::string Engine::double_points_string(const double t_double, const int t_points)
   {
-    REQUIRE(!m_is_running_);
-    m_is_running_ = true;
-
-    disable_mouse_editing();
-    srand(GetTickCount());
-
-    shadow_maze::Game::init();
-
-    puts("============================ End of Program ====================================");
-    wait_key();
-    m_is_running_ = false;
-  }
-
-  bool Engine::is_running() { return m_is_running_; }
-
-  int Engine::get_key()
-  {
-    switch (_kbhit())
-    {
-    case KEY_NO_PRESS: return KEY_NO_PRESS;
-    default: return wait_key();
-    }//switch 1st keyboard hit
-  }
-
-  int Engine::wait_key()
-  {
-    const auto FIRST_KEY = _getch();
-    switch (FIRST_KEY)
-    {
-    case KEY_ARROW: return _getch();
-    default: switch (_kbhit())
-      {
-      case KEY_NO_PRESS: break;
-      default: _getch();
-      }//switch 2nd keyboard hit
-      return FIRST_KEY;
-    }
-  }
-
-  int Engine::wait_key(const int t_miliseconds)
-  {
-    const auto TIME_UP = clock() + t_miliseconds;
-    do
-    {
-      const auto KEY = get_key();
-      switch (KEY)
-      {
-      case KEY_NO_PRESS: break;
-      default: return KEY;
-      }
-
-      Sleep(FPS_50);
-    } while (clock() < TIME_UP);
-
-    return KEY_NO_PRESS;
-  }
-
-  COORD Engine::get_cursor()
-  {
-    CONSOLE_SCREEN_BUFFER_INFO console_info;
-    PROMISE(GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &console_info));
-    return console_info.dwCursorPosition;
-  }
-
-  void Engine::set_cursor(const COORD& t_coord)
-  {
-    REQUIRE(0 <= t_coord.X); REQUIRE(t_coord.X <= CMD_LAST_COLS);
-    REQUIRE(0 <= t_coord.Y); REQUIRE(t_coord.Y <= CMD_LAST_ROWS);
-
-    PROMISE(SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), t_coord));
+    std::stringstream double_w_points;
+    double_w_points << std::fixed << std::setprecision(t_points) << t_double;
+    return double_w_points.str();
   }
 
   short Engine::limit_interval(const short t_number
@@ -146,41 +79,49 @@ namespace jdb
     }//row loop
   }
 
-  int Engine::random(int t_min, int t_max)
+  //___ public engine ___________________________________________________________
+
+  Engine::Engine()
   {
-    if(t_min > t_max)
+    REQUIRE(m_state_ <= INVALID);
+    m_state_ = CONSTRUCTING;
+
+    disable_mouse_editing();
+    srand(GetTickCount());
+    show_header();
+  }
+
+  Engine::~Engine()
+  {
+    m_state_ = DESTROYING;
+    puts("JDB Engine destroying...");
+    m_state_ = INVALID;
+    puts("JDB Engine destroyed.");
+  }
+
+  void Engine::run(std::unique_ptr<System_base> t_app)
+  {
+    REQUIRE(t_app);
+    m_app_ = std::move(t_app);
+    const auto WINDOW = init();
+    
+    m_app_->start();
+
+    while (!Gui_system::has_window_close(WINDOW))
     {
-      std::swap(t_min, t_max);
+      m_app_->update();
+      Gui_system::swap_buffer_n_clear_inputs(WINDOW);
     }
-    return t_min + (rand() & t_max - t_min);
+    
+    m_state_ = SHUTTING_DOWN;
+    std::cout << "JDB Engine: \"" << m_app_->title() << "\" is shutting down..." << std::endl;
+    Gui_system::destroy_windows();
+    m_app_.reset();
   }
 
-  void Engine::reset_delta_time()
-  {
-    m_delta_milisec_ = clock();
-  }
+  //___ private ___________________________________________________________
 
-  float Engine::get_delta_time()
-  {
-    return (clock() - m_delta_milisec_)/SECOND;
-  }
-
-  std::string Engine::double_points_string(const double t_double, const int t_points)
-  {
-    std::stringstream double_w_points;
-    double_w_points << std::fixed << std::setprecision(t_points) << t_double;
-    return double_w_points.str();
-  }
-
-  void Engine::paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb)
-  {
-    glColor3f(t_rgb.x, t_rgb.y, t_rgb.z);
-    glVertex3f(t_pos.x, t_pos.y, t_pos.z);
-  }
-
-  //___ private static ___________________________________________________________
-  clock_t Engine::m_delta_milisec_ = 0;
-  bool Engine::m_is_running_ = false;
+  Engine::State Engine::m_state_ = INVALID;
 
   void Engine::disable_mouse_editing()
   {
@@ -191,29 +132,38 @@ namespace jdb
 
   void Engine::show_header()
   {
-    puts("=== Game Engine =======================");
+    puts("=== JDB Game Engine =======================");
     puts("");
-    puts("JDB_Engine");
+    puts("By: Jee, Dandy, Ball");
     puts("");
-    puts("");
-    puts("         ////////////////////////// Game list /////////////////////////////");
-    puts("");
-    puts("                    1. The Fantasy World - NoOne The Hero.");
-    puts("");
-    puts("                    2. Bit Autonomous Car.");
-    puts("");
-    puts("                    3. Shadow Maze.");
-    puts("");
-    puts("         //////////////////////////////////////////////////////////////////");
-    puts("");
-    puts("");
+    puts("JDB Engine constructed.");
   }
 
-  void Engine::back_to_main_menu()
+  GLFWwindow* Engine::init()
   {
-    std::cout << std::endl
-      << "Press <Any key> to main menu: ";
-    _getch(); _getch();
-    system("CLS");
+    m_state_ = INITIALIZING;
+    std::cout << "JDB Engine: initailizing \"" << m_app_->title() << "\"." 
+      << std::endl << std::endl;
+
+    Vec2<int> size;
+    m_app_->window_size(size);
+
+    const auto WINDOW = Gui_system::create_window(m_app_->title(), size);
+    Gui_system::set_key_callback(WINDOW, this, key_callback);
+
+    m_state_ = RUNNING;
+    std::cout << "JDB Engine: \"" << m_app_->title() << "\" is running."
+      << std::endl << std::endl;
+
+    return WINDOW;
   }
+
+  void Engine::key_callback(GLFWwindow* t_window, const int t_key
+    , const int t_scancode, const int t_action, const int t_mods)
+  {
+    auto that = static_cast<Engine*>(glfwGetWindowUserPointer(t_window));
+    REQUIRE(that->m_app_);
+    that->m_app_->key_callback(t_window, t_key, t_scancode, t_action, t_mods);
+  }
+
 }//jdb

@@ -1,64 +1,46 @@
-#ifndef JDB_GAME_ENGINE_HPP
-#define JDB_GAME_ENGINE_HPP
+#ifndef JDB_ENGINE_HPP
+#define JDB_ENGINE_HPP
 #pragma once
-#include "my_math/Vec3.hpp"
 
 namespace jdb
 {
-  class Grid;
+  class System_base;
 
   class Engine final
   {
   public:
-    enum Enum
-    {
-      KEY_NO_PRESS
-      , KEY_ARROW = 224
-      , KEY_ARROW_UP = 72, KEY_ARROW_DOWN = 80
-      , KEY_ARROW_LEFT = 75, KEY_ARROW_RIGHT = 77
-      , KEY_SPACE = 32
-      , KEY_ESC = 27
-      , FPS_50 = 20
-      , CMD_LAST_COLS = 140, CMD_LAST_ROWS = 40
-      , DEFAULT_DOUBLE_POINTS = 2
-    };
-    static const float SECOND, PRECISION;
+    // ___ Utility _____________________________________________________________________________
 
-    static void start();
-    static bool is_running();
+    static const float PRECISION;
 
-    static int get_key();
-    static int wait_key();
-    static int wait_key(int t_miliseconds);
-    static COORD get_cursor();
-    static void set_cursor(const COORD& t_coord);
-
+    enum Default { DOUBLE_POINTS = 2 };
+    static std::string double_points_string(double t_double
+      , int t_points = DOUBLE_POINTS);
     static short limit_interval(short t_number, short t_min, short t_max);
 
     static void load_txt(const std::string& t_path, std::string& t_string_out);
     static void load_bmp(const std::string& t_path
       , std::vector<std::vector<std::vector<int>>>& t_image);
 
-    static int random(int t_min, int t_max);
+    // ___ Engine _____________________________________________________________________________
 
-    static void reset_delta_time();
-    static float get_delta_time();
+    enum State { INVALID, CONSTRUCTING, INITIALIZING, RUNNING, SHUTTING_DOWN, DESTROYING };
+    Engine();
+    ~Engine();
 
-    static std::string double_points_string(double t_double
-      , int t_points = DEFAULT_DOUBLE_POINTS);
-
-    static void paint_pos(const Vec3<float>& t_pos, const Vec3<float>& t_rgb);
-    
-    ~Engine() = default;
+    void run(std::unique_ptr<System_base> t_app);
   private:
-    static clock_t m_delta_milisec_;
-    static bool m_is_running_;
+    static State m_state_;
 
     static void disable_mouse_editing();
     static void show_header();
-    static void back_to_main_menu();
+    GLFWwindow* init();
 
-    Engine() = default;
+    static void key_callback(GLFWwindow* t_window, int t_key, int t_scancode, int t_action
+      , int t_mods);
+
+    std::unique_ptr<System_base> m_app_{};
+
     Engine(const Engine& t_to_copy) = default;
     Engine(Engine&& t_to_move) noexcept = default;
     Engine& operator=(const Engine& t_to_copy) = default;
@@ -66,4 +48,4 @@ namespace jdb
   };
 }//jdb
 
-#endif //JDB_GAME_ENGINE_HPP
+#endif //JDB_ENGINE_HPP

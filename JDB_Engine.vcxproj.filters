@@ -48,12 +48,6 @@
     <ClInclude Include="jdb_engine\Engine.hpp">
       <Filter>Header Files\jdk_engine</Filter>
     </ClInclude>
-    <ClInclude Include="jdb_engine\Grid.hpp">
-      <Filter>Header Files\jdk_engine</Filter>
-    </ClInclude>
-    <ClInclude Include="jdb_engine\App.hpp">
-      <Filter>Header Files\jdk_engine</Filter>
-    </ClInclude>
     <ClInclude Include="jdb_engine\Audio_manager.hpp">
       <Filter>Header Files\jdk_engine</Filter>
     </ClInclude>
@@ -84,11 +78,17 @@
     <ClInclude Include="jdb_engine\visual\Shader_manager.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
     </ClInclude>
-    <ClInclude Include="jdb_engine\visual\Mesh_manager.hpp">
-      <Filter>Header Files\jdk_engine\visual</Filter>
-    </ClInclude>
     <ClInclude Include="jdb_engine\visual\Mesh.hpp">
       <Filter>Header Files\jdk_engine\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="jdb_engine\visual\Mesh_factory.hpp">
+      <Filter>Header Files\jdk_engine\visual</Filter>
+    </ClInclude>
+    <ClInclude Include="jdb_engine\System_base.hpp">
+      <Filter>Header Files\jdk_engine</Filter>
+    </ClInclude>
+    <ClInclude Include="jdb_engine\Gui_system.hpp">
+      <Filter>Header Files\jdk_engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -100,12 +100,6 @@
     </ClCompile>
     <ClCompile Include="shadow_maze\Game.cpp">
       <Filter>Source Files\shadow_maze</Filter>
-    </ClCompile>
-    <ClCompile Include="jdb_engine\Grid.cpp">
-      <Filter>Source Files\jdk_engine</Filter>
-    </ClCompile>
-    <ClCompile Include="jdb_engine\App.cpp">
-      <Filter>Source Files\jdk_engine</Filter>
     </ClCompile>
     <ClCompile Include="jdb_engine\Audio_manager.cpp">
       <Filter>Source Files\jdk_engine</Filter>
@@ -140,11 +134,14 @@
     <ClCompile Include="jdb_engine\visual\Shader_manager.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
     </ClCompile>
-    <ClCompile Include="jdb_engine\visual\Mesh_manager.cpp">
-      <Filter>Source Files\jdk_engine\visual</Filter>
-    </ClCompile>
     <ClCompile Include="jdb_engine\visual\Mesh.cpp">
       <Filter>Source Files\jdk_engine\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="jdb_engine\visual\Mesh_factory.cpp">
+      <Filter>Source Files\jdk_engine\visual</Filter>
+    </ClCompile>
+    <ClCompile Include="jdb_engine\Gui_system.cpp">
+      <Filter>Source Files\jdk_engine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

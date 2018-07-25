@@ -156,16 +156,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="jdb_engine\App.hpp" />
+    <ClInclude Include="jdb_engine\Gui_system.hpp" />
     <ClInclude Include="jdb_engine\Audio_manager.hpp" />
     <ClInclude Include="jdb_engine\Delta_time.hpp" />
     <ClInclude Include="jdb_engine\Engine.hpp" />
-    <ClInclude Include="jdb_engine\Grid.hpp" />
     <ClInclude Include="jdb_engine\my_math\Mat4.hpp" />
     <ClInclude Include="jdb_engine\my_math\Vec2.hpp" />
     <ClInclude Include="jdb_engine\my_math\Vec3.hpp" />
     <ClInclude Include="jdb_engine\my_math\Vec4.hpp" />
-    <ClInclude Include="jdb_engine\visual\Mesh_manager.hpp" />
+    <ClInclude Include="jdb_engine\System_base.hpp" />
+    <ClInclude Include="jdb_engine\visual\Mesh_factory.hpp" />
     <ClInclude Include="jdb_engine\visual\Mesh.hpp" />
     <ClInclude Include="jdb_engine\visual\Renderer.hpp" />
     <ClInclude Include="jdb_engine\visual\Shader_manager.hpp" />
@@ -175,16 +175,15 @@
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="jdb_engine\App.cpp" />
+    <ClCompile Include="jdb_engine\Gui_system.cpp" />
     <ClCompile Include="jdb_engine\Audio_manager.cpp" />
     <ClCompile Include="jdb_engine\Delta_time.cpp" />
     <ClCompile Include="jdb_engine\Engine.cpp" />
-    <ClCompile Include="jdb_engine\Grid.cpp" />
     <ClCompile Include="jdb_engine\my_math\Mat4.cpp" />
     <ClCompile Include="jdb_engine\my_math\Vec2.cpp" />
     <ClCompile Include="jdb_engine\my_math\Vec3.cpp" />
     <ClCompile Include="jdb_engine\my_math\Vec4.cpp" />
-    <ClCompile Include="jdb_engine\visual\Mesh_manager.cpp" />
+    <ClCompile Include="jdb_engine\visual\Mesh_factory.cpp" />
     <ClCompile Include="jdb_engine\visual\Mesh.cpp" />
     <ClCompile Include="jdb_engine\visual\Renderer.cpp" />
     <ClCompile Include="jdb_engine\visual\Shader_manager.cpp" />

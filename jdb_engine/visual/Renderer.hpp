@@ -33,7 +33,7 @@ namespace jdb
     static void use_texture(Texture t_id);
 
     //draw first stay on top
-    static void draw_mesh(const Mesh& t_mesh);
+    static void draw_mesh(const std::shared_ptr<Mesh>& t_mesh);
 
     ~Renderer() = default;
   private:

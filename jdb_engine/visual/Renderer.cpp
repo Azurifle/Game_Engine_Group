@@ -57,9 +57,9 @@ namespace jdb
     glBindTexture(GL_TEXTURE_2D, t_id);
   }
 
-  void Renderer::draw_mesh(const Mesh& t_mesh)
+  void Renderer::draw_mesh(const std::shared_ptr<Mesh>& t_mesh)
   {
-    glUseProgram(t_mesh.shader());
+    glUseProgram(t_mesh->shader());
 
     auto model_transform = Mat4::identity();
     for(const auto MATRIX : instance.m_matrices_)
@@ -67,10 +67,10 @@ namespace jdb
       model_transform *= MATRIX;
     }
     const auto MVP_ARRAY = (model_transform * instance.m_view_projection_).to_array();
-    glUniformMatrix4fv(t_mesh.vram_mvp(), 1, GL_FALSE, MVP_ARRAY);
+    glUniformMatrix4fv(t_mesh->vram_mvp(), 1, GL_FALSE, MVP_ARRAY);
 
-    glBindVertexArray(t_mesh.id());
-    glDrawArrays(t_mesh.draw_mode(), 0, t_mesh.vertices_count());
+    glBindVertexArray(t_mesh->id());
+    glDrawArrays(t_mesh->draw_mode(), 0, t_mesh->vertices_count());
     delete[] MVP_ARRAY;
   }
 

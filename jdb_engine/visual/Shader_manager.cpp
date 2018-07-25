@@ -38,7 +38,7 @@ namespace jdb
     glAttachShader(ids[PROGRAM], ids[FRAGMENT]);
 
     glLinkProgram(ids[PROGRAM]);
-    step7_check_linking(ids[PROGRAM]);
+    step7_check_linking(ids[PROGRAM], t_folder_path);
 
     m_loadeds_[t_folder_path] = ids[PROGRAM];
     return ids[PROGRAM];
@@ -70,45 +70,57 @@ namespace jdb
     GLint result;
     glGetShaderiv(t_shader_id, GL_COMPILE_STATUS, &result);
     switch (result) { case GL_TRUE: return; default:; }
-    show_shader_error(t_shader_id, "Compilation", false);
+    show_compile_error(t_shader_id);
   }
 
-  void Shader_manager::step7_check_linking(const Shader t_m_program_id)
+  void Shader_manager::step7_check_linking(const Shader t_id, const std::string& t_folder_path)
   {
     GLint link_status, validate_status;
 
-    glGetProgramiv(t_m_program_id, GL_LINK_STATUS, &link_status);
+    glGetProgramiv(t_id, GL_LINK_STATUS, &link_status);
     switch (link_status)
     {
-    case GL_FALSE: show_shader_error(t_m_program_id, "Linking"); default:;
+    case GL_FALSE: show_program_error(t_id, "Linking"); default:;
     }
 
-    glValidateProgram(t_m_program_id);
-    glGetProgramiv(t_m_program_id, GL_VALIDATE_STATUS, &validate_status);
+    glValidateProgram(t_id);
+    glGetProgramiv(t_id, GL_VALIDATE_STATUS, &validate_status);
     switch (validate_status)
     {
-    case GL_FALSE: show_shader_error(t_m_program_id, "Validation"); default:;
+    case GL_FALSE: show_program_error(t_id, "Validation"); default:;
     }
 
-    std::cout << "Link: " << link_status
-      << ", Validate: " << validate_status << std::endl;
+    std::cout << "Shader \"" << t_folder_path << "\" Link: " << show_succeed_failed(link_status)
+      << ", Validate: " << show_succeed_failed(validate_status) << std::endl;
   }
 
-  void Shader_manager::show_shader_error(const Shader t_shader_id
-    , const std::string t_text, const bool t_is_program)
+  void Shader_manager::show_compile_error(const Shader t_id)
   {
-    std::cout << "Shader " << t_text << " FAILED" << std::endl;
-    const auto MESSAGE_LENGTH = 256;
-    GLchar messages[MESSAGE_LENGTH];
-    switch (t_is_program)
-    {
-    case false: glGetShaderInfoLog(t_shader_id, sizeof messages, nullptr, &messages[0]);
-      break;
-    default: glGetProgramInfoLog(t_shader_id, sizeof messages, nullptr, &messages[0]);
-    }
+    std::cout << "Shader compilation FAILED" << std::endl;
+    GLchar messages[LENGTH];
+
+    glGetShaderInfoLog(t_id, sizeof messages, nullptr, &messages[0]);
     std::cout << messages;
+
     glfwTerminate();
     PROMISE(false);
+  }
+
+  void Shader_manager::show_program_error(const Shader t_id, const std::string& t_text)
+  {
+    std::cout << "Shader " << t_text << " FAILED" << std::endl;
+    GLchar messages[LENGTH];
+
+    glGetProgramInfoLog(t_id, sizeof messages, nullptr, &messages[0]);
+    std::cout << messages;
+
+    glfwTerminate();
+    PROMISE(false);
+  }
+
+  const char* Shader_manager::show_succeed_failed(const GLint t_link_status)
+  {
+    return t_link_status ? "succeed" : "FAILED";
   }
 
 }//jdb

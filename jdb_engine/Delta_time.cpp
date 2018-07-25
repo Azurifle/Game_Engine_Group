@@ -1,4 +1,4 @@
-#include "stdafx.h"
+#include <stdafx.h>
 #include "Delta_time.hpp"
 
 namespace jdb
