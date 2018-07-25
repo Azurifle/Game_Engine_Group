@@ -27,11 +27,14 @@ namespace shadow_maze
     nlohmann::json m_config_{};
     jdb::Vec2<int> m_window_size_{};
 
-    enum Object { GRASS_TILE, HERO, SIZE };
+    enum Object { GRASS_TILE, SIZE };
     std::vector<jdb::Game_object> m_game_objects_{};
 	  std::vector<std::shared_ptr<jdb::Mesh>> m_player_mesh_;
-    jdb::Texture m_hero_texture_{};
+    jdb::Texture m_a_texture_{};
     jdb::Audio m_bgm_{};
+
+    float m_anime_data_;
+    int m_dummy_time_;
 
     jdb::Texture load_texture(const std::string& t_png_name, GLenum t_color_format = GL_RGB);
     void setup_meshes();

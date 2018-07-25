@@ -11,7 +11,8 @@ namespace shadow_maze
   //How to use json: https://github.com/nlohmann/json/tree/master
 
   Game::Game(): m_config_(nlohmann::json::parse(std::ifstream("shadow_maze/Config.json")))
-  , m_window_size_(jdb::Vec2<int>(m_config_["window_width"], m_config_["window_height"])) {}
+  , m_window_size_(jdb::Vec2<int>(m_config_["window_width"], m_config_["window_height"]))
+  , m_anime_data_(0), m_dummy_time_(0) {}
 
   Game::~Game()
   {
@@ -42,7 +43,7 @@ namespace shadow_maze
 
     m_game_objects_.resize(SIZE);
     m_game_objects_[GRASS_TILE].texture = load_texture("Grass");
-    m_hero_texture_ = load_texture("Hero2", GL_RGBA);
+    m_a_texture_ = load_texture("Warp2", GL_RGBA);
 
     jdb::Renderer::set_projection_orthogonal(jdb::Vec2<int>(20));
     setup_meshes();
@@ -55,9 +56,20 @@ namespace shadow_maze
 
     m_game_objects_[GRASS_TILE].render();
 
+    m_dummy_time_++;
+    if (m_dummy_time_ >= 1000)
+    {
+      m_anime_data_++;
+      if (m_anime_data_ > 15)
+      {
+        m_anime_data_ = 0;
+      }
+      m_dummy_time_ = 0;
+    }
+
     jdb::Renderer::push_matrix();
-      jdb::Renderer::use_texture(m_hero_texture_);
-      jdb::Renderer::draw_mesh(m_player_mesh_[0]);
+      jdb::Renderer::use_texture(m_a_texture_);
+      jdb::Renderer::draw_mesh(m_player_mesh_[m_anime_data_]);
     jdb::Renderer::pop_matrix();
   }
 
@@ -92,31 +104,127 @@ namespace shadow_maze
 	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
 	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
 	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
-    m_player_mesh_.push_back(mesh_factory.save_mesh());
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
 
-	  /*//1 Down
-	  mesh_factory.new_mesh(GL_QUADS);
-	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, 0));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
-	  m_player_mesh_.push_back(mesh_factory.save_mesh());*/
-
-	  /*//2 Down
+	  //1 Down
 	  mesh_factory.new_mesh(GL_QUADS);
 	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
 	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR*2, 0));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR*2, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //2 Down
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR*2, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR*3, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR*3, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR*2, DY_FOUR));
 	  m_player_mesh_.push_back(mesh_factory.save_mesh());
 
 	  //3 Down
 	  mesh_factory.new_mesh(GL_QUADS);
-	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, 0));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
-	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
-	  m_player_mesh_.push_back(mesh_factory.save_mesh());*/
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //4 Left
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR*2));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //5 Left
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR*2));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //6 Left
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR*2));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //7 Left
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR*2));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //8 Right
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR * 3));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //9 Right
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 3));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //10 Right
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 3));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //11 Right
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR*2));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 3));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //12 Up
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 4));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR * 4));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //13 Up
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 4));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR * 4));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //14 Up
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 4));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 2, DY_FOUR * 4));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //15 Up
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR * 3));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 4, DY_FOUR * 4));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR * 3, DY_FOUR * 4));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
   }
 
 }//shadow_maze
