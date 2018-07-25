@@ -27,9 +27,11 @@ namespace shadow_maze
   {
     if (t_key == GLFW_KEY_F3 && t_action == GLFW_PRESS)
     {
-      puts("F13 pressed: Show GLFW window information");
+      puts("F3 pressed: Show GLFW window information");
       std::cout << "window:" << t_window << ", scancode: " << t_scancode 
         << ", mods: " << t_mods << std::endl;
+	    std::cout << "WIDTH:" << m_config_["window_width"]
+        << ", HEIGHT: " << m_config_["window_height"] << std::endl;
     }
   }
 
@@ -40,13 +42,10 @@ namespace shadow_maze
 
     m_game_objects_.resize(SIZE);
     m_game_objects_[GRASS_TILE].texture = load_texture("Grass");
-    m_game_objects_[TEST].texture = load_texture("Test", GL_RGBA);
+    m_hero_texture_ = load_texture("Hero2", GL_RGBA);
 
     jdb::Renderer::set_projection_orthogonal(jdb::Vec2<int>(20));
     setup_meshes();
-
-    m_game_objects_[GRASS_TILE].pos = jdb::Vec3<float>(-5, 5);
-    m_game_objects_[TEST].pos = m_game_objects_[GRASS_TILE].pos;
   }
 
   void Game::update()
@@ -54,13 +53,12 @@ namespace shadow_maze
     static const jdb::Vec3<float> BLACK(0);
     jdb::Renderer::render_bg(BLACK);
 
-    m_game_objects_[TEST].radian_angles.z = static_cast<float>(glfwGetTime());
-    m_game_objects_[TEST].scale = jdb::Vec3<float>(0.5f);
+    m_game_objects_[GRASS_TILE].render();
 
-    for(auto object : m_game_objects_)
-    {
-      object.render();
-    }
+    jdb::Renderer::push_matrix();
+      jdb::Renderer::use_texture(m_hero_texture_);
+      jdb::Renderer::draw_mesh(m_player_mesh_[0]);
+    jdb::Renderer::pop_matrix();
   }
 
   //___ private __________________________________________________________________________________
@@ -77,11 +75,6 @@ namespace shadow_maze
       , TEX_RIGHT_BOTTOM = jdb::Vec2<float>(1, 1), TEX_LEFT_BOTTOM = jdb::Vec2<float>(0, 1);
 
     jdb::Mesh_factory mesh_factory{};
-    mesh_factory.new_mesh(GL_TRIANGLES, jdb::Shader_manager::load_or_get());
-    mesh_factory.add_vertex(jdb::Vec3<float>(6, -4), TEX_RIGHT_BOTTOM);
-    mesh_factory.add_vertex(jdb::Vec3<float>(-6, -4), TEX_LEFT_BOTTOM);
-    mesh_factory.add_vertex(jdb::Vec3<float>(0, 6), jdb::Vec2<float>(0.5f, 0));
-    m_game_objects_[TEST].mesh = mesh_factory.save_mesh();
 
     mesh_factory.new_mesh(GL_QUADS);
     static const auto TILE_SIZE = 1.0f;
@@ -90,6 +83,40 @@ namespace shadow_maze
     mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);
     mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), TEX_LEFT_BOTTOM);
     m_game_objects_[GRASS_TILE].mesh = mesh_factory.save_mesh();
+
+    static const auto DY_FOUR = 0.25f;
+
+	  //0 Down
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+    m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  /*//1 Down
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());*/
+
+	  /*//2 Down
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR*2, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());
+
+	  //3 Down
+	  mesh_factory.new_mesh(GL_QUADS);
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(0, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), jdb::Vec2<float>(DY_FOUR, 0));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(DY_FOUR, DY_FOUR));
+	  mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), jdb::Vec2<float>(0, DY_FOUR));
+	  m_player_mesh_.push_back(mesh_factory.save_mesh());*/
   }
 
 }//shadow_maze
