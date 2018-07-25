@@ -35,6 +35,7 @@ namespace shadow_maze
 
     std::shared_ptr<jdb::Mesh> m_test_mesh_{}, m_tile_mesh_{};
 	std::vector<std::shared_ptr<jdb::Mesh>> m_player_mesh_;
+	std::vector<std::shared_ptr<jdb::Mesh>> m_tilesets_mesh_;
     void setup_meshes();
     void update_game_objects() const;
     jdb::Audio m_bgm_{};
