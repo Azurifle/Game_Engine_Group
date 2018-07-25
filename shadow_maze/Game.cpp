@@ -41,8 +41,7 @@ namespace shadow_maze
     m_bgm_ = jdb::Audio_manager::load_or_get_audio("shadow_maze/music/Game.wav");
     jdb::Audio_manager::play(m_bgm_);
 
-    m_game_objects_.resize(SIZE);
-    m_game_objects_[GRASS_TILE].texture = load_texture("Grass");
+    m_grass_tile_.texture = load_texture("Grass");
     m_a_texture_ = load_texture("Warp2", GL_RGBA);
 
     jdb::Renderer::set_projection_orthogonal(jdb::Vec2<int>(20));
@@ -54,7 +53,7 @@ namespace shadow_maze
     static const jdb::Vec3<float> BLACK(0);
     jdb::Renderer::render_bg(BLACK);
 
-    m_game_objects_[GRASS_TILE].render();
+    m_grass_tile_.render();
 
     m_dummy_time_++;
     if (m_dummy_time_ >= 1000)
@@ -94,7 +93,7 @@ namespace shadow_maze
     mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, TILE_SIZE), TEX_RIGHT_TOP);
     mesh_factory.add_vertex(jdb::Vec3<float>(TILE_SIZE, -TILE_SIZE), TEX_RIGHT_BOTTOM);
     mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE), TEX_LEFT_BOTTOM);
-    m_game_objects_[GRASS_TILE].mesh = mesh_factory.save_mesh();
+    m_grass_tile_.mesh = mesh_factory.save_mesh();
 
     static const auto DY_FOUR = 0.25f;
 

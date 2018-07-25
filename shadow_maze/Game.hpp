@@ -27,8 +27,7 @@ namespace shadow_maze
     nlohmann::json m_config_{};
     jdb::Vec2<int> m_window_size_{};
 
-    enum Object { GRASS_TILE, SIZE };
-    std::vector<jdb::Game_object> m_game_objects_{};
+    jdb::Game_object m_grass_tile_{};
 	  std::vector<std::shared_ptr<jdb::Mesh>> m_player_mesh_;
     jdb::Texture m_a_texture_{};
     jdb::Audio m_bgm_{};
