@@ -16,7 +16,7 @@ namespace jdb
     // ___ setup glfw window _____________________________________________________________________
 
     virtual std::string title() = 0;
-    virtual void window_size(Vec2<int>& t_out) = 0;
+    virtual Vec2<int> window_size() = 0;
     virtual void key_callback(GLFWwindow* t_window, int t_key, int t_scancode, int t_action
       , int t_mods) = 0;
 
