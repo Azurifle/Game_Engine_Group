@@ -44,7 +44,7 @@ namespace shadow_maze
     m_warp_tile_.texture = load_texture("Warp2", GL_RGBA);
     m_grass_tile_.texture = load_texture("Tile01", GL_RGBA);
 
-    jdb::Renderer::set_projection_orthogonal(jdb::Vec2<int>(20));
+    jdb::Renderer::set_projection_orthogonal(jdb::Vec2<float>(20));
     setup_meshes();
   }
 

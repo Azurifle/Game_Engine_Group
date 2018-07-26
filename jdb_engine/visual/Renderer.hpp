@@ -16,7 +16,7 @@ namespace jdb
     static Renderer instance;
 
     static void render_bg(const Vec3<float>& t_rgb);
-    static void set_projection_orthogonal(Vec2<int> t_grid_size);
+    static void set_projection_orthogonal(Vec2<float> t_grid_size);
 
     //default is set_draw_frame(0, 0, window_size.x, window_size.y) = full window
     //(0, 0) means left bottom edge of the window

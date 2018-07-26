@@ -93,6 +93,12 @@
     <ClInclude Include="jdb_engine\Game_object.hpp">
       <Filter>Header Files\jdb_engine</Filter>
     </ClInclude>
+    <ClInclude Include="shadow_maze\Map.hpp">
+      <Filter>Header Files\shadow_maze</Filter>
+    </ClInclude>
+    <ClInclude Include="shadow_maze\Tile.hpp">
+      <Filter>Header Files\shadow_maze</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -148,6 +154,12 @@
     </ClCompile>
     <ClCompile Include="jdb_engine\Game_object.cpp">
       <Filter>Source Files\jdb_engine</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow_maze\Map.cpp">
+      <Filter>Source Files\shadow_maze</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow_maze\Tile.cpp">
+      <Filter>Source Files\shadow_maze</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

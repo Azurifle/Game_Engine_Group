@@ -14,10 +14,11 @@ namespace jdb
     glClearColor(t_rgb.x, t_rgb.y, t_rgb.z, 1);
   }
 
-  void Renderer::set_projection_orthogonal(Vec2<int> t_grid_size)
+  void Renderer::set_projection_orthogonal(Vec2<float> t_grid_size)
   {
-    t_grid_size.x /= 2;
-    t_grid_size.y /= 2;
+    REQUIRE(t_grid_size.x > 1); REQUIRE(t_grid_size.y > 1);
+
+    t_grid_size /= 2;
     instance.m_view_projection_ = Mat4::ortho(-t_grid_size.x, t_grid_size.x
       , -t_grid_size.y, t_grid_size.y, 1, -1);
   }
@@ -25,6 +26,9 @@ namespace jdb
   void Renderer::set_draw_frame(const Vec2<int>& t_pos_on_window
     , const Vec2<int>& t_frame_size)
   {
+    REQUIRE(0 <= t_pos_on_window.x); REQUIRE(0 <= t_pos_on_window.y);
+    REQUIRE(t_frame_size.x > 1); REQUIRE(t_frame_size.y > 1);
+
     glViewport(t_pos_on_window.x, t_pos_on_window.y, t_frame_size.x, t_frame_size.y);
   }
 
