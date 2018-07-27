@@ -38,18 +38,20 @@ namespace shadow_maze
 
   void Game::start()
   {
-    m_map_.pre_render();
-    m_map_.load("shadow_maze/maze/01.bmp");
+    m_map_.init("shadow_maze/maze/01.bmp");
     jdb::Audio_manager::play(m_bgm_);
   }
-
   void Game::update(const float t_delta_secs)
   {
     static const jdb::Vec3<float> BG_COLOR(
       m_config_["bg_color.r"], m_config_["bg_color.g"], m_config_["bg_color.b"]);
     jdb::Renderer::render_bg(BG_COLOR);
-
-    m_map_.render();
+	
+	jdb::Renderer::set_draw_frame(jdb::Vec2<int>(), m_window_size_);
+    m_map_.update(t_delta_secs);
+	
+	jdb::Renderer::set_draw_frame(jdb::Vec2<int>(), m_window_size_/4);
+	m_map_.render_mini();
   }
 
 }//shadow_maze
