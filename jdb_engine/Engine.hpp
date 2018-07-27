@@ -19,7 +19,6 @@ namespace jdb
     enum Default { DOUBLE_POINTS = 2 };
     static std::string double_points_string(double t_double
       , int t_points = DOUBLE_POINTS);
-    static short limit_interval(short t_number, short t_min, short t_max);
 
     static void load_txt(const std::string& t_path, std::string& t_string_out);
     static void load_bmp(const std::string& t_path, std::vector<std::vector<Vec3<int>>>& t_image);
@@ -28,6 +27,8 @@ namespace jdb
     // ___ Engine _____________________________________________________________________________
 
     enum State { INVALID, CONSTRUCTING, INITIALIZING, RUNNING, SHUTTING_DOWN, DESTROYING };
+    static State state();
+
     Engine();
     ~Engine();
 

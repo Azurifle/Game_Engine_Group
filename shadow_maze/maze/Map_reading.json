@@ -8,6 +8,8 @@
   , "player.g": 0
   , "player.r": 255
   , "player_texture": "shadow_maze/texture/mini_map/Player.png"
+  , "player_radius": 0.2
+  , "player_speed": 0.4
 
   , "warp.b": 0
   , "warp.g": 255

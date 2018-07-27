@@ -26,7 +26,6 @@ namespace jdb
   void Renderer::set_draw_frame(const Vec2<int>& t_pos_on_window
     , const Vec2<int>& t_frame_size)
   {
-    REQUIRE(0 <= t_pos_on_window.x); REQUIRE(0 <= t_pos_on_window.y);
     REQUIRE(t_frame_size.x > 1); REQUIRE(t_frame_size.y > 1);
 
     glViewport(t_pos_on_window.x, t_pos_on_window.y, t_frame_size.x, t_frame_size.y);

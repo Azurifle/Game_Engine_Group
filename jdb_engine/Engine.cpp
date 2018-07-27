@@ -16,20 +16,6 @@ namespace jdb
     return double_w_points.str();
   }
 
-  short Engine::limit_interval(const short t_number
-    , const short t_min, const short t_max)
-  {
-    if (t_number <= t_min)
-    {
-      return t_min;
-    }
-    if (t_number >= t_max)
-    {
-      return t_max;
-    }
-    return t_number;
-  }
-
   void Engine::load_txt(const std::string& t_path, std::string& t_string_out)
   {
     std::ifstream file_reader(t_path);
@@ -94,6 +80,8 @@ namespace jdb
   }
 
   //___ public engine ___________________________________________________________
+
+  Engine::State Engine::state() { return m_state_; }
 
   Engine::Engine()
   {

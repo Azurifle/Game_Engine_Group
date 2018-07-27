@@ -99,6 +99,9 @@
     <ClInclude Include="shadow_maze\Tile.hpp">
       <Filter>Header Files\shadow_maze</Filter>
     </ClInclude>
+    <ClInclude Include="shadow_maze\Player.hpp">
+      <Filter>Header Files\shadow_maze</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -159,6 +162,9 @@
       <Filter>Source Files\shadow_maze</Filter>
     </ClCompile>
     <ClCompile Include="shadow_maze\Tile.cpp">
+      <Filter>Source Files\shadow_maze</Filter>
+    </ClCompile>
+    <ClCompile Include="shadow_maze\Player.cpp">
       <Filter>Source Files\shadow_maze</Filter>
     </ClCompile>
   </ItemGroup>
