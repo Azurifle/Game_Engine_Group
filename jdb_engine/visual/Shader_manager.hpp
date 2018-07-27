@@ -10,6 +10,7 @@ namespace jdb
   {
   public:
     //Folder must contain file name "Vertex.shader" and "Fragment.shader"
+    //This function must be call after Gui_system::create_window(...)
     static Shader load_or_get(const std::string& t_folder_path = "jdb_engine/visual/jdb_texture_shader/");
 
     ~Shader_manager() = default;

@@ -9,7 +9,7 @@ namespace jdb
   class Texture_manager final
   {
   public:
-    static Texture load_or_get(const std::string& t_png_file_path, GLenum t_color_format = GL_RGBA);
+    static Texture load_or_get(const std::string& t_png_file_path, GLenum t_color_format = GL_RGB);
 
     ~Texture_manager() = default;
   private:

@@ -53,6 +53,18 @@ namespace jdb
   }
 
   template <class T>
+  Vec3<T> Vec3<T>::operator+(T t_scalar) const
+  {
+    return { x + t_scalar, y + t_scalar, z + t_scalar };
+  }
+
+  template <class T>
+  Vec3<T> Vec3<T>::operator-(T t_scalar) const
+  {
+    return { x - t_scalar, y - t_scalar, z - t_scalar };
+  }
+
+  template <class T>
   Vec3<T> Vec3<T>::operator*(const T t_scalar) const
   {
     return { x * t_scalar, y * t_scalar, z * t_scalar };
@@ -172,6 +184,32 @@ namespace jdb
   }
 
   template class Vec3<int>;
+  Vec3<int> operator + (const Vec3<int>& t_left, const Vec2<int>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y , t_left.z };
+  }
+  Vec3<int> operator - (const Vec3<int>& t_left, const Vec2<int>& t_right)
+  {
+    return { t_left.x - t_right.x, t_left.y - t_right.y , t_left.z };
+  }
+
   template class Vec3<float>;
+  Vec3<float> operator + (const Vec3<float>& t_left, const Vec2<float>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y , t_left.z };
+  }
+  Vec3<float> operator - (const Vec3<float>& t_left, const Vec2<float>& t_right)
+  {
+    return { t_left.x - t_right.x, t_left.y - t_right.y , t_left.z };
+  }
+
   template class Vec3<double>;
+  Vec3<double> operator + (const Vec3<double>& t_left, const Vec2<double>& t_right)
+  {
+    return { t_left.x + t_right.x, t_left.y + t_right.y , t_left.z };
+  }
+  Vec3<double> operator - (const Vec3<double>& t_left, const Vec2<double>& t_right)
+  {
+    return { t_left.x - t_right.x, t_left.y - t_right.y , t_left.z };
+  }
 }//jdb

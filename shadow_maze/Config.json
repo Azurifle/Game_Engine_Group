@@ -1,5 +1,9 @@
 {
-  "texture_folder": "shadow_maze/texture/"
+  "title": "Shadow Maze"
   , "window_width": 1300
   , "window_height": 700
+
+  , "bg_color.r": 0.0
+  , "bg_color.g": 0.0
+  , "bg_color.b": 0.0
 }

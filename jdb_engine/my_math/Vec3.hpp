@@ -1,6 +1,7 @@
 #ifndef JDB_VEC3_HPP
 #define JDB_VEC3_HPP
 #pragma once
+#include "Vec2.hpp"
 
 namespace jdb
 {
@@ -27,6 +28,10 @@ namespace jdb
 
     Vec3 operator + (const Vec3& t_other) const;
     Vec3 operator - (const Vec3& t_other) const;
+    Vec3 friend operator + (const Vec3& t_left, const Vec2<T>& t_right);
+    Vec3 friend operator - (const Vec3& t_left, const Vec2<T>& t_right);
+    Vec3 operator + (T t_scalar) const;
+    Vec3 operator - (T t_scalar) const;
     Vec3 operator * (T t_scalar) const;
     Vec3 operator / (T t_scalar) const;
 

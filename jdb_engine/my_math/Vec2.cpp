@@ -48,6 +48,18 @@ namespace jdb
   }
 
   template <class T>
+  Vec2<T> Vec2<T>::operator+(T t_scalar) const
+  {
+    return { x + t_scalar, y + t_scalar };
+  }
+
+  template <class T>
+  Vec2<T> Vec2<T>::operator-(T t_scalar) const
+  {
+    return { x - t_scalar, y - t_scalar };
+  }
+
+  template <class T>
   Vec2<T> Vec2<T>::operator*(const T t_scalar) const
   {
     return { x * t_scalar, y * t_scalar };

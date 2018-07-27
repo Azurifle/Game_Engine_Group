@@ -6,6 +6,12 @@ namespace jdb
 {
   // ___ public __________________________________________________________________________________
 
+  Mesh_factory::Mesh_factory(const GLenum t_draw_mode, const Shader t_shader)
+    : m_draw_mode_(t_draw_mode), m_shader_(t_shader)
+  {
+    m_vertices_.clear();
+  }
+
   void Mesh_factory::new_mesh(const GLenum t_draw_mode, const Shader t_shader)
   {
     m_vertices_.clear();

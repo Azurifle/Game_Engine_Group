@@ -44,10 +44,10 @@ namespace jdb
   }
 
   void Engine::load_bmp(const std::string& t_path
-    , std::vector<std::vector<std::vector<int>>>& t_image)
+    , std::vector<std::vector<Vec3<int>>>& t_image)
   {
     //adapt from https://stackoverflow.com/questions/9296059/read-pixel-value-in-bmp-file
-
+    
     std::ifstream bmp_stream(t_path, std::ios::binary);
     REQUIRE(bmp_stream.is_open());//should change to popup warning later
 
@@ -58,13 +58,22 @@ namespace jdb
     const unsigned WIDTH = *reinterpret_cast<unsigned *>(&header[18])
       , HEIGHT = *reinterpret_cast<unsigned *>(&header[22])
       , BGR = 3;
-    t_image.resize(HEIGHT, std::vector<std::vector<int>>(WIDTH, std::vector<int>(BGR)));
-
+    t_image.resize(HEIGHT, std::vector<Vec3<int>>(WIDTH, Vec3<int>()));
     const auto DATA_SIZE = (WIDTH * BGR + BGR & ~BGR) * HEIGHT;
     std::vector<char> inverse_row_img(DATA_SIZE);
     bmp_stream.read(inverse_row_img.data(), inverse_row_img.size());
 
-    enum Enum { B, G, R, COLOR_VALUE = 255, ROW_PADDING = 2 };
+    enum Enum { B, G, R, COLOR_VALUE = 255, ROW_PADDING = 0 };//usually 2 but this time it's 0
+
+    /* 
+    //Find row padding size
+    for(int i = DATA_SIZE-3; i > 0; i-=3)
+    {
+      std::cout << i << " : " << (inverse_row_img[i + B] & COLOR_VALUE) << ","
+        << (inverse_row_img[i + G] & COLOR_VALUE) << ","
+        << (inverse_row_img[i + R] & COLOR_VALUE) << std::endl;
+    }*/
+
     for (unsigned row = 0; row < HEIGHT; ++row)
     {
       for (unsigned col = 0; col < WIDTH; ++col)
@@ -72,11 +81,16 @@ namespace jdb
         const auto INDEX = (HEIGHT - 1 - row)
           * (WIDTH * BGR + ROW_PADDING) + col * BGR;
 
-        t_image[row][col][B] = inverse_row_img[INDEX + B] & COLOR_VALUE;
-        t_image[row][col][G] = inverse_row_img[INDEX + G] & COLOR_VALUE;
-        t_image[row][col][R] = inverse_row_img[INDEX + R] & COLOR_VALUE;
+        t_image[row][col].x = inverse_row_img[INDEX + B] & COLOR_VALUE;
+        t_image[row][col].y = inverse_row_img[INDEX + G] & COLOR_VALUE;
+        t_image[row][col].z = inverse_row_img[INDEX + R] & COLOR_VALUE;
       }//col loop
     }//row loop
+  }
+
+  nlohmann::json Engine::load_json(const std::string& t_path)
+  {
+    return nlohmann::json::parse(std::ifstream(t_path));
   }
 
   //___ public engine ___________________________________________________________

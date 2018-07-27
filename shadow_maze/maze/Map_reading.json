@@ -1,0 +1,18 @@
+{
+  "grass.b": 255
+  , "grass.g": 255
+  , "grass.r": 255
+  , "grass_texture": "shadow_maze/texture/mini_map/Grass.png"
+
+  , "player.b": 0
+  , "player.g": 0
+  , "player.r": 255
+  , "player_texture": "shadow_maze/texture/mini_map/Player.png"
+
+  , "warp.b": 0
+  , "warp.g": 255
+  , "warp.r": 0
+  , "warp_texture": "shadow_maze/texture/mini_map/Warp.png"
+
+  , "wall_texture": "shadow_maze/texture/mini_map/Wall.png"
+}

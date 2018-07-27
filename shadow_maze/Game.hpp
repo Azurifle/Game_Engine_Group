@@ -2,10 +2,9 @@
 #define SHADOW_MAZE_GAME_HPP
 #pragma once
 #include <jdb_engine/System_base.hpp>
-#include <jdb_engine/visual/Mesh.hpp>
 #include <jdb_engine/thirdparty/json.hpp>
-#include "jdb_engine/Game_object.hpp"
-#include "jdb_engine/Audio_manager.hpp"
+#include <jdb_engine/Audio_manager.hpp>
+#include "Map.hpp"
 
 namespace shadow_maze
 {
@@ -25,16 +24,9 @@ namespace shadow_maze
     void update(float t_delta_secs) override;
   private:
     nlohmann::json m_config_{};
+    Map m_map_;
     jdb::Vec2<int> m_window_size_{};
-    jdb::Game_object m_grass_tile_{}, m_warp_tile_{};
-	  std::vector<std::shared_ptr<jdb::Mesh>> m_player_mesh_, m_grass_mesh_;
     jdb::Audio m_bgm_{};
-
-    float m_dummy_time_;
-    int m_anime_data_, anime_data_tile_;
-
-    jdb::Texture load_texture(const std::string& t_png_name, GLenum t_color_format = GL_RGB);
-    void setup_meshes();
 
     Game(const Game& t_to_copy) = default;
     Game& operator=(const Game& t_to_copy) = default;

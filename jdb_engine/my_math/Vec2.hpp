@@ -25,6 +25,8 @@ namespace jdb
 
     Vec2 operator + (const Vec2& t_other) const;
     Vec2 operator - (const Vec2& t_other) const;
+    Vec2 operator + (T t_scalar) const;
+    Vec2 operator - (T t_scalar) const;
     Vec2 operator * (T t_scalar) const;
     Vec2 operator / (T t_scalar) const;
 

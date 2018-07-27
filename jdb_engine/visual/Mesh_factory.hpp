@@ -13,7 +13,7 @@ namespace jdb
   class Mesh_factory final
   {
   public:
-    Mesh_factory() = default;
+    explicit Mesh_factory(GLenum t_draw_mode, Shader t_shader = Shader_manager::load_or_get());
     ~Mesh_factory() = default;
     Mesh_factory(const Mesh_factory& t_to_copy) = default;
     Mesh_factory(Mesh_factory&& t_to_move) noexcept = default;
