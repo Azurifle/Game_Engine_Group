@@ -26,14 +26,17 @@ namespace shadow_maze
   private:
     nlohmann::json m_config_{};
     Map m_map_;
+    std::vector<std::string> m_mazes_{};
     jdb::Vec2<int> m_window_size_{}, m_map_coord_{};
-    jdb::Audio m_bgm_{};
+    jdb::Audio m_bgm_{}, m_win_bgm_{};
+    unsigned m_level_;
 
     Game(const Game& t_to_copy) = default;
     Game& operator=(const Game& t_to_copy) = default;
 
     void switch_key(int t_key, GLFWwindow* t_window, const jdb::Vec2<int>& t_scancode_n_mods);
     void show_window_info(GLFWwindow* t_window, const jdb::Vec2<int>& t_scancode_n_mods);
+    void switch_move(Map::Move_state t_move_state);
   };
 }//shadow_maze
 

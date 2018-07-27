@@ -6,4 +6,8 @@
   , "bg_color.r": 0.0
   , "bg_color.g": 0.0
   , "bg_color.b": 0.0
+
+  , "mazes": ["shadow_maze/maze/01.bmp"
+    , "shadow_maze/maze/02.bmp", "shadow_maze/maze/03.bmp"
+    , "shadow_maze/maze/04.bmp", "shadow_maze/maze/05.bmp"]
 }

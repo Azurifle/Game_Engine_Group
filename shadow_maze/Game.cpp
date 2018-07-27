@@ -10,13 +10,17 @@ namespace shadow_maze
 
   //How to use json: https://github.com/nlohmann/json/tree/master
 
-  Game::Game(): m_config_(jdb::Engine::load_json("shadow_maze/Config.json"))
+  Game::Game() : m_config_(jdb::Engine::load_json("shadow_maze/Config.json"))
+    , m_mazes_(m_config_["mazes"].get<std::vector<std::string>>())
     , m_window_size_(jdb::Vec2<int>(m_config_["window_width"], m_config_["window_height"]))
-    , m_bgm_(jdb::Audio_manager::load_or_get_audio("shadow_maze/music/Game.wav")) {}
+    , m_bgm_(jdb::Audio_manager::load_or_get_audio("shadow_maze/music/Game.wav"))
+    , m_win_bgm_(jdb::Audio_manager::load_or_get_audio("shadow_maze/music/Menu.wav"))
+    , m_level_(0) {}
 
   Game::~Game()
   {
-    jdb::Audio_manager::stop(m_bgm_);
+    jdb::Audio_manager::stop(m_bgm_); 
+    jdb::Audio_manager::stop(m_win_bgm_);
   }
 
   std::string Game::title() { return m_config_["title"]; }
@@ -35,7 +39,8 @@ namespace shadow_maze
 
   void Game::start()
   {
-    m_map_.init("shadow_maze/maze/01.bmp");
+    m_map_.init(m_mazes_[m_level_]);
+    ++m_level_;
     calulate_map_coord();
 
     jdb::Audio_manager::play(m_bgm_);
@@ -61,10 +66,10 @@ namespace shadow_maze
     switch(t_key)
     {
     case GLFW_KEY_F3: show_window_info(t_window, t_scancode_n_mods); break;
-    case GLFW_KEY_W: m_map_.move_player(Map::Face::UP); calulate_map_coord(); break;
-    case GLFW_KEY_S: m_map_.move_player(Map::Face::DOWN); calulate_map_coord(); break;
-    case GLFW_KEY_A: m_map_.move_player(Map::Face::LEFT); calulate_map_coord(); break;
-    case GLFW_KEY_D: m_map_.move_player(Map::Face::RIGHT); calulate_map_coord(); default:;
+    case GLFW_KEY_W: switch_move(m_map_.move_player(Map::Face::UP)); break;
+    case GLFW_KEY_S: switch_move(m_map_.move_player(Map::Face::DOWN)); break;
+    case GLFW_KEY_A: switch_move(m_map_.move_player(Map::Face::LEFT)); break;
+    case GLFW_KEY_D: switch_move(m_map_.move_player(Map::Face::RIGHT)); default:;
     }
   }
 
@@ -84,6 +89,27 @@ namespace shadow_maze
       - m_map_.player_pos_ratio().x*m_window_size_.x * 2));
     m_map_coord_.y = static_cast<int>(round(m_window_size_.y / 2
       - m_map_.player_pos_ratio().y * m_window_size_.y * 2));
+  }
+
+  void Game::switch_move(const Map::Move_state t_move_state)
+  {
+    switch (t_move_state)
+    {
+    case Map::YES: calulate_map_coord(); break;
+    case Map::WARP: if(m_level_ < m_mazes_.size())
+    {
+      m_map_.load(m_mazes_[m_level_]);
+      ++m_level_;
+      jdb::Audio_manager::stop(m_bgm_);
+      jdb::Audio_manager::play(m_bgm_);
+    }
+      else
+      {
+        jdb::Audio_manager::stop(m_bgm_);
+        jdb::Audio_manager::play(m_win_bgm_);
+      }
+       default:;
+    }
   }
 
 }//shadow_maze
