@@ -46,8 +46,7 @@ namespace shadow_maze
       m_config_["bg_color.r"], m_config_["bg_color.g"], m_config_["bg_color.b"]);
     jdb::Renderer::render_bg(BG_COLOR);
 
-    //jdb::Renderer::set_draw_frame(m_map_coord_, m_window_size_ * 2);
-    jdb::Renderer::set_draw_frame(jdb::Vec2<int>(0), m_window_size_);
+    jdb::Renderer::set_draw_frame(m_map_coord_, m_window_size_ * 2);
     m_map_.update(t_delta_secs);
 
     jdb::Renderer::set_draw_frame(jdb::Vec2<int>(), m_window_size_ / 4);

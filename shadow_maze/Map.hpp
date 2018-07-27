@@ -34,7 +34,7 @@ namespace shadow_maze
     jdb::Vec2<float> player_pos_ratio() const;
   private:
     nlohmann::json m_config_{};
-    std::vector<std::vector<jdb::Texture>> m_tiles_, m_tiles_minimap;
+    std::vector<std::vector<int>> m_tiles_, m_tiles_minimap;
     std::vector<std::vector<int>> m_mesh_type_, m_anime_, m_other_int_;
     std::vector<jdb::Texture> m_tiles_other_;
 
@@ -69,7 +69,7 @@ namespace shadow_maze
 	  bool animation(unsigned t_row, unsigned t_col, const std::string& t_texture
       , int t_frameloop,bool t_playAll = false);
 
-    static void swap_player_tile(std::vector<std::vector<jdb::Texture>>& t_tiles
+    static void swap_player_tile(std::vector<std::vector<int>>& t_tiles
       , const jdb::Vec2<int>& t_new_pos, const jdb::Vec2<int>& t_player_pos);
   };
 }//shadow_maze
