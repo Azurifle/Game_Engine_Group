@@ -30,6 +30,7 @@ namespace shadow_maze
     m_grass_texture_ = jdb::Texture_manager::load_or_get(m_config_["grass_texture"]);
     m_wall_texture_ = jdb::Texture_manager::load_or_get(m_config_["wall_texture"]);
     m_player_texture_ = jdb::Texture_manager::load_or_get(m_config_["player_texture"]);
+    m_warp_texture_ = jdb::Texture_manager::load_or_get(m_config_["warp_texture"]);
 
     load(t_bmp_path);
   }
@@ -95,7 +96,7 @@ namespace shadow_maze
     }//row loop
   }
 
-  void Map::move_player(const int t_face)
+  Map::Move_state Map::move_player(const int t_face)
   {
     REQUIRE(!m_tiles_.empty());
 
@@ -120,13 +121,20 @@ namespace shadow_maze
       || m_tiles_[new_pos_y][static_cast<int>(round(new_pos.x-PLAYER_RADIUS))]
       == m_wall_texture_)
     {
-      return;
+      return NO;
+    }
+
+    if(m_tiles_[new_pos_y][new_pos_x] == m_warp_texture_)
+    {
+      return WARP;
     }
     
     const auto player_texture = m_tiles_[player_pos_y][player_pos_x];
     m_tiles_[player_pos_y][player_pos_x] = m_tiles_[new_pos_y][new_pos_x];
     m_tiles_[new_pos_y][new_pos_x] = player_texture;
     m_player_pos_ = new_pos;
+
+    return YES;
   }
 
   jdb::Vec2<float> Map::player_pos_ratio() const
@@ -156,7 +164,7 @@ namespace shadow_maze
           m_tiles_[row][col] = m_player_texture_;
           m_player_pos_ = { static_cast<float>(col), static_cast<float>(row) };
         }
-        else if (t_bmp[row-1][col-1] == BGR_WARP) set_tex(row, col, "warp_texture");
+        else if (t_bmp[row-1][col-1] == BGR_WARP) m_tiles_[row][col] = m_warp_texture_;
         else set_tex_wall(row, col);
       }
     }//row loop
@@ -165,12 +173,6 @@ namespace shadow_maze
   void Map::set_tex_wall(const unsigned t_row, const unsigned t_col)
   {
     m_tiles_[t_row][t_col] = m_wall_texture_;
-  }
-
-  void Map::set_tex(const unsigned t_row, const unsigned t_col
-    , const std::string& t_texture)
-  {
-    m_tiles_[t_row][t_col] = jdb::Texture_manager::load_or_get(m_config_[t_texture]);
   }
 
 }//jdb

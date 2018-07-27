@@ -70,7 +70,8 @@ namespace shadow_maze
     }
   }
 
-  void Game::show_window_info(GLFWwindow* t_window, const jdb::Vec2<int>& t_scancode_n_mods)
+  void Game::show_window_info(GLFWwindow* t_window
+    , const jdb::Vec2<int>& t_scancode_n_mods)
   {
     puts("F3 pressed: Show GLFW window information");
     std::cout << "window:" << t_window << ", scancode: " << t_scancode_n_mods.x
@@ -81,8 +82,10 @@ namespace shadow_maze
 
   void Game::calulate_map_coord()
   {
-    m_map_coord_.x = m_window_size_.x / 2 - m_map_.player_pos_ratio().x*m_window_size_.x * 2;
-    m_map_coord_.y = m_window_size_.y / 2 - m_map_.player_pos_ratio().y * m_window_size_.y * 2;
+    m_map_coord_.x = static_cast<int>(round(m_window_size_.x / 2
+      - m_map_.player_pos_ratio().x*m_window_size_.x * 2));
+    m_map_coord_.y = static_cast<int>(round(m_window_size_.y / 2
+      - m_map_.player_pos_ratio().y * m_window_size_.y * 2));
   }
 
 }//shadow_maze
