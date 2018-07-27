@@ -24,6 +24,8 @@ namespace jdb
     static void load_bmp(const std::string& t_path, std::vector<std::vector<Vec3<int>>>& t_image);
     static nlohmann::json load_json(const std::string& t_path);
 
+	static int random(int t_min, int t_max);
+
     // ___ Engine _____________________________________________________________________________
 
     enum State { INVALID, CONSTRUCTING, INITIALIZING, RUNNING, SHUTTING_DOWN, DESTROYING };

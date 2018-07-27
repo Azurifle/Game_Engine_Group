@@ -70,6 +70,11 @@ namespace jdb
         t_image[row][col].x = inverse_row_img[INDEX + B] & COLOR_VALUE;
         t_image[row][col].y = inverse_row_img[INDEX + G] & COLOR_VALUE;
         t_image[row][col].z = inverse_row_img[INDEX + R] & COLOR_VALUE;
+
+		/*std::cout << t_image[row][col].x << " | " 
+			<< t_image[row][col].y << " | " 
+			<< t_image[row][col].z << std::endl;*/
+
       }//col loop
     }//row loop
   }
@@ -77,6 +82,16 @@ namespace jdb
   nlohmann::json Engine::load_json(const std::string& t_path)
   {
     return nlohmann::json::parse(std::ifstream(t_path));
+  }
+
+  int Engine::random(int t_min,int t_max)
+  {
+	  t_max += 1;
+	  if (t_min > t_max)
+	  {
+		  std::swap(t_min, t_max);
+	  }
+	  return (rand() % (t_max-t_min) + t_min);
   }
 
   //___ public engine ___________________________________________________________
@@ -89,7 +104,6 @@ namespace jdb
     m_state_ = CONSTRUCTING;
 
     disable_mouse_editing();
-    srand(GetTickCount());
     show_header();
   }
 

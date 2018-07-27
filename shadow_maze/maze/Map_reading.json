@@ -2,19 +2,31 @@
   "grass.b": 255
   , "grass.g": 255
   , "grass.r": 255
-  , "grass_texture": "shadow_maze/texture/mini_map/Grass.png"
-
+  , "grass_texture": "shadow_maze/texture/Tile01.png"
+  , "grass_type":2
+  , "grass_index":0
+  , "grass_mini_texture": "shadow_maze/texture/mini_map/Grass_.png"
+  
   , "player.b": 0
   , "player.g": 0
   , "player.r": 255
-  , "player_texture": "shadow_maze/texture/mini_map/Player.png"
+  , "player_texture": "shadow_maze/texture/Hero3.png"
+  , "player_type":1
+  , "player_index":0
+  , "player_mini_texture": "shadow_maze/texture/mini_map/Player_.png"
   , "player_radius": 0.2
   , "player_speed": 0.4
-
+  
   , "warp.b": 0
   , "warp.g": 255
   , "warp.r": 0
-  , "warp_texture": "shadow_maze/texture/mini_map/Warp.png"
-
-  , "wall_texture": "shadow_maze/texture/mini_map/Wall.png"
+  , "warp_texture": "shadow_maze/texture/Warp2.png"
+  , "warp_type":1
+  , "warp_index":8
+  , "warp_mini_texture": "shadow_maze/texture/mini_map/Warp_.png"
+  
+  , "warp_texture2": "shadow_maze/texture/Warp.png"
+  
+  , "wall_texture": "shadow_maze/texture/mini_map/Wall_new.png"
+  , "wall_mini_texture": "shadow_maze/texture/mini_map/Wall_b.png"
 }
