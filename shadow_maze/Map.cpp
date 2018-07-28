@@ -139,7 +139,6 @@ namespace shadow_maze
 
 				//other obj
 				jdb::Renderer::push_matrix();
-					//jdb::Renderer::scale(jdb::Vec3<float>(0.7f, 0.7f, 0));
 					jdb::Renderer::translate(jdb::Vec3<float>(0, 0.05f, 0));
 					switch (m_other_int_[row][col])
 					{
@@ -199,8 +198,6 @@ namespace shadow_maze
 				}
 				jdb::Renderer::pop_matrix();
 				//End warp obj
-
-
 			jdb::Renderer::pop_matrix();
 
 		  if (jdb::Texture_manager::load_or_get(m_config_["player_texture"]) == m_tiles_[row][col])
@@ -279,9 +276,12 @@ namespace shadow_maze
       {
         if(row <= 0 || col <= 0 || row >= m_tiles_.size()-1 || col >= m_tiles_[0].size()-1)
           set_tex(row, col, "wall_texture",Meshtype::NORMAL);
-        else if (t_bmp[row-1][col-1] == BGR_GRASS) set_tex(row, col, "grass_texture", m_config_["grass_type"], m_config_["grass_index"]);
-        else if(t_bmp[row-1][col-1] == BGR_PLAYER) set_tex(row, col, "player_texture", m_config_["player_type"], m_config_["player_index"]);
-		else if (t_bmp[row - 1][col - 1] == BGR_WARP) set_tex(row, col, "warp_texture", m_config_["warp_type"], m_config_["warp_index"]);
+        else if (t_bmp[row-1][col-1] == BGR_GRASS) set_tex(row, col, "grass_texture"
+			, m_config_["grass_type"], m_config_["grass_index"]);
+        else if(t_bmp[row-1][col-1] == BGR_PLAYER) set_tex(row, col, "player_texture"
+			, m_config_["player_type"], m_config_["player_index"]);
+		else if (t_bmp[row - 1][col - 1] == BGR_WARP) set_tex(row, col, "warp_texture"
+			, m_config_["warp_type"], m_config_["warp_index"]);
         else set_tex(row, col, "wall_texture", Meshtype::NORMAL);
 		//for mini map
 		if (row <= 0 || col <= 0 || row >= m_tiles_.size() - 1 || col >= m_tiles_[0].size() - 1)
