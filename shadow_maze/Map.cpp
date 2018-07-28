@@ -48,7 +48,7 @@ namespace shadow_maze
           , jdb::Vec2<float>(DY_FOUR*(1 + col), DY_FOUR* (1 + row)));
         mesh_factory.add_vertex(jdb::Vec3<float>(-TILE_SIZE, -TILE_SIZE)
           , jdb::Vec2<float>(DY_FOUR*(0 + col), DY_FOUR* (1 + row)));
-        m_obj4x4_mesh_.push_back(mesh_factory.save_mesh());
+        m_obj4_x4_mesh_.push_back(mesh_factory.save_mesh());
       }
 
     //Tilesets 8x...
@@ -90,7 +90,7 @@ namespace shadow_maze
     REQUIRE(!t_bmp_path.empty());
 
     m_tiles_.clear();
-	  m_tiles_minimap.clear();
+	  m_tiles_minimap_.clear();
 	  m_tiles_other_.clear();
 
 	  m_other_int_.clear();
@@ -102,7 +102,7 @@ namespace shadow_maze
     jdb::Engine::load_bmp(t_bmp_path, bmp);
 
     m_tiles_.resize(bmp.size()+2, std::vector<int>(bmp[0].size() + 2));
-	  m_tiles_minimap.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
+	  m_tiles_minimap_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
 
 	  m_mesh_type_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
 	  m_anime_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
@@ -113,11 +113,11 @@ namespace shadow_maze
 
   void Map::update(const float t_delta_secs)
   {
-    t += t_delta_secs;
-    if (t >= 0.25f)
+    m_t_ += t_delta_secs;
+    if (m_t_ >= 0.25f)
     {
-      dummycount++;
-      t = 0;
+      m_dummy_count_++;
+      m_t_ = 0;
     }
 
     static const jdb::Vec2<float> MAP_SIZE(
@@ -133,7 +133,8 @@ namespace shadow_maze
         jdb::Renderer::push_matrix();//1
 
         jdb::Renderer::push_matrix();//2
-        jdb::Renderer::translate(jdb::Vec3<float>(col, row) - TO_POS_ON_ORTHO);
+        jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+          , static_cast<float>(row)) - TO_POS_ON_ORTHO);
         //BG
         jdb::Renderer::use_texture(m_grass_texture_);
         jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_config_["grass_index"]]);
@@ -194,11 +195,11 @@ namespace shadow_maze
 
                                     //warp obj
         jdb::Renderer::push_matrix();//3
-        if (m_warp_texture_ == m_tiles_[row][col])
+        if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
         {
           jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
           jdb::Renderer::use_texture(m_tiles_other_[0]);
-          jdb::Renderer::draw_mesh(m_obj4x4_mesh_[animation_tick]);
+          jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]);
         }
         jdb::Renderer::pop_matrix();//3
                                     //End warp obj
@@ -214,49 +215,50 @@ namespace shadow_maze
       for (unsigned col = 0; col < m_tiles_[0].size(); ++col)
       {
         //Animation 
-        if (m_player_texture_ == m_tiles_[row][col])
+        if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
         {
-          normal_tick = m_player_face_;
+          m_normal_tick_ = m_player_face_;
         }
         else
         {
-          normal_tick = m_anime_[row][col];
+          m_normal_tick_ = m_anime_[row][col];
         }
 
         if (animation(row, col, m_config_["player_texture"], 4)) {}
         else if (animation(row, col, m_config_["warp_texture"], 4, true)) {}
         else
         {
-          animation_tick = normal_tick;
+          m_animation_tick_ = m_normal_tick_;
         }
         //End Animation
 
         jdb::Renderer::push_matrix();//1
 
-        if (m_warp_texture_ == m_tiles_[row][col])
+        if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
         {
           jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
           jdb::Renderer::scale(jdb::Vec3<float>(0.5f, 2.0f, 0));
         }
 
-        if (m_player_texture_ == m_tiles_[row][col])
+        if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
         {
           jdb::Renderer::scale(jdb::Vec3<float>(0.7f, 1.2f, 0));
           jdb::Renderer::translate(m_player_pos_ - TO_POS_ON_ORTHO);
         }
         else
         {
-          jdb::Renderer::translate(jdb::Vec3<float>(col, row) - TO_POS_ON_ORTHO);
+          jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+            , static_cast<float>(row)) - TO_POS_ON_ORTHO);
         }
 
-        if (m_grass_texture_ != m_tiles_[row][col])
+        if (static_cast<int>(m_grass_texture_) != m_tiles_[row][col])
         {
           jdb::Renderer::use_texture(m_tiles_[row][col]);
           switch (m_mesh_type_[row][col])
           {
           case NORMAL: jdb::Renderer::draw_mesh(m_wall_mesh_); break;
-          case OBJ4X4: jdb::Renderer::draw_mesh(m_obj4x4_mesh_[animation_tick]); break;
-          case TILESETS: jdb::Renderer::draw_mesh(m_tilesets_mesh_[animation_tick]); default:;
+          case OBJ4_X4: jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]); break;
+          case TILESETS: jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_animation_tick_]); default:;
             //***remove?
           }
         }//draw wall & player
@@ -278,9 +280,11 @@ namespace shadow_maze
       for (unsigned col = 0; col < m_tiles_[0].size(); ++col)
       {
         jdb::Renderer::push_matrix();
-          jdb::Renderer::translate(jdb::Vec3<float>(col, row) - OFFSET);
-          jdb::Renderer::scale(jdb::Vec3<float>(1.05));
-          jdb::Renderer::use_texture(m_tiles_minimap[row][col]);
+          jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+            , static_cast<float>(row)) - OFFSET);
+          const auto REDUCE_EDGE = 1.05f;
+          jdb::Renderer::scale(jdb::Vec3<float>(REDUCE_EDGE));
+          jdb::Renderer::use_texture(m_tiles_minimap_[row][col]);
           jdb::Renderer::draw_mesh(m_tile_mesh_);
         jdb::Renderer::pop_matrix();
       }
@@ -308,14 +312,14 @@ namespace shadow_maze
       , player_pos_x = static_cast<int>(round(m_player_pos_.x));
     static const float PLAYER_RADIUS = m_config_["player_radius"];
     if (m_tiles_[new_pos_y][static_cast<int>(round(new_pos.x+PLAYER_RADIUS))]
-      == m_wall_texture_
+      == static_cast<int>(m_wall_texture_)
       || m_tiles_[new_pos_y][static_cast<int>(round(new_pos.x-PLAYER_RADIUS))]
-      == m_wall_texture_)
+      == static_cast<int>(m_wall_texture_))
     {
       return NO;
     }
 
-    if(m_tiles_[new_pos_y][new_pos_x] == m_warp_texture_)
+    if(m_tiles_[new_pos_y][new_pos_x] == static_cast<int>(m_warp_texture_))
     {
       return WARP;
     }
@@ -326,7 +330,7 @@ namespace shadow_maze
     swap_player_tile(m_mesh_type_, new_pos_int, player_pos_int);
     swap_player_tile(m_anime_, new_pos_int, player_pos_int);
 
-    swap_player_tile(m_tiles_minimap, new_pos_int, player_pos_int);
+    swap_player_tile(m_tiles_minimap_, new_pos_int, player_pos_int);
     m_player_pos_ = new_pos;
 
     //set hide unhide tile around player?***
@@ -402,7 +406,7 @@ namespace shadow_maze
   void Map::set_tex_minimap(const unsigned t_row, const unsigned t_col
     , const std::string & t_texture)
   {
-	  m_tiles_minimap[t_row][t_col] = jdb::Texture_manager::load_or_get(m_config_[t_texture]
+	  m_tiles_minimap_[t_row][t_col] = jdb::Texture_manager::load_or_get(m_config_[t_texture]
       , GL_RGBA);
   }
 
@@ -411,20 +415,22 @@ namespace shadow_maze
 	  m_tiles_other_.push_back(jdb::Texture_manager::load_or_get(m_config_[t_texture], GL_RGBA));
   }
 
-  bool Map::animation(unsigned t_row, unsigned t_col, const std::string & t_texture
-    , int t_frameloop, bool t_playAll)
+  bool Map::animation(const unsigned t_row, const unsigned t_col, const std::string & t_texture
+    , int t_frameloop, const bool t_play_all)
   {
-	  REQUIRE(t_frameloop + normal_tick <= m_obj4x4_mesh_.size() && t_frameloop >= 0);
+	  REQUIRE(t_frameloop + m_normal_tick_ <= 
+      static_cast<int>(m_obj4_x4_mesh_.size()) && t_frameloop >= 0);
 		 
-	  if (t_playAll)
+	  if (t_play_all)
 	  {
-		  t_frameloop = m_obj4x4_mesh_.size();
-		  normal_tick = 0;
+		  t_frameloop = m_obj4_x4_mesh_.size();
+		  m_normal_tick_ = 0;
 	  }
 
-	  if (jdb::Texture_manager::load_or_get(t_texture) == m_tiles_[t_row][t_col])
+	  if (static_cast<int>(jdb::Texture_manager::load_or_get(t_texture)) 
+      == m_tiles_[t_row][t_col])
 	  {
-		  animation_tick = normal_tick + (dummycount % t_frameloop);
+		  m_animation_tick_ = m_normal_tick_ + (m_dummy_count_ % t_frameloop);
 		  return true;
 	  }
     return false;

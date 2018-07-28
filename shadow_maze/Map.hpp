@@ -34,12 +34,12 @@ namespace shadow_maze
     jdb::Vec2<float> player_pos_ratio() const;
   private:
     nlohmann::json m_config_{};
-    std::vector<std::vector<int>> m_tiles_, m_tiles_minimap;
-    std::vector<std::vector<int>> m_mesh_type_, m_anime_, m_other_int_;
-    std::vector<jdb::Texture> m_tiles_other_;
+    std::vector<std::vector<int>> m_tiles_{}, m_tiles_minimap_{};
+    std::vector<std::vector<int>> m_mesh_type_{}, m_anime_{}, m_other_int_{};
+    std::vector<jdb::Texture> m_tiles_other_{};
 
-    enum Meshtype { NORMAL, OBJ4X4, TILESETS };
-    std::vector<std::shared_ptr<jdb::Mesh>> m_obj4x4_mesh_, m_tilesets_mesh_;
+    enum Meshtype { NORMAL, OBJ4_X4, TILESETS };
+    std::vector<std::shared_ptr<jdb::Mesh>> m_obj4_x4_mesh_{}, m_tilesets_mesh_{};
     std::shared_ptr<jdb::Mesh> m_tile_mesh_, m_wall_mesh_;
 
     jdb::Vec3<float> m_player_pos_;
@@ -50,10 +50,10 @@ namespace shadow_maze
       , m_grass_mini_texture_{}, m_wall_mini_texture_{}
       , m_player_mini_texture_{}, m_warp_mini_texture_{};
 
-    int normal_tick = 0;
-    int animation_tick = normal_tick;
-    int dummycount = 0;
-    float t = 0;
+    int m_normal_tick_ = 0;
+    int m_animation_tick_ = m_normal_tick_;
+    int m_dummy_count_ = 0;
+    float m_t_ = 0;
 
     Map(const Map& t_to_copy) = default;
     Map(Map&& t_to_move) noexcept = default;
@@ -67,7 +67,7 @@ namespace shadow_maze
 	  void set_tex_other(const std::string& t_texture);
 
 	  bool animation(unsigned t_row, unsigned t_col, const std::string& t_texture
-      , int t_frameloop,bool t_playAll = false);
+      , int t_frameloop,bool t_play_all = false);
 
     static void swap_player_tile(std::vector<std::vector<int>>& t_tiles
       , const jdb::Vec2<int>& t_new_pos, const jdb::Vec2<int>& t_player_pos);
