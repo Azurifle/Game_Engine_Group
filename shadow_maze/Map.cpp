@@ -92,6 +92,7 @@ namespace shadow_maze
     m_tiles_.clear();
 	  m_tiles_minimap_.clear();
 	  m_tiles_other_.clear();
+	  m_bool_vision.clear();
 
 	  m_other_int_.clear();
 
@@ -107,6 +108,7 @@ namespace shadow_maze
 	  m_mesh_type_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
 	  m_anime_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
 	  m_other_int_.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
+	  m_bool_vision.resize(bmp.size() + 2, std::vector<int>(bmp[0].size() + 2));
 
     setup_tiles_textures(bmp);
   }
@@ -126,87 +128,110 @@ namespace shadow_maze
     jdb::Renderer::set_projection_orthogonal(MAP_SIZE);
 
 
+
+
     for (int row = m_tiles_.size() - 1; row >= 0; --row)
     {
       for (unsigned col = 0; col < m_tiles_[0].size(); ++col)
       {
-        jdb::Renderer::push_matrix();//1
+		  if (m_tiles_[row][col] == static_cast<int>(m_player_texture_))
+		  {
+			  m_bool_vision[row][col] = 1;
+			  m_bool_vision[row][col - 1] = 1;
+			  m_bool_vision[row][col + 1] = 1;
 
-        jdb::Renderer::push_matrix();//2
-        jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
-          , static_cast<float>(row)) - TO_POS_ON_ORTHO);
-        //BG
-        jdb::Renderer::use_texture(m_grass_texture_);
-        jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_config_["grass_index"]]);
-        //End BG
+			  m_bool_vision[row + 1][col] = 1;
+			  m_bool_vision[row + 1][col + 1] = 1;
+			  m_bool_vision[row + 1][col - 1] = 1;
 
-        //other obj (layer on grass)
-        jdb::Renderer::push_matrix();//3
-        //static const auto AVOID_WALL = 0.05f;
-        //jdb::Renderer::translate(jdb::Vec3<float>(0, AVOID_WALL, 0));
+			  m_bool_vision[row - 1][col] = 1;
+			  m_bool_vision[row - 1][col + 1] = 1;
+			  m_bool_vision[row - 1][col - 1] = 1;
 
-        switch (m_other_int_[row][col])
-        {
-        case 0:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[1]);
-          break;
-        case 1:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[2]);
-          break;
-        case 2:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[3]);
-          break;
-        case 3:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[21]);
-          break;
-        case 4:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[6]);
-          break;
-        case 5:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[18]);
-          break;
-        case 6:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[19]);
-          break;
-        case 7:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[20]);
-          break;
-        case 8:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[13]);
-          break;
-        case 9:
-          jdb::Renderer::use_texture(m_tiles_other_[1]);
-          jdb::Renderer::draw_mesh(m_tilesets_mesh_[14]);
-          break;
-        default:
-          break;
-        }
-        jdb::Renderer::pop_matrix();//3
-                                    //End other obj
+		  }
+		  /////////////////////////////////
+		  if (m_bool_vision[row][col] == 1)
+		  {
 
-                                    //warp obj
-        jdb::Renderer::push_matrix();//3
-        if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
-        {
-          jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
-          jdb::Renderer::use_texture(m_tiles_other_[0]);
-          jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]);
-        }
-        jdb::Renderer::pop_matrix();//3
-                                    //End warp obj
+			  jdb::Renderer::push_matrix();//1
 
-        jdb::Renderer::pop_matrix();//2
+			  jdb::Renderer::push_matrix();//2
+			  jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+				  , static_cast<float>(row)) - TO_POS_ON_ORTHO);
+			  //BG
+			  jdb::Renderer::use_texture(m_grass_texture_);
+			  jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_config_["grass_index"]]);
+			  //End BG
 
-        jdb::Renderer::pop_matrix();//1
+			  //other obj (layer on grass)
+			  jdb::Renderer::push_matrix();//3
+			  //static const auto AVOID_WALL = 0.05f;
+			  //jdb::Renderer::translate(jdb::Vec3<float>(0, AVOID_WALL, 0));
+
+			  switch (m_other_int_[row][col])
+			  {
+			  case 0:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[1]);
+				  break;
+			  case 1:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[2]);
+				  break;
+			  case 2:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[3]);
+				  break;
+			  case 3:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[21]);
+				  break;
+			  case 4:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[6]);
+				  break;
+			  case 5:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[18]);
+				  break;
+			  case 6:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[19]);
+				  break;
+			  case 7:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[20]);
+				  break;
+			  case 8:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[13]);
+				  break;
+			  case 9:
+				  jdb::Renderer::use_texture(m_tiles_other_[1]);
+				  jdb::Renderer::draw_mesh(m_tilesets_mesh_[14]);
+				  break;
+			  default:
+				  break;
+			  }
+			  jdb::Renderer::pop_matrix();//3
+										  //End other obj
+
+										  //warp obj
+			  jdb::Renderer::push_matrix();//3
+			  if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
+			  {
+				  jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
+				  jdb::Renderer::use_texture(m_tiles_other_[0]);
+				  jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]);
+			  }
+			  jdb::Renderer::pop_matrix();//3
+										  //End warp obj
+
+			  jdb::Renderer::pop_matrix();//2
+
+			  jdb::Renderer::pop_matrix();//1
+
+		  }
       }
     }
 
@@ -214,56 +239,61 @@ namespace shadow_maze
     {
       for (unsigned col = 0; col < m_tiles_[0].size(); ++col)
       {
-        //Animation 
-        if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
-        {
-          m_normal_tick_ = m_player_face_;
-        }
-        else
-        {
-          m_normal_tick_ = m_anime_[row][col];
-        }
+		  /////////////////////////////////
+		  if (m_bool_vision[row][col] == 1)
+		  {
 
-        if (animation(row, col, m_config_["player_texture"], 4)) {}
-        else if (animation(row, col, m_config_["warp_texture"], 4, true)) {}
-        else
-        {
-          m_animation_tick_ = m_normal_tick_;
-        }
-        //End Animation
+			  //Animation 
+			  if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
+			  {
+				  m_normal_tick_ = m_player_face_;
+			  }
+			  else
+			  {
+				  m_normal_tick_ = m_anime_[row][col];
+			  }
 
-        jdb::Renderer::push_matrix();//1
+			  if (animation(row, col, m_config_["player_texture"], 4)) {}
+			  else if (animation(row, col, m_config_["warp_texture"], 4, true)) {}
+			  else
+			  {
+				  m_animation_tick_ = m_normal_tick_;
+			  }
+			  //End Animation
 
-        if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
-        {
-          jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
-          jdb::Renderer::scale(jdb::Vec3<float>(0.5f, 2.0f, 0));
-        }
+			  jdb::Renderer::push_matrix();//1
 
-        if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
-        {
-          jdb::Renderer::scale(jdb::Vec3<float>(0.7f, 1.2f, 0));
-          jdb::Renderer::translate(m_player_pos_ - TO_POS_ON_ORTHO);
-        }
-        else
-        {
-          jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
-            , static_cast<float>(row)) - TO_POS_ON_ORTHO);
-        }
+			  if (static_cast<int>(m_warp_texture_) == m_tiles_[row][col])
+			  {
+				  jdb::Renderer::translate(jdb::Vec3<float>(0, 0.35f, 0));
+				  jdb::Renderer::scale(jdb::Vec3<float>(0.5f, 2.0f, 0));
+			  }
 
-        if (static_cast<int>(m_grass_texture_) != m_tiles_[row][col])
-        {
-          jdb::Renderer::use_texture(m_tiles_[row][col]);
-          switch (m_mesh_type_[row][col])
-          {
-          case NORMAL: jdb::Renderer::draw_mesh(m_wall_mesh_); break;
-          case OBJ4_X4: jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]); break;
-          case TILESETS: jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_animation_tick_]); default:;
-            //***remove?
-          }
-        }//draw wall & player
+			  if (static_cast<int>(m_player_texture_) == m_tiles_[row][col])
+			  {
+				  jdb::Renderer::scale(jdb::Vec3<float>(0.7f, 1.2f, 0));
+				  jdb::Renderer::translate(m_player_pos_ - TO_POS_ON_ORTHO);
+			  }
+			  else
+			  {
+				  jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+					  , static_cast<float>(row)) - TO_POS_ON_ORTHO);
+			  }
 
-        jdb::Renderer::pop_matrix();//1
+			  if (static_cast<int>(m_grass_texture_) != m_tiles_[row][col])
+			  {
+				  jdb::Renderer::use_texture(m_tiles_[row][col]);
+				  switch (m_mesh_type_[row][col])
+				  {
+				  case NORMAL: jdb::Renderer::draw_mesh(m_wall_mesh_); break;
+				  case OBJ4_X4: jdb::Renderer::draw_mesh(m_obj4_x4_mesh_[m_animation_tick_]); break;
+				  case TILESETS: jdb::Renderer::draw_mesh(m_tilesets_mesh_[m_animation_tick_]); default:;
+					  //***remove?
+				  }
+			  }//draw wall & player
+
+			  jdb::Renderer::pop_matrix();//1
+		  }
       }//col loop
     }
   }//update
@@ -279,14 +309,18 @@ namespace shadow_maze
     {
       for (unsigned col = 0; col < m_tiles_[0].size(); ++col)
       {
-        jdb::Renderer::push_matrix();
-          jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
-            , static_cast<float>(row)) - OFFSET);
-          const auto REDUCE_EDGE = 1.05f;
-          jdb::Renderer::scale(jdb::Vec3<float>(REDUCE_EDGE));
-          jdb::Renderer::use_texture(m_tiles_minimap_[row][col]);
-          jdb::Renderer::draw_mesh(m_tile_mesh_);
-        jdb::Renderer::pop_matrix();
+		  /////////////////////////////////
+		  if (m_bool_vision[row][col] == 1)
+		  {
+			  jdb::Renderer::push_matrix();
+			  jdb::Renderer::translate(jdb::Vec3<float>(static_cast<float>(col)
+				  , static_cast<float>(row)) - OFFSET);
+			  const auto REDUCE_EDGE = 1.05f;
+			  jdb::Renderer::scale(jdb::Vec3<float>(REDUCE_EDGE));
+			  jdb::Renderer::use_texture(m_tiles_minimap_[row][col]);
+			  jdb::Renderer::draw_mesh(m_tile_mesh_);
+			  jdb::Renderer::pop_matrix();
+		  }
       }
     }//row loop
   }
@@ -387,6 +421,22 @@ namespace shadow_maze
 
 		    //for other obj
 		    m_other_int_[row][col] = jdb::Engine::random(0,15);
+
+			if (m_tiles_[row][col] == static_cast<int>(m_player_texture_))
+			{
+				m_bool_vision[row][col] = 1;
+				m_bool_vision[row][col - 1] = 1;
+				m_bool_vision[row][col + 1] = 1;
+
+				m_bool_vision[row + 1][col] = 1;
+				m_bool_vision[row + 1][col+1] = 1;
+				m_bool_vision[row + 1][col - 1] = 1;
+				
+				m_bool_vision[row - 1][col] = 1;
+				m_bool_vision[row - 1][col + 1] = 1;
+				m_bool_vision[row - 1][col - 1] = 1;
+
+			}
       }
     }//row loop
   }

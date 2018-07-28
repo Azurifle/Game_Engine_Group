@@ -35,6 +35,8 @@ namespace shadow_maze
   private:
     nlohmann::json m_config_{};
     std::vector<std::vector<int>> m_tiles_{}, m_tiles_minimap_{};
+	std::vector<std::vector<int>> m_bool_vision;
+
     std::vector<std::vector<int>> m_mesh_type_{}, m_anime_{}, m_other_int_{};
     std::vector<jdb::Texture> m_tiles_other_{};
 
